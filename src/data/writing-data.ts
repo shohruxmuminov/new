@@ -9,6 +9,7 @@ export interface WritingTask {
   sampleEssay: string;
   template: string;
   vocabulary: string[];
+  htmlUrl?: string;
 }
 
 export const writingTasks: WritingTask[] = [
@@ -33,5 +34,29 @@ export const writingTasks: WritingTask[] = [
     sampleEssay: 'In the modern era, technology has become an inseparable part of human existence...',
     template: 'Introduction: It is often argued that...\nBody 1 (Complexity): On the one hand, some believe...\nBody 2 (Simplicity): On the other hand, others argue...\nConclusion: In conclusion, while technology adds complexity...',
     vocabulary: ['inseparable part', 'on the one hand', 'on the other hand', 'in conclusion']
+  },
+  {
+    id: 'w3',
+    type: 'Task 1',
+    title: 'Writing Task 1 (Premium)',
+    prompt: 'Premium Writing Task 1',
+    minWords: 150,
+    duration: 20,
+    sampleEssay: 'Loading...',
+    template: 'Loading...',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Appeared Full writing (4).html'
+  },
+  {
+    id: 'w4',
+    type: 'Task 2',
+    title: 'Writing Task 2 (Premium)',
+    prompt: 'Premium Writing Task 2',
+    minWords: 250,
+    duration: 40,
+    sampleEssay: 'Loading...',
+    template: 'Loading...',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/APPEARED full writing (5).html'
   }
 ];

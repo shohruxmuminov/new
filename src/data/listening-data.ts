@@ -18,7 +18,25 @@ export interface ListeningTest {
   title: string;
   audioUrl: string;
   duration: number;
+  htmlUrl?: string;
   sections: ListeningSection[];
 }
 
-export const listeningTests: ListeningTest[] = [];
+export const listeningTests: ListeningTest[] = [
+  {
+    id: 'l1',
+    title: 'Listening Test 1',
+    audioUrl: '/test materials/listening/1.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/1.html',
+    sections: []
+  },
+  {
+    id: 'l5',
+    title: 'Listening Test 5',
+    audioUrl: '',
+    duration: 30,
+    htmlUrl: '/test materials/listening/IELTSwithJurabek Listening (5).html',
+    sections: []
+  }
+];

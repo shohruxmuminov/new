@@ -35,6 +35,21 @@ export default function WritingPracticePage({ params }: { params: Promise<{ task
 
   if (!task) return <div className="min-h-screen pt-24 flex items-center justify-center"><p style={{ color: 'var(--text-secondary)' }}>Task not found.</p></div>;
 
+  if (task.htmlUrl) {
+    return (
+      <div className="h-screen flex flex-col bg-surface overflow-hidden">
+        <header className="h-16 flex items-center px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
+          <Link href="/writing" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+            <ArrowLeft size={16} /> Back to Writing
+          </Link>
+        </header>
+        <div className="flex-1 w-full bg-white">
+          <iframe src={task.htmlUrl} className="w-full h-full border-none" title={task.title} />
+        </div>
+      </div>
+    );
+  }
+
   const words = countWords(text);
   const saveDraft = () => {
     localStorage.setItem(`cdi-draft-${task.id}`, text);

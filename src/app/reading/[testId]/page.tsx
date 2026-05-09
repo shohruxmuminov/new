@@ -33,6 +33,21 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
 
   if (!test) return <div className="min-h-screen pt-24 flex items-center justify-center bg-surface"><p className="text-secondary">Test not found.</p></div>;
 
+  if (test.htmlUrl) {
+    return (
+      <div className="h-screen flex flex-col bg-surface overflow-hidden">
+        <header className="h-16 flex items-center px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
+          <Link href="/reading" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+            <ArrowLeft size={16} /> Back to Reading
+          </Link>
+        </header>
+        <div className="flex-1 w-full bg-white">
+          <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />
+        </div>
+      </div>
+    );
+  }
+
   const score = test.questions.reduce((acc, q) => {
     const userAns = (answers[q.id] || '').toLowerCase().trim();
     return acc + (userAns === q.answer.toLowerCase().trim() ? 1 : 0);
