@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, Eye, EyeOff, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { setSession } from '@/lib/session';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ export default function LoginPage() {
     setLoading(true);
     // Demo mode simulation
     setTimeout(() => {
-      localStorage.setItem('cdi-user', JSON.stringify({ email, name: email.split('@')[0] }));
+      setSession({ email, name: email.split('@')[0] });
       window.location.href = '/dashboard';
     }, 1000);
   };

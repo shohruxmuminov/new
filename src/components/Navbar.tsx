@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Sun, Moon, Search, BookOpen, Mic, Headphones, PenTool, 
-  LayoutDashboard, LogIn, ChevronDown
+  LayoutDashboard, LogIn, ChevronDown, LayoutGrid, Shield
 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
@@ -15,6 +15,7 @@ const navLinks = [
   { href: '/reading', label: 'Reading', icon: BookOpen, color: '#10b981' },
   { href: '/listening', label: 'Listening', icon: Headphones, color: '#6366f1' },
   { href: '/writing', label: 'Writing', icon: PenTool, color: '#ec4899' },
+  { href: '/mock-tests', label: 'Mock Tests', icon: LayoutGrid, color: '#8b5cf6' },
 ];
 
 export default function Navbar() {
@@ -124,6 +125,15 @@ export default function Navbar() {
             >
               {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
+
+            <Link
+              href="/teacher"
+              className="btn-ghost flex items-center gap-2 text-sm"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <Shield size={16} />
+              Teacher
+            </Link>
 
             <Link
               href="/dashboard"

@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Clock, CheckCircle, XCircle, ArrowLeft, Send, 
   RotateCcw, ChevronLeft, ChevronRight, LayoutGrid,
-  FileText, Info, HelpCircle, X
+  FileText, Info, HelpCircle, X, Maximize, Minimize
 } from 'lucide-react';
 import { readingTests } from '@/data/reading-data';
 import { formatTime, calculateScore, getBandScore } from '@/lib/utils';
 import Link from 'next/link';
+import { useFullscreen } from '@/hooks/useFullscreen';
 
 export default function ReadingTestPage({ params }: { params: Promise<{ testId: string }> }) {
   const { testId } = use(params);
@@ -31,15 +32,28 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerActive, timer]);
 
+  const { enter: enterFS, exit: exitFS } = useFullscreen();
+  const [isFS, setIsFS] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setIsFS(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
+
   if (!test) return <div className="min-h-screen pt-24 flex items-center justify-center bg-surface"><p className="text-secondary">Test not found.</p></div>;
 
   if (test.htmlUrl) {
     return (
       <div className="h-screen flex flex-col bg-surface overflow-hidden">
-        <header className="h-16 flex items-center px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
+        <header className="h-16 flex items-center justify-between px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
           <Link href="/reading" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
             <ArrowLeft size={16} /> Back to Reading
           </Link>
+          <button onClick={isFS ? exitFS : enterFS}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-default text-xs font-bold text-secondary hover:text-primary transition-all">
+            {isFS ? <><Minimize size={14}/> Exit Fullscreen</> : <><Maximize size={14}/> Fullscreen</>}
+          </button>
         </header>
         <div className="flex-1 w-full bg-white">
           <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />

@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Save, Eye, EyeOff, BookOpen, FileText, ArrowLeft, Tag } from 'lucide-react';
+import { Clock, Save, Eye, EyeOff, BookOpen, FileText, ArrowLeft, Tag, Maximize, Minimize } from 'lucide-react';
 import { writingTasks } from '@/data/writing-data';
 import { formatTime, countWords } from '@/lib/utils';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useFullscreen } from '@/hooks/useFullscreen';
 
 export default function WritingPracticePage({ params }: { params: Promise<{ taskId: string }> }) {
   const { taskId } = use(params);
@@ -33,15 +34,28 @@ export default function WritingPracticePage({ params }: { params: Promise<{ task
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerActive, timer]);
 
+  const { enter: enterFS, exit: exitFS } = useFullscreen();
+  const [isFS, setIsFS] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setIsFS(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
+
   if (!task) return <div className="min-h-screen pt-24 flex items-center justify-center"><p style={{ color: 'var(--text-secondary)' }}>Task not found.</p></div>;
 
   if (task.htmlUrl) {
     return (
       <div className="h-screen flex flex-col bg-surface overflow-hidden">
-        <header className="h-16 flex items-center px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
+        <header className="h-16 flex items-center justify-between px-6 border-b shrink-0 bg-surface z-50" style={{ borderColor: 'var(--border-default)' }}>
           <Link href="/writing" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
             <ArrowLeft size={16} /> Back to Writing
           </Link>
+          <button onClick={isFS ? exitFS : enterFS}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-default text-xs font-bold text-secondary hover:text-primary transition-all">
+            {isFS ? <><Minimize size={14}/> Exit Fullscreen</> : <><Maximize size={14}/> Fullscreen</>}
+          </button>
         </header>
         <div className="flex-1 w-full bg-white">
           <iframe src={task.htmlUrl} className="w-full h-full border-none" title={task.title} />

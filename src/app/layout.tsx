@@ -4,6 +4,7 @@ import ThemeProvider from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
+import SessionGuard from '@/components/SessionGuard';
 
 export const metadata: Metadata = {
   title: 'CDI Prep — Premium IELTS CDI Exam Preparation',
@@ -28,21 +29,23 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: 'var(--bg-surface)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border-default)',
-                borderRadius: '12px',
-                fontSize: '0.875rem',
-              },
-            }}
-          />
+          <SessionGuard>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: 'var(--bg-surface)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border-default)',
+                  borderRadius: '12px',
+                  fontSize: '0.875rem',
+                },
+              }}
+            />
+          </SessionGuard>
         </ThemeProvider>
       </body>
     </html>
