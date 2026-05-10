@@ -60,5 +60,14 @@ export const writingTasks: WritingTask[] = [
     template: 'Loading...',
     vocabulary: [],
     htmlUrl: '/test materials/writing/APPEARED writing (2).html'
+  },
+  {
+    id: 'w_practice_29',
+    title: 'Writing Practice - Set 29',
+    type: 'Task 1',
+    duration: 60,
+    minWords: 150,
+    prompt: 'The graph below shows the percentage of people visiting GYM once a month or more between 1984 to 2003. Summarize the information by selecting and reporting the main features, and make comparisons where relevant.',
+    htmlUrl: '/test materials/writing/full-writing-29.html'
   }
 ];

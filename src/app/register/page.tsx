@@ -16,7 +16,16 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      localStorage.setItem('cdi-user', JSON.stringify({ email, name }));
+      const newUser = { email, name, registeredAt: Date.now() };
+      localStorage.setItem('cdi-user', JSON.stringify(newUser));
+      
+      // Save to global user list for CEO
+      const allUsers = JSON.parse(localStorage.getItem('cdi-all-users') || '[]');
+      if (!allUsers.find((u: any) => u.email === email)) {
+        allUsers.push(newUser);
+        localStorage.setItem('cdi-all-users', JSON.stringify(allUsers));
+      }
+
       window.location.href = '/dashboard';
     }, 1000);
   };

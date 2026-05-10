@@ -12,12 +12,35 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    // Check if banned
+    const banned = localStorage.getItem('cdi-banned-users');
+    if (banned && JSON.parse(banned).includes(email)) {
+      setError('Your account has been banned. Please contact the CEO.');
+      return;
+    }
+
     setLoading(true);
     // Demo mode simulation
     setTimeout(() => {
-      setSession({ email, name: email.split('@')[0] });
+      const user = { email, name: email.split('@')[0] };
+      setSession(user);
+
+      // Ensure user is in global list
+      const allUsers = JSON.parse(localStorage.getItem('cdi-all-users') || '[]');
+      const existing = allUsers.find((u: any) => u.email === email);
+      if (!existing) {
+        allUsers.push({ ...user, registeredAt: Date.now(), lastLogin: Date.now() });
+      } else {
+        existing.lastLogin = Date.now();
+      }
+      localStorage.setItem('cdi-all-users', JSON.stringify(allUsers));
+
       window.location.href = '/dashboard';
     }, 1000);
   };
@@ -107,10 +130,11 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 px-1">
-              <input type="checkbox" id="remember" className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-              <label htmlFor="remember" className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Remember for 30 days</label>
-            </div>
+            {error && (
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold text-center">
+                {error}
+              </div>
+            )}
 
             <button type="submit" disabled={loading} className="btn-primary w-full justify-center text-base py-4 rounded-2xl group relative overflow-hidden">
               <div className="relative z-10 flex items-center gap-2">

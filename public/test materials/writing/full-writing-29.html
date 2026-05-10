@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Practice - Set 29</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .red-gradient { background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div id="start-screen" class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-sm w-full border border-gray-100 transition-all hover:scale-[1.01]">
+            <div class="red-gradient p-6 text-white">
+                <h1 class="text-2xl font-black mb-1">December 12, 2025</h1>
+                <div class="flex items-center gap-2 opacity-90">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    <span class="text-sm font-bold uppercase tracking-wider">Practice Set</span>
+                </div>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 aspect-[4/3] flex items-center justify-center relative group">
+                    <!-- Placeholder for the graph image -->
+                    <img src="https://www.sanokulov.uz/media/writing_images/gym_visits.png" alt="Gym Visits Graph" class="w-full h-full object-contain p-2" onerror="this.src='https://via.placeholder.com/400x300?text=Gym+Visits+Graph'">
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Task 1:</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500 text-white text-sm font-bold shadow-md shadow-blue-500/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+                            Line Graph
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Task 2:</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white text-sm font-bold shadow-md shadow-red-600/20 leading-tight">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            TO WHAT EXTENT DO YOU AGREE OR DISAGREE?
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="startPractice()" class="w-full py-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-[0.2em] shadow-xl shadow-red-600/20 transition-all active:scale-95 flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Start Practice
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="test-screen" class="hidden h-screen flex flex-col bg-white overflow-hidden">
+        <header class="h-16 flex items-center justify-between px-6 border-b shrink-0 bg-white z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-xs">29</div>
+                <h2 class="font-black text-gray-900 tracking-tight">Writing Practice Set 29</h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span id="timer" class="font-mono font-bold text-lg text-gray-700">60:00</span>
+                </div>
+                <button onclick="finishTest()" class="px-6 py-2 rounded-xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition-all">Finish Test</button>
+            </div>
+        </header>
+
+        <main class="flex-1 flex overflow-hidden">
+            <!-- Left Side: Prompts -->
+            <div class="w-1/2 overflow-y-auto p-8 border-r border-gray-100 bg-gray-50/50">
+                <div class="space-y-12 max-w-2xl mx-auto">
+                    <section>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-lg bg-blue-100 text-blue-600 font-bold text-[10px] uppercase tracking-wider">Task 1</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 leading-relaxed">
+                            The graph below shows the percentage of people visiting GYM once a month or more between 1984 to 2003.
+                        </h3>
+                        <div class="rounded-2xl bg-white p-4 shadow-sm border border-gray-100 mb-6">
+                            <img src="https://www.sanokulov.uz/media/writing_images/gym_visits.png" alt="Gym Visits Graph" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/800x600?text=Gym+Visits+Graph'">
+                        </div>
+                        <p class="text-gray-600 leading-relaxed italic">
+                            Summarize the information by selecting and reporting the main features, and make comparisons where relevant.
+                        </p>
+                    </section>
+
+                    <div class="h-px bg-gray-200"></div>
+
+                    <section>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-lg bg-red-100 text-red-600 font-bold text-[10px] uppercase tracking-wider">Task 2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 leading-relaxed">
+                            The best way to make the road transport safer is to make drivers to take a driving test every year. 
+                        </h3>
+                        <p class="text-lg font-bold text-gray-800 mb-6 uppercase tracking-tight">To what extent do you agree or disagree?</p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Give reasons for your answer and include any relevant examples from your own knowledge or experience.
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Right Side: Editor -->
+            <div class="w-1/2 flex flex-col bg-white">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+                    <div class="flex gap-2">
+                        <button onclick="switchTask(1)" id="btn-t1" class="px-4 py-2 rounded-xl bg-gray-100 text-gray-900 font-bold text-xs transition-all border-2 border-transparent focus:border-blue-500">Task 1 Response</button>
+                        <button onclick="switchTask(2)" id="btn-t2" class="px-4 py-2 rounded-xl bg-gray-100 text-gray-400 font-bold text-xs transition-all border-2 border-transparent focus:border-red-500">Task 2 Response</button>
+                    </div>
+                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                        Word Count: <span id="word-count" class="text-gray-900">0</span>
+                    </div>
+                </div>
+                <textarea 
+                    id="editor" 
+                    placeholder="Start typing your response here..."
+                    class="flex-1 p-8 text-lg leading-relaxed outline-none resize-none text-gray-800 placeholder:text-gray-300"
+                    oninput="updateCount()"
+                ></textarea>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let time = 3600;
+        let timerInterval;
+        let currentTask = 1;
+        let responses = { 1: '', 2: '' };
+
+        function startPractice() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('test-screen').classList.remove('hidden');
+            
+            timerInterval = setInterval(() => {
+                time--;
+                const mins = Math.floor(time / 60);
+                const secs = time % 60;
+                document.getElementById('timer').innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
+                if (time <= 0) finishTest();
+            }, 1000);
+        }
+
+        function switchTask(t) {
+            responses[currentTask] = document.getElementById('editor').value;
+            currentTask = t;
+            document.getElementById('editor').value = responses[t];
+            
+            const b1 = document.getElementById('btn-t1');
+            const b2 = document.getElementById('btn-t2');
+            
+            if (t === 1) {
+                b1.classList.replace('text-gray-400', 'text-gray-900');
+                b2.classList.replace('text-gray-900', 'text-gray-400');
+            } else {
+                b2.classList.replace('text-gray-400', 'text-gray-900');
+                b1.classList.replace('text-gray-900', 'text-gray-400');
+            }
+            updateCount();
+        }
+
+        function updateCount() {
+            const text = document.getElementById('editor').value;
+            const count = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('word-count').innerText = count;
+        }
+
+        function finishTest() {
+            clearInterval(timerInterval);
+            alert('Practice finished! In a real exam, your responses would be submitted now.');
+            window.parent.postMessage('test-finished', '*');
+        }
+    </script>
+</body>
+</html>

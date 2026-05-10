@@ -1,31 +1,43 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mic, BookOpen, Headphones, PenTool, ArrowRight, Flame, 
   Target, Calendar, TrendingUp, Star, Award, Clock, 
-  ArrowUpRight, Users, GraduationCap, Zap
+  ArrowUpRight, Users, GraduationCap, Zap, Bell, X, Mail,
+  Play as PlayIcon, Volume2, Info
 } from 'lucide-react';
-
-const modules = [
-  { id: 'reading', icon: BookOpen, title: 'Reading', desc: '40 Questions · 60m', href: '/reading', color: '#10b981', progress: 42, band: '7.5' },
-  { id: 'listening', icon: Headphones, title: 'Listening', desc: '40 Questions · 30m', href: '/listening', color: '#6366f1', progress: 88, band: '8.0' },
-  { id: 'writing', icon: PenTool, title: 'Writing', desc: '2 Tasks · 60m', href: '/writing', color: '#ec4899', progress: 30, band: '6.5' },
-  { id: 'speaking', icon: Mic, title: 'Speaking', desc: '3 Parts · 15m', href: '/speaking', color: '#f59e0b', progress: 65, band: '7.0' },
-];
 
 export default function DashboardPage() {
   const [user, setUser] = useState<{name: string, email: string} | null>(null);
+  const [messages, setMessages] = useState<any[]>([]);
+  const [showMessages, setShowMessages] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('cdi-user');
-    if (stored) setUser(JSON.parse(stored));
+    if (stored) {
+      const userData = JSON.parse(stored);
+      setUser(userData);
+      
+      // Load messages
+      const msgs = localStorage.getItem(`cdi-messages-${userData.email}`);
+      if (msgs) setMessages(JSON.parse(msgs));
+    }
   }, []);
 
+  const markAsRead = (id: string) => {
+    const updated = messages.map(m => m.id === id ? { ...m, read: true } : m);
+    setMessages(updated);
+    if (user) {
+      localStorage.setItem(`cdi-messages-${user.email}`, JSON.stringify(updated));
+    }
+  };
+
+  const unreadCount = messages.filter(m => !m.read).length;
+
   return (
-    <div className="max-w-7xl mx-auto space-y-10 pb-20">
+    <div className="max-w-7xl mx-auto space-y-10 pb-20 pt-24 px-4">
       {/* Hero Welcome Banner */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative rounded-[32px] p-8 lg:p-12 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/5"
@@ -36,9 +48,23 @@ export default function DashboardPage() {
         }} />
 
         <div className="relative z-10 max-w-xl">
-           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 mb-6">
-              <Zap size={14} className="text-yellow-300" />
-              <span className="text-[10px] font-bold text-white uppercase tracking-widest">New mock tests available</span>
+           <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
+                 <Zap size={14} className="text-yellow-300" />
+                 <span className="text-[10px] font-bold text-white uppercase tracking-widest">New mock tests available</span>
+              </div>
+              
+              <button 
+                onClick={() => setShowMessages(true)}
+                className="relative p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all border border-white/10"
+              >
+                 <Bell size={18} className="text-white" />
+                 {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] font-bold flex items-center justify-center text-white ring-2 ring-indigo-600">
+                       {unreadCount}
+                    </span>
+                 )}
+              </button>
            </div>
            <h1 className="text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight">
               Ready to learn, {user?.name?.split(' ')[0] || 'Scholar'}?
@@ -49,50 +75,98 @@ export default function DashboardPage() {
         </div>
 
         <div className="relative z-10 flex flex-wrap gap-4">
-           <div className="glass-card bg-white/5 border-white/10 p-5 min-w-[140px]">
-              <p className="text-[10px] font-bold text-indigo-200 uppercase tracking-widest mb-1">Students</p>
-              <div className="flex items-center gap-2">
-                 <Users size={18} className="text-white" />
-                 <span className="text-2xl font-black text-white">824+</span>
-              </div>
-           </div>
-           <div className="glass-card bg-white/5 border-white/10 p-5 min-w-[140px]">
-              <p className="text-[10px] font-bold text-indigo-200 uppercase tracking-widest mb-1">Target Band</p>
-              <div className="flex items-center gap-2">
-                 <Target size={18} className="text-white" />
-                 <span className="text-2xl font-black text-white">8.5</span>
-              </div>
-           </div>
+           {/* Metric sections removed as per request to keep it authentic */}
         </div>
       </motion.div>
 
-      {/* Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-         {[
-           { label: 'Estimated Band', value: '7.5', trend: '+0.5', icon: GraduationCap, color: '#6366f1' },
-           { label: 'Completed Tests', value: '14', trend: '+3', icon: Award, color: '#10b981' },
-           { label: 'Study Streak', value: '5 Days', trend: '🔥', icon: Flame, color: '#f59e0b' },
-           { label: 'Practice Time', value: '12.4h', trend: '+2.1h', icon: Clock, color: '#ec4899' },
-         ].map((stat, i) => (
-           <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}
-             className="glass-card p-6 border-none">
-              <div className="flex items-center justify-between mb-4">
-                 <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${stat.color}15`, color: stat.color }}>
-                    <stat.icon size={20} />
-                 </div>
-                 <span className="text-[10px] font-bold px-2 py-1 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/10">
-                    {stat.trend}
-                 </span>
-              </div>
-              <p className="text-xs font-bold text-tertiary uppercase tracking-widest mb-1">{stat.label}</p>
-              <h4 className="text-2xl font-black text-primary">{stat.value}</h4>
-           </motion.div>
-         ))}
-      </div>
+      {/* Message Modal */}
+      <AnimatePresence>
+         {showMessages && (
+            <>
+               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowMessages(false)} className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]" />
+               <motion.div initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 100 }} className="fixed top-0 right-0 h-full w-full max-w-md bg-surface z-[101] shadow-2xl border-l border-default">
+                  <div className="p-6 flex items-center justify-between border-b border-default">
+                     <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 flex items-center justify-center">
+                           <Bell size={20} className="text-indigo-400" />
+                        </div>
+                        <h3 className="text-xl font-black text-primary">Notifications</h3>
+                     </div>
+                     <button onClick={() => setShowMessages(false)} className="p-2 rounded-xl hover:bg-surface-soft transition-colors">
+                        <X size={20} className="text-tertiary" />
+                     </button>
+                  </div>
+
+                  <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-80px)]">
+                     {messages.length === 0 ? (
+                        <div className="text-center py-20">
+                           <Mail size={40} className="text-tertiary mx-auto mb-4 opacity-20" />
+                           <p className="text-secondary font-bold">No messages yet</p>
+                           <p className="text-xs text-tertiary mt-1">Updates from CEO and Teachers will appear here.</p>
+                        </div>
+                     ) : (
+                        messages.map(msg => (
+                           <div key={msg.id} 
+                             className={`p-5 rounded-2xl border transition-all ${msg.read ? 'bg-surface border-default' : 'bg-indigo-500/5 border-indigo-500/20'}`}
+                             onClick={() => markAsRead(msg.id)}
+                           >
+                              <div className="flex items-center justify-between mb-3">
+                                 <span className={`text-[10px] font-black px-2 py-1 rounded uppercase ${msg.from === 'CEO' ? 'bg-amber-500/10 text-amber-500' : 'bg-pink-500/10 text-pink-500'}`}>
+                                    Email from {msg.from}
+                                 </span>
+                                 <span className="text-[10px] text-tertiary">{new Date(msg.timestamp).toLocaleDateString()}</span>
+                              </div>
+                              <p className="text-sm text-secondary leading-relaxed">{msg.text}</p>
+                           </div>
+                        ))
+                     )}
+                  </div>
+               </motion.div>
+            </>
+         )}
+      </AnimatePresence>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        {/* Main Modules */}
+        {/* Main Content Area */}
         <div className="lg:col-span-2 space-y-8">
+           
+           {/* Video Ad Section */}
+           <div className="glass-card overflow-hidden border-none shadow-xl">
+              <div className="aspect-video relative group">
+                 <video 
+                   ref={videoRef}
+                   src="/dashboard video/ad.mp4" 
+                   className="w-full h-full object-cover"
+                   loop
+                   muted
+                   playsInline
+                   poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
+                    <h4 className="text-white font-black text-xl mb-1">Academy Showcase</h4>
+                    <p className="text-white/80 text-xs font-medium">Explore our facilities and teaching methods.</p>
+                 </div>
+                 <div className="absolute top-4 right-4 z-10 flex gap-2">
+                    <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
+                       <PlayIcon size={10} fill="white" /> Featured Video
+                    </div>
+                 </div>
+                 <button 
+                   onClick={() => {
+                     if (videoRef.current) {
+                        if (videoRef.current.paused) videoRef.current.play();
+                        else videoRef.current.pause();
+                     }
+                   }}
+                   className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+                 >
+                    <div className="w-16 h-16 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform">
+                       <PlayIcon size={24} fill="white" />
+                    </div>
+                 </button>
+              </div>
+           </div>
+
            <div className="flex items-center justify-between">
               <h2 className="text-2xl font-black text-primary tracking-tight">Practice Modules</h2>
               <Link href="#" className="text-sm font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 group">
@@ -122,34 +196,6 @@ export default function DashboardPage() {
                 </Link>
               ))}
            </div>
-
-           {/* Performance Insights */}
-           <div className="glass-card p-8 border-none" style={{ background: 'var(--bg-secondary)' }}>
-              <div className="flex items-center justify-between mb-8">
-                 <div>
-                    <h3 className="text-lg font-bold text-primary">Performance Insights</h3>
-                    <p className="text-xs text-tertiary mt-1">Based on your last 10 practice sessions</p>
-                 </div>
-                 <button className="text-xs font-bold px-4 py-2 rounded-xl bg-surface border border-default">Detailed Report</button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 {[
-                   { label: 'Vocabulary Range', val: 78, color: '#6366f1' },
-                   { label: 'Grammar Accuracy', val: 62, color: '#ec4899' },
-                   { label: 'Test Endurance', val: 92, color: '#10b981' },
-                 ].map(item => (
-                   <div key={item.label} className="space-y-3">
-                      <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-secondary">
-                         <span>{item.label}</span>
-                         <span>{item.val}%</span>
-                      </div>
-                      <div className="h-2 rounded-full bg-surface-soft overflow-hidden">
-                         <div className="h-full rounded-full" style={{ width: `${item.val}%`, background: item.color }} />
-                      </div>
-                   </div>
-                 ))}
-              </div>
-           </div>
         </div>
 
         {/* Sidebar Widgets */}
@@ -162,7 +208,6 @@ export default function DashboardPage() {
                     <Calendar size={18} className="text-indigo-500" />
                     <span className="text-sm font-bold text-primary">Daily Goals</span>
                  </div>
-                 <span className="text-[10px] font-bold text-tertiary uppercase">3/5 Done</span>
               </div>
 
               <div className="space-y-4">
@@ -181,10 +226,6 @@ export default function DashboardPage() {
                    </div>
                  ))}
               </div>
-
-              <button className="w-full py-3 rounded-xl bg-surface border border-indigo-500/20 text-indigo-500 text-xs font-bold hover:bg-indigo-500/10 transition-all">
-                 + Add New Goal
-              </button>
            </div>
 
            {/* Community Card */}

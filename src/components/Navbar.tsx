@@ -22,14 +22,26 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [user, setUser] = useState<{name: string, email: string} | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('cdi-user');
+    if (stored) setUser(JSON.parse(stored));
+    
+    const checkSession = () => {
+      const current = localStorage.getItem('cdi-user');
+      setUser(current ? JSON.parse(current) : null);
+    };
+    
+    window.addEventListener('storage', checkSession);
+    return () => window.removeEventListener('storage', checkSession);
+  }, [pathname]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -127,6 +139,15 @@ export default function Navbar() {
             </button>
 
             <Link
+              href="/ceo"
+              className="btn-ghost flex items-center gap-2 text-sm"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <Shield size={16} />
+              CEO
+            </Link>
+
+            <Link
               href="/teacher"
               className="btn-ghost flex items-center gap-2 text-sm"
               style={{ color: 'var(--text-secondary)' }}
@@ -141,17 +162,19 @@ export default function Navbar() {
               style={{ color: 'var(--text-secondary)' }}
             >
               <LayoutDashboard size={16} />
-              Dashboard
+              {user ? user.name.split(' ')[0] : 'Dashboard'}
             </Link>
 
-            <Link
-              href="/login"
-              className="btn-primary text-sm"
-              style={{ padding: '8px 20px', fontSize: '0.85rem' }}
-            >
-              <LogIn size={16} />
-              Sign In
-            </Link>
+            {!user && (
+              <Link
+                href="/login"
+                className="btn-primary text-sm"
+                style={{ padding: '8px 20px', fontSize: '0.85rem' }}
+              >
+                <LogIn size={16} />
+                Sign In
+              </Link>
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -205,15 +228,17 @@ export default function Navbar() {
                 style={{ color: 'var(--text-secondary)' }}
               >
                 <LayoutDashboard size={18} />
-                Dashboard
+                {user ? user.name : 'Dashboard'}
               </Link>
-              <Link
-                href="/login"
-                className="btn-primary text-sm justify-center mt-2"
-              >
-                <LogIn size={16} />
-                Sign In
-              </Link>
+              {!user && (
+                <Link
+                  href="/login"
+                  className="btn-primary text-sm justify-center mt-2"
+                >
+                  <LogIn size={16} />
+                  Sign In
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
