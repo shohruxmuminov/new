@@ -10,6 +10,13 @@ import {
   Play as PlayIcon, Volume2, Info
 } from 'lucide-react';
 
+const modules = [
+  { id: 'reading', icon: BookOpen, title: 'Reading', desc: '40 Questions · 60m', href: '/reading', color: '#10b981', progress: 42, band: '7.5' },
+  { id: 'listening', icon: Headphones, title: 'Listening', desc: '40 Questions · 30m', href: '/listening', color: '#6366f1', progress: 88, band: '8.0' },
+  { id: 'writing', icon: PenTool, title: 'Writing', desc: '2 Tasks · 60m', href: '/writing', color: '#ec4899', progress: 30, band: '6.5' },
+  { id: 'speaking', icon: Mic, title: 'Speaking', desc: '3 Parts · 15m', href: '/speaking', color: '#f59e0b', progress: 65, band: '7.0' },
+];
+
 export default function DashboardPage() {
   const [user, setUser] = useState<{name: string, email: string} | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
