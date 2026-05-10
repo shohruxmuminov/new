@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Practice Test 9</title>
+    <style>
+        :root { --primary: #6366f1; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .test-container { max-width: 900px; mx-auto: ; background: var(--card); padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); margin: auto; }
+        h2 { color: var(--primary); font-weight: 800; border-bottom: 2px solid rgba(99,102,241,0.2); padding-bottom: 10px; margin-bottom: 30px; }
+        .section-title { font-size: 1.2rem; font-weight: 700; color: #818cf8; margin-top: 40px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .question-block { margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 16px; }
+        input[type="text"] { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 8px; outline: none; transition: all 0.3s; }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+        img { max-width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.1); }
+        .audio-player { width: 100%; margin-bottom: 30px; border-radius: 12px; }
+        .options-list { list-style: none; padding: 0; }
+        .options-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .q-number { font-weight: 900; color: var(--primary); margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h2>Listening Practice Test 9</h2>
+        
+        <audio id="listeningAudio" class="audio-player" controls>
+            <source src="audio/listening_9.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="content">
+            <div class="section-title">SECTION 1: Questions 1-10</div>
+            <div class="question-block">
+                <p><strong>Questions 1-4</strong><br>Complete the notes below.<br>Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+                <p><strong>Inquiry about a part-time job</strong></p>
+                <p><strong>Example:</strong> Job: <u>Waiter</u></p>
+                <p>Restaurant Name: 1. <input type="text" id="q1" placeholder="1"> Restaurant</p>
+                <p>Work hours: 6:00 pm to 2. <input type="text" id="q2" placeholder="2"> pm</p>
+                <p>Salary: £3. <input type="text" id="q3" placeholder="3"> per hour</p>
+                <p>Benefits: Free 4. <input type="text" id="q4" placeholder="4"></p>
+            </div>
+
+            <div class="question-block">
+                <p><strong>Questions 5-10</strong><br>Complete the table below.<br>Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+                <table style="width:100%; border-collapse: collapse;">
+                    <tr><th style="border:1px solid #444; padding:8px;">Day</th><th style="border:1px solid #444; padding:8px;">Duty</th></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Monday</td><td style="border:1px solid #444; padding:8px;">Cleaning the 5. <input type="text" id="q5"></td></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Tuesday</td><td style="border:1px solid #444; padding:8px;">Preparing 6. <input type="text" id="q6"></td></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Wednesday</td><td style="border:1px solid #444; padding:8px;">Taking 7. <input type="text" id="q7"></td></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Thursday</td><td style="border:1px solid #444; padding:8px;">Serving 8. <input type="text" id="q8"></td></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Friday</td><td style="border:1px solid #444; padding:8px;">Helping the 9. <input type="text" id="q9"></td></tr>
+                    <tr><td style="border:1px solid #444; padding:8px;">Saturday</td><td style="border:1px solid #444; padding:8px;">Washing 10. <input type="text" id="q10"></td></tr>
+                </table>
+            </div>
+
+            <div class="section-title">SECTION 2: Questions 11-20</div>
+            <div class="question-block">
+                <p><strong>Questions 11-15</strong><br>Label the map below.<br>Write the correct letter, <strong>A-H</strong>, next to questions 11-15.</p>
+                <img src="images/listening_9_map.png" alt="Test 9 Map">
+                <p>11. Information Center: <input type="text" id="q11" size="2"></p>
+                <p>12. Souvenir Shop: <input type="text" id="q12" size="2"></p>
+                <p>13. Picnic Area: <input type="text" id="q13" size="2"></p>
+                <p>14. Playground: <input type="text" id="q14" size="2"></p>
+                <p>15. Cafe: <input type="text" id="q15" size="2"></p>
+            </div>
+
+            <div class="question-block">
+                <p><strong>Questions 16-20</strong><br>Complete the sentences below.<br>Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</p>
+                <p>16. The park was opened in the year <input type="text" id="q16">.</p>
+                <p>17. Visitors can see many types of <input type="text" id="q17"> in the garden.</p>
+                <p>18. The <input type="text" id="q18"> is the most popular attraction.</p>
+                <p>19. You must not feed the <input type="text" id="q19">.</p>
+                <p>20. The park closes at <input type="text" id="q20"> during summer.</p>
+            </div>
+
+            <div class="section-title">SECTION 3: Questions 21-30</div>
+            <div class="question-block">
+                <p><strong>Questions 21-25</strong><br>Choose the correct letter, <strong>A, B or C</strong>.</p>
+                <p>21. What did the students decide to study?<br>
+                A. The history of coffee<br>
+                B. The production of tea<br>
+                C. The economics of sugar<br>
+                Answer: <input type="text" id="q21" size="2"></p>
+                
+                <p>22. Why did they choose this topic?<br>
+                A. It is easy to find resources<br>
+                B. They are interested in it<br>
+                C. Their teacher suggested it<br>
+                Answer: <input type="text" id="q22" size="2"></p>
+            </div>
+
+            <div class="section-title">SECTION 4: Questions 31-40</div>
+            <div class="question-block">
+                <p><strong>Questions 31-40</strong><br>Complete the notes below.<br>Write <strong>ONE WORD ONLY</strong> for each answer.</p>
+                <p><strong>The Impact of Technology on Education</strong></p>
+                <p>History:<br>First computers were used in schools in the 31. <input type="text" id="q31">.</p>
+                <p>Benefits:<br>Allows students to access a vast amount of 32. <input type="text" id="q32">.<br>Helps with 33. <input type="text" id="q33"> skills.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-play logic as requested by user
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('listeningAudio');
+            if(audio) audio.play().catch(e => console.log("Auto-play blocked by browser"));
+        });
+    </script>
+</body>
+</html>

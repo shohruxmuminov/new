@@ -54,5 +54,45 @@ export const listeningTests: ListeningTest[] = [
     duration: 30,
     htmlUrl: '/test materials/listening/IELTSwithJurabek Listening (5).html',
     sections: []
+  },
+  {
+    id: 'l_full9',
+    title: 'Listening Test 9',
+    audioUrl: '/test materials/listening/audio/listening_9.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/full-listening-9.html',
+    sections: []
+  },
+  {
+    id: 'l_full10',
+    title: 'Listening Test 10',
+    audioUrl: '/test materials/listening/audio/listening_10.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/full-listening-10.html',
+    sections: []
+  },
+  {
+    id: 'l_full11',
+    title: 'Listening Test 11',
+    audioUrl: '/test materials/listening/audio/listening_11.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/full-listening-11.html',
+    sections: []
+  },
+  {
+    id: 'l_full12',
+    title: 'Listening Test 12',
+    audioUrl: '/test materials/listening/audio/listening_12.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/full-listening-12.html',
+    sections: []
+  },
+  {
+    id: 'l_full13',
+    title: 'Listening Test 13',
+    audioUrl: '/test materials/listening/audio/listening_13.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/full-listening-13.html',
+    sections: []
   }
 ];

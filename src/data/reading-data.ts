@@ -68,5 +68,50 @@ export const readingTests: ReadingTest[] = [
     htmlUrl: '/test materials/reading/IELTSwithJurabek Reading (2).html',
     passages: [],
     questions: []
+  },
+  {
+    id: 'r_full21',
+    title: 'Reading Test 21',
+    difficulty: 'Medium',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-reading-21.html',
+    passages: [],
+    questions: []
+  },
+  {
+    id: 'r_full25',
+    title: 'Reading Test 25',
+    difficulty: 'Hard',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-reading-25.html',
+    passages: [],
+    questions: []
+  },
+  {
+    id: 'r_full26',
+    title: 'Reading Test 26',
+    difficulty: 'Medium',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-reading-26.html',
+    passages: [],
+    questions: []
+  },
+  {
+    id: 'r_full27',
+    title: 'Reading Test 27',
+    difficulty: 'Hard',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-reading-27.html',
+    passages: [],
+    questions: []
+  },
+  {
+    id: 'r_full29',
+    title: 'Reading Test 29',
+    difficulty: 'Medium',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-reading-29.html',
+    passages: [],
+    questions: []
   }
 ];

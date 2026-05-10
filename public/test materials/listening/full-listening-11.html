@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Practice Test 11</title>
+    <style>
+        :root { --primary: #6366f1; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .test-container { max-width: 900px; margin: auto; background: var(--card); padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
+        h2 { color: var(--primary); font-weight: 800; border-bottom: 2px solid rgba(99,102,241,0.2); padding-bottom: 10px; margin-bottom: 30px; }
+        .section-title { font-size: 1.2rem; font-weight: 700; color: #818cf8; margin-top: 40px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .question-block { margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 16px; }
+        input[type="text"] { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 8px; outline: none; transition: all 0.3s; }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+        img { max-width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.1); }
+        .audio-player { width: 100%; margin-bottom: 30px; border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h2>Listening Practice Test 11</h2>
+        
+        <audio id="listeningAudio" class="audio-player" controls>
+            <source src="audio/listening_11.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div class="content">
+            <div class="section-title">SECTION 1: Questions 1-10</div>
+            <div class="question-block">
+                <p><strong>Questions 1-10</strong><br>Complete the form below.<br>Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+                <p><strong>Car Rental Booking</strong></p>
+                <p>Customer Name: 1. <input type="text" id="q1"> </p>
+                <p>Car Category: 2. <input type="text" id="q2"> </p>
+                <p>Pickup Location: 3. <input type="text" id="q3"> </p>
+                <p>Pickup Date: 4. <input type="text" id="q4"> </p>
+                <p>Duration: 5. <input type="text" id="q5"> days</p>
+                <p>Insurance Level: 6. <input type="text" id="q6"> </p>
+                <p>Extra Requirement: 7. <input type="text" id="q7"> </p>
+                <p>Estimated Cost: £ 8. <input type="text" id="q8"> </p>
+                <p>Payment Method: 9. <input type="text" id="q9"> </p>
+                <p>Confirmation Code: 10. <input type="text" id="q10"> </p>
+            </div>
+
+            <div class="section-title">SECTION 2: Questions 11-20</div>
+            <div class="question-block">
+                <p><strong>Questions 11-15</strong><br>Choose the correct letter, <strong>A, B or C</strong>.</p>
+                <p>11. The guided tour starts at...<br>
+                A. 9:00 AM<br>
+                B. 9:30 AM<br>
+                C. 10:00 AM<br>
+                Answer: <input type="text" id="q11" size="2"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('listeningAudio');
+            if(audio) audio.play().catch(e => console.log("Auto-play blocked"));
+        });
+    </script>
+</body>
+</html>
