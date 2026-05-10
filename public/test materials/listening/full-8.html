@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Listening Full Test 8</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; font-size: 16px; transition: background 0.3s, color 0.3s; }
+
+        header {
+            height: 64px; background: white; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .audio-player-container { flex: 1; display: flex; justify-content: center; padding: 0 20px; }
+        audio { height: 36px; width: 100%; max-width: 400px; border-radius: 8px; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px 100px; }
+
+        h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 24px; color: #0f172a; text-align: center; }
+        
+        .part-section { margin-bottom: 40px; }
+        .part-title { 
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; 
+            color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+        }
+        .part-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .question-group { background: white; padding: 30px; border-radius: 20px; margin-bottom: 24px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .instructions { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); line-height: 1.4; }
+        .instructions strong { color: var(--text-main); }
+
+        .question { margin-bottom: 24px; transition: all 0.3s; }
+        .question-text { font-weight: 600; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; }
+        .q-num { background: #f1f5f9; color: var(--primary); width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; shrink: 0; }
+
+        .options { display: flex; flex-direction: column; gap: 8px; margin-left: 40px; }
+        .options label { 
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px; 
+            border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .options label:hover { background: #f8fafc; border-color: var(--primary-light); }
+        .options input:checked + span { color: var(--primary); font-weight: 600; }
+        .options label.selected { background: #eef2ff; border-color: var(--primary); }
+
+        .fill-input { 
+            border: 2px solid var(--border); border-radius: 8px; padding: 6px 12px; outline: none; 
+            width: 100%; max-width: 200px; transition: border-color 0.2s; margin: 0 4px;
+            font-weight: 600; color: var(--primary);
+        }
+        .fill-input:focus { border-color: var(--primary); }
+
+        footer {
+            height: 70px; background: white; border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+            position: fixed; bottom: 0; width: 100%; z-index: 100;
+        }
+
+        .submit-btn { 
+            background: var(--primary); color: white; border: none; padding: 12px 30px; 
+            border-radius: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
+
+        .result-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .result-card { background: white; padding: 40px; border-radius: 24px; width: 90%; max-width: 450px; text-align: center; }
+        .score-circle { 
+            width: 110px; height: 110px; border-radius: 50%; border: 6px solid var(--primary); 
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;
+            font-size: 2.2rem; font-weight: 900; color: var(--primary);
+        }
+
+        .night-mode { background: #0f172a; color: #f1f5f9; }
+        .night-mode header, .night-mode footer { background: #1e293b; border-color: #334155; }
+        .night-mode .question-group { background: #1e293b; border-color: #334155; }
+        .night-mode h1 { color: white; }
+        .night-mode .instructions { border-color: #334155; color: #94a3b8; }
+        .night-mode .options label { border-color: #334155; }
+        .night-mode .q-num { background: #334155; color: var(--primary-light); }
+
+        .diagram-container { text-align: center; margin: 20px 0; border: 1px dashed var(--border); padding: 20px; border-radius: 16px; background: #f8fafc; }
+        .night-mode .diagram-container { background: #0f172a; border-color: #334155; }
+
+        @media (max-width: 640px) {
+            .container { padding: 20px 15px 100px; }
+            .question-group { padding: 20px; }
+            header { padding: 0 15px; }
+            .audio-player-container { padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="font-weight: 900; font-size: 1.1rem; letter-spacing: -1px; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-headphones" style="color:var(--primary)"></i>
+            <span class="hidden sm:inline">CDI<span style="color:var(--primary)">PREP</span></span>
+        </div>
+        <div class="audio-player-container">
+            <audio id="mainAudio" src="https://www.sanokulov.uz/media/listening_tests/audio/6d7f7fd0d0c248808436ca4d1261d7cc.mp3" controls></audio>
+        </div>
+        <div>
+            <button onclick="toggleNightMode()" style="background: #f1f5f9; border:none; border-radius: 12px; width: 36px; height: 36px; cursor:pointer;">
+                <i class="fas fa-moon" id="moonIcon" style="color:var(--text-muted)"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>IELTS Listening – Full Test 8</h1>
+
+        <!-- PART 1 -->
+        <div class="part-section">
+            <div class="part-title">Part 1</div>
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 1–10</strong><br>
+                    Complete the notes below. Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.
+                </div>
+                <div class="question-text"><strong>Short-term Accommodation Rental</strong></div>
+                <div class="question">
+                    <p>Customer Name: <span class="q-num">1</span> <input type="text" name="q1" class="fill-input"></p>
+                    <p>Phone Number: 0412 555 121</p>
+                    <p>Type of property: <span class="q-num">2</span> <input type="text" name="q2" class="fill-input"></p>
+                    <p>Preferred location: <span class="q-num">3</span> <input type="text" name="q3" class="fill-input"></p>
+                    <p>Number of bedrooms: <span class="q-num">4</span> <input type="text" name="q4" class="fill-input"></p>
+                    <p>Maximum rent per week: $ <span class="q-num">5</span> <input type="text" name="q5" class="fill-input"></p>
+                    <p>Move-in date: <span class="q-num">6</span> <input type="text" name="q6" class="fill-input"></p>
+                    <p>Rental period: <span class="q-num">7</span> <input type="text" name="q7" class="fill-input"> months</p>
+                    <p>Furniture needed: <span class="q-num">8</span> <input type="text" name="q8" class="fill-input"></p>
+                    <p>Parking needed: <span class="q-num">9</span> <input type="text" name="q9" class="fill-input"></p>
+                    <p>Extra requirement: no <span class="q-num">10</span> <input type="text" name="q10" class="fill-input"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="part-section">
+            <div class="part-title">Part 2</div>
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 11–14</strong><br>
+                    Choose the correct letter, <strong>A</strong>, <strong>B</strong> or <strong>C</strong>.
+                </div>
+                <div class="question">
+                    <div class="question-text"><span class="q-num">11</span> What is the main reason for the meeting?</div>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="A"> <span>A. to announce a change in the office layout</span></label>
+                        <label><input type="radio" name="q11" value="B"> <span>B. to discuss the upcoming company merger</span></label>
+                        <label><input type="radio" name="q11" value="C"> <span>C. to introduce a new performance review system</span></label>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-text"><span class="q-num">12</span> When will the changes take effect?</div>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="A"> <span>A. at the beginning of next month</span></label>
+                        <label><input type="radio" name="q12" value="B"> <span>B. in two weeks’ time</span></label>
+                        <label><input type="radio" name="q12" value="C"> <span>C. immediately after the meeting</span></label>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-text"><span class="q-num">13</span> What should employees do if they have concerns?</div>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="A"> <span>A. speak to their department manager</span></label>
+                        <label><input type="radio" name="q13" value="B"> <span>B. send an email to human resources</span></label>
+                        <label><input type="radio" name="q13" value="C"> <span>C. fill out an anonymous feedback form</span></label>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="question-text"><span class="q-num">14</span> What will be provided at the end of the meeting?</div>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="A"> <span>A. a printed copy of the new guidelines</span></label>
+                        <label><input type="radio" name="q14" value="B"> <span>B. a link to a training video</span></label>
+                        <label><input type="radio" name="q14" value="C"> <span>C. a schedule for individual meetings</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 15–20</strong><br>
+                    What benefit is mentioned for each of the following office features?<br>
+                    Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A–H</strong>, next to Questions 15–20.<br>
+                    <strong>A</strong> Improved concentration | <strong>B</strong> Better collaboration | <strong>C</strong> Increased privacy | <strong>D</strong> More natural light | 
+                    <strong>E</strong> Better air quality | <strong>F</strong> Reduced noise levels | <strong>G</strong> More flexibility | <strong>H</strong> Improved posture
+                </div>
+                <div class="question">
+                    <p><span class="q-num">15</span> Standing desks: <input type="text" name="q15" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">16</span> Glass partitions: <input type="text" name="q16" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">17</span> Quiet zones: <input type="text" name="q17" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">18</span> Breakout areas: <input type="text" name="q18" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">19</span> Indoor plants: <input type="text" name="q19" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">20</span> Modular furniture: <input type="text" name="q20" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="part-section">
+            <div class="part-title">Part 3</div>
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 21–26</strong><br>
+                    Match the following tasks with the person responsible for them.<br>
+                    Choose <strong>SIX</strong> answers from the box and write the correct letter, <strong>A–C</strong>, next to Questions 21–26.<br>
+                    <strong>A</strong> Jack | <strong>B</strong> Sarah | <strong>C</strong> Both
+                </div>
+                <div class="question">
+                    <p><span class="q-num">21</span> Collecting data from the library: <input type="text" name="q21" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">22</span> Interviewing the local residents: <input type="text" name="q22" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">23</span> Analyzing the survey results: <input type="text" name="q23" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">24</span> Creating the presentation slides: <input type="text" name="q24" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">25</span> Writing the final report: <input type="text" name="q25" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">26</span> Presenting the findings: <input type="text" name="q26" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 27–30</strong><br>
+                    Label the diagram below. Choose <strong>FOUR</strong> answers from the box and write the correct letter, <strong>A–F</strong>, next to Questions 27–30.
+                </div>
+                <div class="diagram-container">
+                    <p style="font-style:italic; color:var(--text-muted)">[ Diagram of Security System Components ]</p>
+                    <p>A. Control Panel | B. Fixed Camera | C. Motion Sensor | D. Alarm Siren | E. Door Contact | F. Smoke Detector</p>
+                </div>
+                <div class="question">
+                    <p><span class="q-num">27</span> Component 1: <input type="text" name="q27" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">28</span> Component 2: <input type="text" name="q28" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">29</span> Component 3: <input type="text" name="q29" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                    <p><span class="q-num">30</span> Component 4: <input type="text" name="q30" class="fill-input" maxlength="1" oninput="this.value=this.value.toUpperCase()"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 4 -->
+        <div class="part-section">
+            <div class="part-title">Part 4</div>
+            <div class="question-group">
+                <div class="instructions">
+                    <strong>Questions 31–40</strong><br>
+                    Complete the notes below. Write <strong>ONE WORD ONLY</strong> for each answer.
+                </div>
+                <div class="question-text"><strong>The Evolution of Communication</strong></div>
+                <div class="question">
+                    <p>Early humans used <span class="q-num">31</span> <input type="text" name="q31" class="fill-input"> to communicate over long distances.</p>
+                    <p>The invention of the <span class="q-num">32</span> <input type="text" name="q32" class="fill-input"> in the 15th century allowed for the mass production of books.</p>
+                    <p>In the 19th century, the <span class="q-num">33</span> <input type="text" name="q33" class="fill-input"> made instant long-distance communication possible for the first time.</p>
+                    <p>The first <span class="q-num">34</span> <input type="text" name="q34" class="fill-input"> message was sent in 1992.</p>
+                    <p>Today, <span class="q-num">35</span> <input type="text" name="q35" class="fill-input"> media has changed how we interact with each other.</p>
+                    <p>One major impact is the speed of <span class="q-num">36</span> <input type="text" name="q36" class="fill-input"> sharing.</p>
+                    <p>However, there are concerns about the <span class="q-num">37</span> <input type="text" name="q37" class="fill-input"> of information online.</p>
+                    <p>Another issue is the decrease in <span class="q-num">38</span> <input type="text" name="q38" class="fill-input"> communication skills.</p>
+                    <p>Experts suggest that we should limit our <span class="q-num">39</span> <input type="text" name="q39" class="fill-input"> time.</p>
+                    <p>In the future, <span class="q-num">40</span> <input type="text" name="q40" class="fill-input"> intelligence might play a role in how we communicate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">IELTS Listening Full Test 8</div>
+        <button class="submit-btn" onclick="submitTest()">
+            <i class="fas fa-paper-plane"></i> Submit Test
+        </button>
+    </footer>
+
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-card">
+            <h2 style="margin-bottom:20px;">Test Complete</h2>
+            <div class="score-circle" id="finalScore">0</div>
+            <p id="scoreText" style="margin-bottom:30px; font-weight:600; font-size: 1.1rem; color: var(--text-main);"></p>
+            <button class="submit-btn" onclick="location.reload()" style="margin: 0 auto;">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleNightMode() {
+            document.body.classList.toggle('night-mode');
+            const icon = document.getElementById('moonIcon');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        const answers = {
+            q1: "smith", q2: "apartment", q3: "city center", q4: "two", q5: "450", q6: "15th june", q7: "6", q8: "fully furnished", q9: "secured", q10: "pets",
+            q11: "A", q12: "B", q13: "C", q14: "A", q15: "H", q16: "D", q17: "A", q18: "B", q19: "E", q20: "G",
+            q21: "A", q22: "B", q23: "C", q24: "A", q25: "B", q26: "C", q27: "B", q28: "C", q29: "E", q30: "D",
+            q31: "signals", q32: "printing press", q33: "telegraph", q34: "text", q35: "social", q36: "information", q37: "accuracy", q38: "verbal", q39: "screen", q40: "artificial"
+        };
+
+        function submitTest() {
+            if(!confirm("Are you sure you want to submit your answers?")) return;
+            
+            // Pause audio
+            document.getElementById('mainAudio').pause();
+
+            let score = 0;
+            for(let i=1; i<=40; i++) {
+                let userVal = "";
+                let inputs = document.getElementsByName('q'+i);
+                if(inputs.length === 0) continue;
+                
+                if(inputs[0].type === "radio") {
+                    for(let r of inputs) if(r.checked) userVal = r.value;
+                } else {
+                    userVal = inputs[0].value.trim().toLowerCase();
+                }
+
+                let correctVal = answers['q'+i].toLowerCase();
+                let isCorrect = (userVal === correctVal || userVal.replace(/ /g,'') === correctVal.replace(/ /g,''));
+                
+                if(isCorrect) score++;
+                
+                // Visual feedback
+                let container = inputs[0].closest('.question');
+                if(container) {
+                   container.style.padding = "15px";
+                   container.style.borderRadius = "12px";
+                   container.style.border = "1px solid " + (isCorrect ? "#10b981" : "#ef4444");
+                   container.style.background = isCorrect ? "rgba(16, 185, 129, 0.05)" : "rgba(239, 68, 68, 0.05)";
+                   
+                   if(!isCorrect) {
+                       let corrDiv = document.createElement('div');
+                       corrDiv.style.color = "#10b981";
+                       corrDiv.style.fontSize = "0.8rem";
+                       corrDiv.style.fontWeight = "700";
+                       corrDiv.style.marginTop = "8px";
+                       corrDiv.innerHTML = "<i class='fas fa-check-circle'></i> Correct: " + answers['q'+i].toUpperCase();
+                       container.appendChild(corrDiv);
+                   }
+                }
+            }
+
+            document.getElementById('resultOverlay').style.display = 'flex';
+            document.getElementById('finalScore').innerText = score;
+            document.getElementById('scoreText').innerText = `You correctly answered ${score} out of 40 questions.`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
