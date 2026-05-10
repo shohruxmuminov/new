@@ -3,19 +3,12 @@
 import { useState, useEffect, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Maximize, Minimize, Clock, ChevronRight, Play, Headphones, BookOpen, PenTool, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import Link from 'next/navigation';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { formatTime } from '@/lib/utils';
+import { mockTests } from '@/data/mock-test-data';
 
-interface MockTest {
-  id: string;
-  title: string;
-  type: 'reading' | 'listening' | 'writing' | 'full';
-  htmlUrl: string;
-  isPublished: boolean;
-}
-
-const STORAGE_KEY = 'cdi-mock-tests';
+const PUBLISHED_TESTS_KEY = 'cdi-published-tests';
 
 const FULL_TEST_SECTIONS = [
   { id: 'listening', title: 'Listening', duration: 30 * 60, icon: Headphones, path: '/test materials/mock test/mock listening/' },
@@ -25,7 +18,7 @@ const FULL_TEST_SECTIONS = [
 
 export default function MockTestViewPage({ params }: { params: Promise<{ testId: string }> }) {
   const { testId } = use(params);
-  const [test, setTest] = useState<MockTest | null>(null);
+  const [test, setTest] = useState<any>(null);
   const { enter: enterFS, exit: exitFS } = useFullscreen();
   const [isFS, setIsFS] = useState(false);
 
@@ -39,12 +32,14 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const all: MockTest[] = JSON.parse(saved);
-      const found = all.find(t => t.id === testId && t.isPublished);
-      setTest(found || null);
+    const saved = localStorage.getItem(PUBLISHED_TESTS_KEY);
+    const publishedIds = saved ? JSON.parse(saved) : [];
+    
+    const found = mockTests.find(t => t.id === testId);
+    if (found && publishedIds.includes(found.id)) {
+      setTest(found);
     }
+    
     const handler = () => setIsFS(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', handler);
     return () => document.removeEventListener('fullscreenchange', handler);
@@ -65,9 +60,10 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
       setCurrentSectionIndex(0);
       setTimer(FULL_TEST_SECTIONS[0].duration);
       setTimerActive(true);
+      // Wait for iframe to load before playing audio
       setTimeout(() => {
         if (audioRef.current) audioRef.current.play().catch(e => console.log('Autoplay blocked:', e));
-      }, 500);
+      }, 1000);
     }
   };
 
@@ -76,9 +72,6 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
       const nextIndex = currentSectionIndex + 1;
       setCurrentSectionIndex(nextIndex);
       setTimer(FULL_TEST_SECTIONS[nextIndex].duration);
-      if (nextIndex === 0 && audioRef.current) {
-        audioRef.current.play().catch(e => console.log('Autoplay blocked', e));
-      }
     } else {
       setTimerActive(false);
       setIsFinished(true);
@@ -91,29 +84,7 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
         <div className="text-center">
           <p className="text-secondary text-lg font-bold mb-2">Test not available</p>
           <p className="text-tertiary text-sm mb-6">This test hasn't been published or doesn't exist.</p>
-          <Link href="/mock-tests" className="btn-primary py-2 px-6 text-sm">← Back to Mock Tests</Link>
-        </div>
-      </div>
-    );
-  }
-
-  // STANDARD SINGLE TEST VIEWER
-  if (test.type !== 'full') {
-    return (
-      <div className="h-screen flex flex-col bg-surface overflow-hidden">
-        <header className="h-16 flex items-center justify-between px-6 border-b shrink-0 bg-surface z-50"
-          style={{ borderColor: 'var(--border-default)' }}>
-          <Link href="/mock-tests" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
-            <ArrowLeft size={16} /> Mock Tests
-          </Link>
-          <span className="font-bold text-primary hidden md:block">{test.title}</span>
-          <button onClick={isFS ? exitFS : enterFS}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-default text-xs font-bold text-secondary hover:text-primary transition-all">
-            {isFS ? <><Minimize size={14} /> Exit Fullscreen</> : <><Maximize size={14} /> Fullscreen</>}
-          </button>
-        </header>
-        <div className="flex-1 w-full bg-white">
-          <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />
+          <a href="/mock-tests" className="btn-primary py-2 px-6 text-sm">← Back to Mock Tests</a>
         </div>
       </div>
     );
@@ -150,7 +121,7 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
             <Clock className="text-amber-500 shrink-0 mt-0.5" size={18} />
             <p className="text-xs text-amber-500/90 leading-relaxed font-medium">
               Once you start, the sections will transition automatically when the timer runs out. 
-              Do not close the tab or refresh the page. Please test your audio before starting the Listening section.
+              The audio will play automatically during the Listening section.
             </p>
           </div>
 
@@ -159,9 +130,9 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
           </button>
           
           <div className="text-center mt-6">
-            <Link href="/mock-tests" className="inline-block text-sm text-tertiary hover:text-secondary">
+            <a href="/mock-tests" className="inline-block text-sm text-tertiary hover:text-secondary">
               ← Cancel and go back
-            </Link>
+            </a>
           </div>
         </motion.div>
       </div>
@@ -180,9 +151,9 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
           <p className="text-secondary text-sm mb-8">
             Congratulations! You have successfully completed the full mock test. Your answers have been recorded.
           </p>
-          <Link href="/mock-tests" className="btn-primary w-full justify-center py-4 text-base">
+          <a href="/mock-tests" className="btn-primary w-full justify-center py-4 text-base">
             Return to Dashboard
-          </Link>
+          </a>
         </motion.div>
       </div>
     );
@@ -190,7 +161,6 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
 
   // FULL MOCK TEST - ACTIVE SECTION VIEWER
   const currentSection = FULL_TEST_SECTIONS[currentSectionIndex];
-  // Extract the filename from the htmlUrl (e.g., "/mock-tests/1.html" -> "1.html")
   const filename = test.htmlUrl.split('/').pop() || '1.html';
   const iframeUrl = `${currentSection.path}${filename}`;
   const audioUrl = currentSection.id === 'listening' ? `${currentSection.path}${filename.replace('.html', '.mp3')}` : null;
@@ -201,11 +171,15 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
         style={{ borderColor: 'var(--border-default)' }}>
         
         <div className="flex items-center gap-4">
+          <a href="/mock-tests" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+            <ArrowLeft size={16} /> Exit
+          </a>
+          <div className="w-px h-6 bg-default mx-1 hidden sm:block"></div>
           <div className="flex items-center gap-2">
             <currentSection.icon size={18} className="text-indigo-400" />
             <span className="font-bold text-primary uppercase tracking-widest text-sm">{currentSection.title}</span>
           </div>
-          <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-secondary text-tertiary">
+          <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-secondary text-tertiary hidden sm:inline">
             Part {currentSectionIndex + 1} of 3
           </span>
         </div>
@@ -228,8 +202,6 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-500 text-white text-xs font-bold hover:bg-indigo-600 transition-colors">
             {currentSectionIndex < 2 ? 'Next Section' : 'Finish Test'} <ChevronRight size={14} />
           </button>
-
-          <div className="w-px h-6 bg-default mx-1 hidden sm:block"></div>
           
           <button onClick={isFS ? exitFS : enterFS}
             className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl border border-default text-xs font-bold text-secondary hover:text-primary transition-all">

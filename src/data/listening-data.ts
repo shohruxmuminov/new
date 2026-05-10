@@ -30,5 +30,29 @@ export const listeningTests: ListeningTest[] = [
     duration: 30,
     htmlUrl: '/test materials/listening/full-8.html',
     sections: []
+  },
+  {
+    id: 'l1',
+    title: 'Listening Test 1',
+    audioUrl: '/test materials/listening/1.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/1.html',
+    sections: []
+  },
+  {
+    id: 'l2',
+    title: 'Listening Test 2',
+    audioUrl: '/test materials/listening/2.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/2.html',
+    sections: []
+  },
+  {
+    id: 'l_jurabek_5',
+    title: 'Jurabek Listening 5',
+    audioUrl: '',
+    duration: 30,
+    htmlUrl: '/test materials/listening/IELTSwithJurabek Listening (5).html',
+    sections: []
   }
 ];
