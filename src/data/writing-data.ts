@@ -58,5 +58,29 @@ export const writingTasks: WritingTask[] = [
     template: 'Loading...',
     vocabulary: [],
     htmlUrl: '/test materials/writing/APPEARED full writing (5).html'
+  },
+  {
+    id: 'w5',
+    type: 'Task 1',
+    title: 'Writing Task 1 (Premium New)',
+    prompt: 'Premium Writing Task 1',
+    minWords: 150,
+    duration: 20,
+    sampleEssay: 'Loading...',
+    template: 'Loading...',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/APPEARED writing (2).html'
+  },
+  {
+    id: 'w6',
+    type: 'Task 2',
+    title: 'Writing Task 2 (Premium New)',
+    prompt: 'Premium Writing Task 2',
+    minWords: 250,
+    duration: 40,
+    sampleEssay: 'Loading...',
+    template: 'Loading...',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/APPEARED full writing (6).html'
   }
 ];

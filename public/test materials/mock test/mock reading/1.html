@@ -1,0 +1,1699 @@
+
+
+
+
+<!--made by IELTSwithJurabek-->
+
+<!DOCTYPE html>
+<html lang="en">
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek--><!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+
+<!--made by IELTSwithJurabek-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-title {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .loading-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .start-content {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+        }
+
+        .start-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .start-button {
+            padding: 12px 32px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .start-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .passage-info {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .timer {
+            background-color: rgba(255, 193, 193, 0.5);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #c53030;
+            border: 1px solid rgba(255, 120, 120, 0.3);
+        }
+
+        .timer.warning {
+            color: #9b2c2c;
+            background-color: rgba(254, 178, 178, 0.7);
+            border-color: rgba(245, 101, 101, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .logo-area:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+        }
+
+        .logo-area i {
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background-color: #f8f9fa;
+            padding: 4px 20px;
+            z-index: 100;
+            flex-shrink: 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .progress-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .progress-item {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-item.current {
+            background-color: #4299e1;
+            color: white;
+            transform: scale(1.1);
+            border-color: #2b6cb0;
+        }
+
+        .progress-item.answered {
+            background-color: #9ae6b4;
+            color: #22543d;
+            border-color: #68d391;
+        }
+
+        .progress-item.correct {
+            background-color: #48bb78;
+            color: white;
+            border-color: #38a169;
+        }
+
+        .progress-item.incorrect {
+            background-color: #fed7d7;
+            color: #c53030;
+            border-color: #feb2b2;
+        }
+
+        .progress-item:hover {
+            background-color: #cbd5e0;
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 6px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.95rem;
+            background-color: #f7fafc;
+            color: #4a5568;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-primary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-primary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-secondary {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #edf2f7;
+            border-color: #a0aec0;
+        }
+
+        .btn-submit {
+            background-color: #48bb78;
+            color: white;
+            font-weight: 900;
+            border: 1px solid #38a169;
+        }
+
+        .btn-submit:hover {
+            background-color: #38a169;
+            border-color: #2f855a;
+        }
+
+        .btn-submit:disabled {
+            background-color: #9ae6b4;
+            color: #718096;
+            cursor: not-allowed;
+            border: 1px solid #68d391;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .passage-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            position: relative;
+        }
+
+        .resizer {
+            width: 4px;
+            background-color: #cbd5e0;
+            cursor: col-resize;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .resizer:hover {
+            background-color: #a0aec0;
+        }
+
+        .resizer::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 60px;
+            background-color: rgba(203, 213, 224, 0.5);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .questions-container {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .passage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage-content p {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .passage p {
+            margin-top: 20px;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .question-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: box-shadow 0.2s;
+        }
+
+        .question:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option:hover {
+            background-color: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        .option input {
+            margin-right: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-field:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+        }
+
+        select.input-field {
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            width: 20%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .answer-indicator {
+            background-color: #e6fffa;
+            border: 1px solid #38b2ac;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .answer-indicator.correct {
+            background-color: #e6fffa;
+            border-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .answer-indicator.incorrect {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+            color: #742a2a;
+        }
+
+        .question-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-group-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+
+        #highlight-btn,
+        #remove-highlight-btn {
+            position: absolute;
+            z-index: 9999;
+            display: none;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2d3748;
+        }
+
+        .score-breakdown {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .resizer {
+                width: 100%;
+                height: 4px;
+                cursor: row-resize;
+            }
+
+            .resizer::before {
+                width: 60px;
+                height: 30px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .logo-area {
+                order: 1;
+            }
+
+            .passage-info {
+                order: 2;
+            }
+
+            .timer {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-item {
+                width: 32px;
+                height: 32px;
+                font-size: 0.85rem;
+            }
+
+            .passage-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+<!--made by IELTSwithJurabek-->
+
+<!--made by IELTSwithJurabek-->
+
+
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 class="loading-title">Your test will begin shortly</h2>
+            <p class="loading-subtitle">Please wait</p>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="start-screen hidden">
+        <div class="start-content">
+            <h1 class="start-title">IELTSwithJurabek</h1>
+            <p class="start-subtitle">Ready to begin your reading test?</p>
+            <button class="start-button" onclick="startTest()">Start Test</button>
+        </div>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container hidden" id="testContainer">
+        <!-- Header -->
+        <header>
+            <div class="passage-info">IELTSwithJurabek</div>
+
+            <!-- Timer -->
+            <div class="timer" id="globalTimer">
+                <i class="fas fa-clock"></i>
+                <span>60:00</span>
+            </div>
+
+            <!-- Promo Button -->
+            <div class="logo-area" onclick="window.open('https://t.me/IELTSwithJurabek', '_blank')">
+                <i class="fas fa-paper-plane"></i>
+                <span>Click for more TESTS</span>
+            </div>
+
+            <div class="passage-info" id="headerPassageTitle">Passage 1 of 3</div>
+        </header>
+
+        <!-- Floating Highlight Buttons -->
+        <button id="highlight-btn" type="button">Highlight</button>
+        <button id="remove-highlight-btn" type="button">Remove Highlight</button>
+
+        <div class="main-content">
+            <!-- ===== PASSAGE 1 ===== -->
+            <div class="passage-container" id="p1_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 1</h2>
+                <div class="passage-content" id="passage1">
+                    <h3>Steam across the water</h3>
+                    <p><strong>A look at the early history of boats powered by steam</strong></p>
+
+                    <p>During the 1600s, very early in the development of steam engines, inventive spirits like the Frenchman Denis Papin dreamed of - and experimented with - boats driven by steam, rather than by the wind or human effort, but many decades passed before those visions became reality.</p>
+
+                    <p>Englishman Jonathan Hulls took out patents on a steamboat in 1736, but it was to be driven by a Newcomen engine, which was heavy and therefore inefficient, and would never be a success. In 1763, William Henry, an American, put a Watt steam engine in a boat, but It sank. Nearly 20 years later, in the 1780s, a steam-powered paddle-wheeler managed to last fifteen minutes against the current on the River Saone in France, but lacked the endurance for longer trips. Developments elsewhere included a boat driven by a steam-powered water-jet and able to do six kilometres per hour. However, all these steamboats were either too slow or too expensive to run. For example, American John Fitch successfully trialled his first steamboat in 1787, but although he tried a number of designs and solved many technical challenges - one of his boats could even travel at 13 km/h - he could never convince sceptics that steamboats would pay.</p>
+
+                    <p>The 19th century came before real success could be claimed. In Scotland in 1802, Lord Dundas launched the steamboat Charlotte Dundas, which was driven by a paddle wheel and had an improved engine designed by William Symington. Barges, some weighing as much as 70 tonnes, were towed by this steamboat 30 kilometres along the Forth and Clyde Canal to Glasgow, Scotland’s second city. Soon after, success came to American Robert Fulton, whose countrymen called him ‘the father of the steamboat’. Inspired by news of the Charlotte Dundas, Fulton ran steamboat trials on the River Seine, in an attempt to attract French support for his submarine Nautilus. He later imported a Boulton-Watt steam engine and built a boat to use it in. In 1807, the Clermont began a scheduled passenger steamboat service between New York and Albany, 250 kilometres up the Hudson River, taking 30 hours for the trip. Within few years, steamers were running on the St Lawrence River in Canada and would soon appear on other rivers and lakes, including the Mississippi River, a most famous venue for the paddle-wheelers.</p>
+
+                    <p>Back in Scotland, Fulton’s ideas inspired Henry Bell, who launched his Comet in 1812 on the Clyde between Glasgow and Greenock. Inside a decade, dozens of steamboats were to be seen on the rivers, lochs and canals of Scotland, carrying cargo and occasionally passengers. The age of steamboats had come.</p>
+
+                    <p>Once steamboats were carrying passengers and industrial goods along the inland waterways and sheltered coastlines of Europe, North America and elsewhere, the challenge became to send steamboats onto the open ocean, such as across the Atlantic Ocean,between Europe and the US. Travelling under steam power alone would require engines to use less coal so the ship could stay at sea for several weeks. In order to provide a reliable service, it was also necessary to replace paddle wheels as a source of power with something less affected by the rolling of the ship.</p>
+
+                    <p>Without waiting for such breakthroughs, crossings under a combination of steam and sail got underway in 1819 with the American ship Savannah. A regular service took another two decades and introduced the famous name of Cunard. Securing the British government contract for the mail service across the Atlantic, Samuel Cunard established a shipping line in 1840, soon carrying passengers as well, and offering guaranteed sailing dates. Cunard’s first ships used a sail-steam combination, but the era of the passenger liner, using steam alone, was getting close.</p>
+
+                    <p>When it came to building the ships, the versatile British engineer Isambard Kingdom Brunei set the pace. Brunei, brilliant and daring, had already built the Great Western Railway. He created ever bigger ships - faster, more luxurious and comfortable for passengers. The Great Western, launched in 1838, was 70 metres long and crossed from Bristol to New York in just fifteen days. The largest paddle steamer ever built was Brunei’s Great Eastern. Ultimately too expensive to run as a passenger ship, it was leased to lay the first submarine telegraph cable from Europe to America. His 1853 Great Britain, nearly 100 metres long and luxuriously appointed, was the first oceangoing steamship made of iron, and the first to use the underwater screw propeller for powering movement in place of paddle wheels. The idea of the screw had been around since the experiments of the American John Stevens in 1803, but only in 1838 did a large steamer use one, the riverboat Archimedes built by Francis Pettit Smith. Later ships had twin screws for reliability.</p>
+
+                    <p>In many modem ships, steam turbines have replaced engines with pistons, with fuel oil instead of coal to fire the boilers. Diesel engines keep others moving. The largest ships afloat now would dwarf Brunei’s Great Eastern (launched in 1860); the Atlantic can be crossed in only four days. But in whatever form, the ever-evolving descendants of the original visions of Denis Papin and Robert Fulton continue to travel the seas in vast numbers.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 1 -->
+            <div class="questions-container" id="p1_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 1–13</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 1-6</div>
+                    <p>Complete the table below.</p>
+                    <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                    <p>Write your answers in boxes 1-6 on your answer sheet.</p>
+
+                    <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Date</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Event</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1600s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• Early inventors like Papin started to develop boats that relied on steam instead of manpower or wind.</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1730s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• The engine of Jonathan Hulls' steamboat was <input type="text" name="q1" placeholder="Answer..." style="width: 100px;"> due to its weight.</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1780s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• A French paddle steamer did not have the <input type="text" name="q2" placeholder="Answer..." style="width: 100px;"> to keep going for more than a quarter of an hour.</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1780s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• John Fitch overcame a number of <input type="text" name="q3" placeholder="Answer..." style="width: 100px;"> problems with his steamboat designs.</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Early 1800s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• The Charlotte Dundas pulled barges to Glasgow.</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Early 1800s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• In France, Fulton used a steamboat to try to raise interest in a <input type="text" name="q4" placeholder="Answer..." style="width: 100px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Early 1800s</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• Passengers in the US began to be carried regularly by a steamboat called the <input type="text" name="q5" placeholder="Answer..." style="width: 100px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">1812 onwards</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">• In Scotland, steamboats transported some passengers, but mostly <input type="text" name="q6" placeholder="Answer..." style="width: 100px;"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 7-13</div>
+                    <p>Do the following statements agree with the information given in Reading Passage 1?</p>
+                    <p>In boxes 7-13 on your answer sheet, write</p>
+                    <p><strong>TRUE</strong> if the statement agrees with the information</p>
+                    <p><strong>FALSE</strong> if the statement contradicts the information</p>
+                    <p><strong>NOT GIVEN</strong> if there is no information on this</p>
+
+                    <div class="question" data-question="7">
+                        <div class="question-text">7 For steamboats to cross the Atlantic Ocean, engines which used fuel economically were needed.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q7" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q7" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q7" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="8">
+                        <div class="question-text">8 Using paddle wheels guaranteed reliability on ocean crossings.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q8" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q8" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q8" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="9">
+                        <div class="question-text">9 The Savannah was much faster than a regular paddle steamer.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q9" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q9" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q9" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="10">
+                        <div class="question-text">10 Brunei preferred designing railways to steamships.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q10" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q10" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q10" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="11">
+                        <div class="question-text">11 The Great Britain had more than one innovative feature.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q11" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q11" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q11" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="12">
+                        <div class="question-text">12 The design of the riverboat Archimedes was widely admired.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q12" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q12" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q12" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="13">
+                        <div class="question-text">13 Modern ships that cross the Atlantic use the same energy source as the early steamships.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q13" value="TRUE"> TRUE</label>
+                            <label><input type="radio" name="q13" value="FALSE"> FALSE</label>
+                            <label><input type="radio" name="q13" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 2 ===== -->
+            <div class="passage-container hidden" id="p2_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 2</h2>
+                <div class="passage-content" id="passage2">
+                    <h3>The story of the ocean</h3>
+                    <p><strong>How humans have explored the world by boat</strong></p>
+
+                    <p><strong>A.</strong> What is the ocean? Today we refer to live individual oceans - the Atlantic, Pacific, Indian, Arctic, and Southern. But in the distant past, people saw the ‘ocean’ as the whole mysterious mass of water surrounding the places where they lived. In fact, nothing separates the oceans from each other. There is no moment when one passes from the Atlantic to the Indian Ocean, or from the Indian Ocean to the Pacific and in total they cover the greater part of the surface of the Earth.</p>
+
+                    <p><strong>B.</strong> Ocean voyages were made as long ago as 1000BCE, when Polynesians began migrating across the Pacific, setting off into the unknown. They reached small inhabited islands using only knowledge passed from navigator to apprentice, often using songs to memorize important facts, such as where specific stars would rise and set on the horizon. From Europe, Viking sailors crossed the North Atlantic and reached North America by 1000CE. In the Middle Ages, sea trade routes linked China to Egypt and Venice to London. Most seafarers kept close to the coastline whenever possible, however, and for many scholars, the ocean remained the subject of terror or denial. Arab geographer Al-Masudi in 957CE recorded a common sailors’ tale that at the exit from the Mediterranean Sea into the Atlantic there were giant statues, indicating that there was ‘no way beyond’. The German storyteller Adam of Bremen wrote in 1076: ‘Beyond Norway, which is the farthermost northern country, you will find no human habitation, nothing but ocean, terrible to look at and limitless.’ Around 1290 a map was presented to Hereford Cathedral. In medieval fashion, it showed the world as consisting of the continents of Europe, Africa and Asia, which was all that was known about at the time. Even the Mediterranean was not accurately drawn. The band of oceans surrounding the great landmass was not much wider than the rivers - the oceans were simply not considered important.</p>
+
+                    <p><strong>C.</strong> This narrow view of the world was soon to change during the 13th - 15th centuries. Venetian Marco Polo’s 1298 account of his travels in the east, including a sea journey from China to the Persian Gulf, broadened the scope of knowledge. The works of the ancient Greek geographer Ptolemy, in which he had plotted the Indian Ocean, had been forgotten for many centuries, but by 1400 they were again influential in Europe. Between 1405 and 1433, the Chinese admiral Zheng He led a series of voyages into the Indian Ocean, travelling as far as the cast coast of Africa. The expanding view of the world is represented in a great map made by the monk Fra Mauro in Venice around 1450. It was one of the first maps to recognize the Atlanta as an ocean. The European experience soon spread to the rest of the world. Adventurers and sailors, now sometimes backed by acquisitive kings, queens and emperors, set out in search of trade, territory and treasure. Setting out in 1498, Vasco da Gama led a Portuguese fleet around the southern tip of Africa to India. In 1519, Ferdinand Magellan, a Portuguese In theservice of Spain, set off on a voyage around South America, his crew completing a circumnavigation of the globe. The age of ocean denial was over.</p>
+
+                    <p><strong>D.</strong> Once humans could travel over vast areas of sea, it was perhaps justifiable to use the term ‘conquering the ocean’. Yet for centuries, ocean voyagers confronted discomfort and danger. Without prior knowledge or charts, sailors could never be sure what was under the surface of the sea. If bad weather came, it was often not possible to and shelter. Sicknesses, such as scurvy, killed thousands of people at sea, and accidents were commonplace. Sea travelers might run out of food or water, and it was not possible for a sailor in trouble to call for help beyond the horizon. The first ocean-going sailing ships were central to world trade and warfare and conflict, yet remained entirely at the mercy of the currents and the winds.</p>
+
+                    <p><strong>E.</strong> The other problem of ocean travel was the lack of navigational techniques. Observing heavenly bodies, continually measuring the ship’s speed, and using the magnetic compass could at best achieve a fair degree of precision in calculating a ship’s position. Sailors far out to sea often had only a vague notion of where they were, but years of technological progress, better navigational instruments and maritime experience gradually improved ocean travel. By the 19th century, scurvy was almost eliminated once it was realized it could be prevented and treated with citrus fruit, and navigation was greatly improved. As ocean-going steamships replaced sail in the second half of the century, the time spent at sea was reduced. By the 20th century, ocean travel had become reasonably safe, at least in times of peace.</p>
+
+                    <p><strong>F.</strong> In a sense, the ocean has not been ‘conquered’. We cannot control the currents and weather, and human impact has mostly been negative. But we have at least des-eloped the means to travel over vast areas, and this achievement has been the product of many centuries of adventures. Seafarers from ancient times down to the present day have faced a hard struggle against the elements, demanding endurance, skill, and ingenuity. The record of their lives includes barely credible stories of voyages into uncharted waters and survival at sea. Their experience deserves to be remembered and honored, as does the essential contribution of modem sailors to our ever-evolving history.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 2 -->
+            <div class="questions-container hidden" id="p2_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 14–26</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 14-19</div>
+                    <p>Reading Passage 2 has six paragraphs, A-F.</p>
+                    <p>Choose the correct heading for each paragraph from the list of headings below.</p>
+                    <p>Write the correct number, <strong>i-ix</strong>, in boxes 14-19 on your answer sheet.</p>
+
+                    <div class="headings-list">
+                        <p><strong>List of Headings</strong></p>
+                        <p><strong>i</strong> Increasing the amount of information about the geography of the ocean</p>
+                        <p><strong>ii</strong> Celebrating the accomplishments of sailors in the past and present</p>
+                        <p><strong>iii</strong> Comparing sailors’ fears in the past to fears today</p>
+                        <p><strong>iv</strong> Understanding the ocean as a single body of water</p>
+                        <p><strong>v</strong> Sailing becomes less risky thanks to innovation and discovery</p>
+                        <p><strong>vi</strong> Adapting ships for longer ocean voyages</p>
+                        <p><strong>vii</strong> Misunderstanding and fearing the ocean</p>
+                        <p><strong>viii</strong> Facing a variety of risks in the ocean</p>
+                        <p><strong>ix</strong> Exploiting the ocean for its natural resources</p>
+                    </div>
+
+                    <div class="question" data-question="14">
+                        <div class="question-text">14 Paragraph A</div>
+                        <div class="options">
+                            <select name="q14">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="15">
+                        <div class="question-text">15 Paragraph B</div>
+                        <div class="options">
+                            <select name="q15">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="16">
+                        <div class="question-text">16 Paragraph C</div>
+                        <div class="options">
+                            <select name="q16">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="17">
+                        <div class="question-text">17 Paragraph D</div>
+                        <div class="options">
+                            <select name="q17">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="18">
+                        <div class="question-text">18 Paragraph E</div>
+                        <div class="options">
+                            <select name="q18">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="19">
+                        <div class="question-text">19 Paragraph F</div>
+                        <div class="options">
+                            <select name="q19">
+                                <option value="">Select</option>
+                                <option value="i">i</option>
+                                <option value="ii">ii</option>
+                                <option value="iii">iii</option>
+                                <option value="iv">iv</option>
+                                <option value="v">v</option>
+                                <option value="vi">vi</option>
+                                <option value="vii">vii</option>
+                                <option value="viii">viii</option>
+                                <option value="ix">ix</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 20-24</div>
+                    <p>Complete the sentences below.</p>
+                    <p>Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+                    <p>Write your answers in boxes 20-24 on your answer sheet.</p>
+
+                    <div class="question" data-question="20">
+                        <div class="question-text">20 The Polynesians sometimes relied on <input type="text" name="q20" placeholder="Answer..." style="width: 150px;"> to help them remember important sailing information.</div>
+                    </div>
+                    <div class="question" data-question="21">
+                        <div class="question-text">21 It was believed that large <input type="text" name="q21" placeholder="Answer..." style="width: 150px;"> warned sailors about sailing from the Mediterranean into the Atlantic.</div>
+                    </div>
+                    <div class="question" data-question="22">
+                        <div class="question-text">22 Adam of Bremen wrote that there was no sign of any <input type="text" name="q22" placeholder="Answer..." style="width: 150px;"> life after Norway.</div>
+                    </div>
+                    <div class="question" data-question="23">
+                        <div class="question-text">23 The Hereford Cathedral map reveals the number of <input type="text" name="q23" placeholder="Answer..." style="width: 150px;"> that medieval people believed to exist.</div>
+                    </div>
+                    <div class="question" data-question="24">
+                        <div class="question-text">24 In the Hereford Cathedral map, oceans were shown to be a similar size to <input type="text" name="q24" placeholder="Answer..." style="width: 150px;">.</div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 25 and 26</div>
+                    <p>Choose <strong>TWO</strong> letters, <strong>A-E</strong>.</p>
+                    <p>Write the correct letters in boxes 25 and 26 on your answer sheet.</p>
+                    <p>Which <strong>TWO</strong> of the following difficulties does the writer say that sailors in the past faced?</p>
+
+                    <div class="question" data-question="25">
+                        <div class="question-text">25</div>
+                        <div class="options">
+                            <label><input type="checkbox" name="q25" value="A"> A long periods of isolation</label>
+                            <label><input type="checkbox" name="q25" value="B"> B the likelihood of low wages</label>
+                            <label><input type="checkbox" name="q25" value="C"> C the frequency of disease</label>
+                            <label><input type="checkbox" name="q25" value="D"> D the possibility of starvation</label>
+                            <label><input type="checkbox" name="q25" value="E"> E the chance of imprisonment during war</label>
+                        </div>
+                    </div>
+
+                    <div class="question" data-question="26">
+                        <div class="question-text">26</div>
+                        <div class="options">
+                            <label><input type="checkbox" name="q26" value="A"> A long periods of isolation</label>
+                            <label><input type="checkbox" name="q26" value="B"> B the likelihood of low wages</label>
+                            <label><input type="checkbox" name="q26" value="C"> C the frequency of disease</label>
+                            <label><input type="checkbox" name="q26" value="D"> D the possibility of starvation</label>
+                            <label><input type="checkbox" name="q26" value="E"> E the chance of imprisonment during war</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PASSAGE 3 ===== -->
+            <div class="passage-container hidden" id="p3_passagePanel" role="region" aria-label="Reading Passage">
+                <h2 class="section-title">READING PASSAGE 3</h2>
+                <div class="passage-content" id="passage3">
+                    <h3>The fluoridation controversy</h3>
+                    <p>The long-standing debate about whether to fluoridate our drinking water continues</p>
+
+                    <p>Fluoridation is the addition of fluorine to public water supplies with the aim of reducing tooth decay. The fluorine, when mixed with water, becomes fluoride and the desired concentration of fluoride in public water is approximately one part per million, depending on the regional temperature and hence the amount of water people are likely to drink. Many studies, such as those by McClure in 1970 through to Burt in 1983, have shown that when children drink fluoridated water, their average rate of tooth decay seems greatly reduced. A typical figure claimed is 50 percent reduction. This apparently enormous benefit for children’s teeth is the major argument in favor of fluoridation.</p>
+
+                    <p>Three main grounds for opposition to fluoridation have been expressed. First, opponents claim the benefits are exaggerated or not established. Second, there are claims of health risks to pans of the population, for example, allergic reactions. It is also accepted that high levels of fluoride can cause discoloration of otherwise healthy teeth. Proponents do not consider this to be a problem in such small concentrations, whereas opponents disagree - especially because some people drink more water and obtain much more than the standard I milligram of fluoride per day. Third, fluoridation is thought to be an infringement on individual rights because it is compulsory medication of all members of a community.</p>
+
+                    <p>An understanding of the fluoridation issue has important implications. If, according to the experts, fluoridation is unquestionably a beneficial and non-hazardous measure, then the wisdom of allowing the public to vote on, and reject it must be questioned.</p>
+
+                    <p>Almost all studies that have been done have assumed that the scientific aspects of the controversy are unproblematic, and they have excluded science from sociological examination. The traditional view is that science is a special kind of knowledge, which is established through scientific methods and objectively applied by members of a scientific community. However, in recent years there has been a major challenge to this picture by a sociology of science that shows how scientific knowledge is socially negotiated, and inevitably linked to the values of the relevant parties, both scientists and nonscientists. These challengers do not sec scientific knowledge as exempt from social inquiry.</p>
+
+                    <p>Kuhn (1970) argued that scientific knowledge does not always develop as an orderly process, but is characterized by periodic revolutions, in which the methods of study and the assessment criteria change in a fragmented way. According to Kuhn, the shift from one scientific way of thinking to another is not made solely on the basis of clear rules of formal scientific practice, but can include social factors, though Kuhn has never developed a full analysis of what these might be. Collins(1975) took this concept further when he asserted that the outcome of experiments was not something whose meaning could be immediately comprehended, but rather something for interpretation, discussion between scientists, and reinterpretation in the light of other experiments.</p>
+
+                    <p>One interpretation of this analysis of science is that traditional distinctions between facts and theories, and between scientific knowledge and values, can no longer be justified. Because social processes are involved at all stages of the creation, evaluation, and establishing of scientific knowledge, social values may also be involved.</p>
+
+                    <p>In the same way as many scientists who study fluoridation have overlooked social values, sociologists have also downplayed an Important part of the debate by ignoring the number of eminent scientists who have questioned aspects of fluoridation. An example is the study by Sutton in 1960, which analyzed the classic North American studies of the effect of fluoridation on tooth decay, and found that each showed significant methodological shortcomings. Sutton’s detailed study throws doubt as to the extent of reductions in tooth decay from fluoridation. Yet Sutton’s book is not cited in a single analysis of the fluoridation issue by any sociologist.</p>
+
+                    <p>In a situation of some scientific uncertainty, differences in values are highlighted. A supporter of fluoridation might argue, The evidence for the benefits of fluoridation is quite substantial, while the evidence for harm is limited and dubious. I think the likely benefits outweigh the possible dangers; hence I support fluoridation because it is the cheapest and easiest way to make sure every child reaps the benefits.’ An opponent might argue, Though the evidence for the benefits of fluoridation is substantial, there is some doubt about it. Since fluoridation is not necessary for good teeth, we should forego the benefits if been is some slight chance of harm. Some scientists claim that a small percentage of the population could be harmed by fluoride. Therefore I oppose fluoridation of water supplies and favor the voluntary use of fluoride tablets by those who want to take them.’</p>
+
+                    <p>Both arguments consider the scientific evidence concerning fluoridation, but differ in their assessments of the social benefits and costs. This difference is not between rationality and irrationality but is a legitimate difference in values, for example, the positive value placed on good teeth, the negative value placed on possible health risks, and the social benefits or costs of compulsory or voluntary intake of fluorides.</p>
+
+                    <p>From the sociological point of view, opposition to fluoridation is not necessarily irrational. Rather, claims to rationality and to scientific authority are better seen as part of a strategy to promote fluoridation than as incontrovertible statements of fact. Second, social values are likely to be bound up in any decision about fluoridation, no this is not an issue on which declarations by scientific experts ought to be considered the final word.</p>
+                </div>
+            </div>
+            <div class="resizer"></div>
+
+            <!-- Questions for Passage 3 -->
+            <div class="questions-container hidden" id="p3_questionsPanel" role="region" aria-label="Questions">
+                <h2 class="section-title">Questions 27–40</h2>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 27-31</div>
+                    <p>Choose the correct letter, <strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>.</p>
+                    <p>Write the correct letter in boxes 27-31 on your answer sheet.</p>
+
+                    <div class="question" data-question="27">
+                        <div class="question-text">27 The optimum amount of fluorine in fluoridated water is calculated partly according to</div>
+                        <div class="options">
+                            <label><input type="radio" name="q27" value="A"> A how hot the area is.</label>
+                            <label><input type="radio" name="q27" value="B"> B how warm the water is.</label>
+                            <label><input type="radio" name="q27" value="C"> C how many dental problems there are in the community.</label>
+                            <label><input type="radio" name="q27" value="D"> D how much fluorine the community chooses to have in its water.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="28">
+                        <div class="question-text">28 One reason given by the writer for opposing fluoridation is that</div>
+                        <div class="options">
+                            <label><input type="radio" name="q28" value="A"> A it may contribute to tooth decay.</label>
+                            <label><input type="radio" name="q28" value="B"> B it will be unacceptably expensive for the public.</label>
+                            <label><input type="radio" name="q28" value="C"> C obligatory fluoridation takes away personal freedom.</label>
+                            <label><input type="radio" name="q28" value="D"> D excessive fluoride could be added to the water by mistake.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="29">
+                        <div class="question-text">29 The writer mentions Kuhn in order to</div>
+                        <div class="options">
+                            <label><input type="radio" name="q29" value="A"> A provide a contrast with the view of Collins.</label>
+                            <label><input type="radio" name="q29" value="B"> B support the rational nature of scientific inquiry.</label>
+                            <label><input type="radio" name="q29" value="C"> C demonstrate that Kuhn did not argue his case adequately.</label>
+                            <label><input type="radio" name="q29" value="D"> D show that science can be influenced by non-scientific considerations.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="30">
+                        <div class="question-text">30 What did Sutton’s research discover about earlier studies in North America?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q30" value="A"> A There were failings in the way they were carried out.</label>
+                            <label><input type="radio" name="q30" value="B"> B The scientists involved had achieved unique results.</label>
+                            <label><input type="radio" name="q30" value="C"> C Proponents of fluoridation had not understood its long-term effects.</label>
+                            <label><input type="radio" name="q30" value="D"> D Fluoridation had a greater effect on tooth decay than previously believed.</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="31">
+                        <div class="question-text">31 In the last paragraph, what does the writer say about scientists?</div>
+                        <div class="options">
+                            <label><input type="radio" name="q31" value="A"> A They should reveal their true motivations.</label>
+                            <label><input type="radio" name="q31" value="B"> B They should not decide the fluoridation policy.</label>
+                            <label><input type="radio" name="q31" value="C"> C They are solely concerned with scientific truths.</label>
+                            <label><input type="radio" name="q31" value="D"> D They cannot reach agreement on the fluoridation issue.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 32-35</div>
+                    <p>Do the following statements agree with the views of the writer in Reading Passage 3?</p>
+                    <p>In boxes 32-35 on your answer sheet, write</p>
+                    <p><strong>YES</strong> if the statement agrees with the views of the writer</p>
+                    <p><strong>NO</strong> if the statement contradicts the views of the writer</p>
+                    <p><strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this</p>
+
+                    <div class="question" data-question="32">
+                        <div class="question-text">32 Scientific knowledge should be kept separate from social values.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q32" value="YES"> YES</label>
+                            <label><input type="radio" name="q32" value="NO"> NO</label>
+                            <label><input type="radio" name="q32" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="33">
+                        <div class="question-text">33 Many sociologists have disregarded the doubts that some scientists have concerning fluoridation.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q33" value="YES"> YES</label>
+                            <label><input type="radio" name="q33" value="NO"> NO</label>
+                            <label><input type="radio" name="q33" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="34">
+                        <div class="question-text">34 Sutton’s findings have been given insufficient attention by scientists outside of North America.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q34" value="YES"> YES</label>
+                            <label><input type="radio" name="q34" value="NO"> NO</label>
+                            <label><input type="radio" name="q34" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                    <div class="question" data-question="35">
+                        <div class="question-text">35 There are valid arguments on both sides of the fluoridation debate.</div>
+                        <div class="options">
+                            <label><input type="radio" name="q35" value="YES"> YES</label>
+                            <label><input type="radio" name="q35" value="NO"> NO</label>
+                            <label><input type="radio" name="q35" value="NOT GIVEN"> NOT GIVEN</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Questions 36-40</div>
+                    <p>Complete each sentence with the correct ending, <strong>A-G</strong>, below.</p>
+                    <p>Write the correct letter, <strong>A-G</strong>, in boxes 36-40 on your answer sheet.</p>
+
+                    <div class="endings-list">
+                        <p><strong>A</strong> the results of scientific research are not always understood at first.</p>
+                        <p><strong>B</strong> science is an unbiased discipline.</p>
+                        <p><strong>C</strong> people should be able to choose whether they want fluoride.</p>
+                        <p><strong>D</strong> there is insufficient proof to support a cautious approach.</p>
+                        <p><strong>E</strong> the serious damage fluoride causes far outweighs any positive effects.</p>
+                        <p><strong>F</strong> children are not the only ones who benefit from fluoridation.</p>
+                        <p><strong>G</strong> scientific knowledge is affected by the beliefs of everyone concerned.</p>
+                    </div>
+
+                    <div class="question" data-question="36">
+                        <div class="question-text">36 The traditional view of science is that</div>
+                        <div class="options">
+                            <select name="q36">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="37">
+                        <div class="question-text">37 A sociological view of science argues that</div>
+                        <div class="options">
+                            <select name="q37">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="38">
+                        <div class="question-text">38 Collins is of the opinion that</div>
+                        <div class="options">
+                            <select name="q38">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="39">
+                        <div class="question-text">39 The writer suggests that a supporter of fluoridation may conclude that</div>
+                        <div class="options">
+                            <select name="q39">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="question" data-question="40">
+                        <div class="question-text">40 The writer suggests that an opponent of fluoridation may conclude that</div>
+                        <div class="options">
+                            <select name="q40">
+                                <option value="">Select</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Progress/Navigation -->
+        <div class="progress-container">
+            <div class="progress-nav">
+                <div class="progress-items" style="gap:10px; flex-wrap:wrap;">
+                    <div id="bottomPartTabs" style="display:flex; gap:14px; justify-content:center; width:100%; align-items:center; flex-wrap:wrap;"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+                    <button class="btn btn-secondary" id="next-btn">Next</button>
+                    <button class="btn btn-submit" id="submit-all-btn">Submit All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Test Results</h2>
+            <div class="score-display" id="score-display">0/0</div>
+            <div class="score-breakdown" id="score-breakdown"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="close-modal">Close</button>
+                <button class="btn btn-primary" id="review-answers">Review Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========= CONFIG ========= */
+        const PARTS = [
+            { id: 1, title: 'Passage 1', qStart: 1, qEnd: 13, passagePanel: 'p1_passagePanel', questionsPanel: 'p1_questionsPanel' },
+            { id: 2, title: 'Passage 2', qStart: 14, qEnd: 26, passagePanel: 'p2_passagePanel', questionsPanel: 'p2_questionsPanel' },
+            { id: 3, title: 'Passage 3', qStart: 27, qEnd: 40, passagePanel: 'p3_passagePanel', questionsPanel: 'p3_questionsPanel' },
+        ];
+
+        /* ======= ANSWER KEY ======= */
+        const correctAnswers = {
+            q1: "inefficient", q2: "endurance", q3: "technical", q4: "submarine", q5: "Clermont", q6: "cargo",
+            q7: "TRUE", q8: "FALSE", q9: "NOT GIVEN", q10: "FALSE", q11: "TRUE", q12: "NOT GIVEN", q13: "FALSE",
+            q14: "iv", q15: "vii", q16: "i", q17: "viii", q18: "v", q19: "ii",
+            q20: "songs", q21: "statues", q22: "human", q23: "continents", q24: "rivers",
+            q25: ["C","D"], q26: ["C","D"],
+            q27: "A", q28: "C", q29: "D", q30: "A", q31: "B",
+            q32: "NO", q33: "YES", q34: "NOT GIVEN", q35: "YES",
+            q36: "B", q37: "G", q38: "A", q39: "D", q40: "C"
+        };
+
+        /* ========= STATE ========= */
+        let currentPart = 1;
+        let currentQuestion = 1;
+        let seconds = 60 * 60;
+        let timerInterval;
+
+        /* ========= HELPERS ========= */
+        function el(id) { return document.getElementById(id); }
+        function inRange(q, pId) { const p = PARTS[pId - 1]; return q >= p.qStart && q <= p.qEnd; }
+
+        /* ======= BOTTOM TABS + PER-PART NUMBER RAILS ======= */
+        function renderBottomTabs() {
+            const tabs = el('bottomPartTabs');
+            tabs.innerHTML = '';
+            PARTS.forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.fontWeight = (p.id === currentPart) ? '900' : '600';
+                btn.innerHTML = (p.id === currentPart) ? `<strong>${p.title}</strong>` : `${p.title}`;
+                btn.onclick = () => switchPart(p.id);
+                tabs.appendChild(btn);
+
+                const rail = document.createElement('div');
+                rail.id = `rail-part-${p.id}`;
+                rail.style.display = (p.id === currentPart) ? 'flex' : 'none';
+                rail.style.gap = '6px';
+                rail.style.flexWrap = 'wrap';
+                rail.style.alignItems = 'center';
+                const total = p.qEnd - p.qStart + 1;
+                for (let q = p.qStart; q <= p.qEnd; q++) {
+                    const chip = document.createElement('div');
+                    chip.textContent = q;
+                    chip.className = 'progress-item' + (q === currentQuestion && p.id === currentPart ? ' current' : '');
+                    chip.dataset.question = q;
+                    chip.style.width = '30px'; chip.style.height = '20px'; chip.style.borderRadius = '6px';
+                    chip.style.fontSize = '14px'; chip.style.padding = '0'; chip.style.lineHeight = '20px';
+                    chip.onclick = () => scrollToQuestion(q);
+                    rail.appendChild(chip);
+                }
+                tabs.appendChild(rail);
+            });
+        }
+
+        function refreshBottomBar() { renderBottomTabs(); }
+
+        function switchPart(partId) {
+            if (currentPart === partId) return;
+            PARTS.forEach(p => {
+                el(p.passagePanel).classList.add('hidden');
+                el(p.questionsPanel).classList.add('hidden');
+                const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'none';
+            });
+            currentPart = partId;
+            const p = PARTS[currentPart - 1];
+            currentQuestion = p.qStart;
+            el(p.passagePanel).classList.remove('hidden');
+            el(p.questionsPanel).classList.remove('hidden');
+            const r = el(`rail-part-${p.id}`); if (r) r.style.display = 'flex';
+            el('headerPassageTitle').textContent = `Passage ${currentPart} of 3`;
+            scrollToQuestion(currentQuestion, false);
+            refreshBottomBar();
+        }
+
+        function scrollToQuestion(num, smooth = true) {
+            const elQ = document.querySelector(`[data-question="${num}"]`) ||
+                document.querySelector(`input[name="q${num}"]`) ||
+                document.querySelector(`select[name="q${num}"]`);
+            if (elQ) elQ.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+            updateCurrentQuestion(num);
+        }
+
+        function updateCurrentQuestion(num) {
+            currentQuestion = num;
+            document.querySelectorAll(`#rail-part-${currentPart} .progress-item`).forEach(it => {
+                it.classList.toggle('current', parseInt(it.dataset.question, 10) === num);
+            });
+        }
+
+        function attachAnsweredListeners() {
+            document.querySelectorAll('input[type="radio"], input[type="text"], select, input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    const m = input.name && input.name.match(/^q(\d+)$/);
+                    if (!m) return;
+                    const q = parseInt(m[1], 10);
+                    const chip = document.querySelector(`.progress-item[data-question="${q}"]`);
+                    if (chip) {
+                        let val = '';
+                        if (input.type === 'text') val = input.value.trim();
+                        else if (input.type === 'checkbox') val = Array.from(document.querySelectorAll(`input[name="${input.name}"]:checked`)).map(cb => cb.value).join(',');
+                        else val = input.value;
+                        if (val) chip.classList.add('answered');
+                    }
+                });
+            });
+        }
+
+        /* ===== SUBMIT ALL ===== */
+        el('submit-all-btn').addEventListener('click', () => {
+            if (!confirm('Submit the entire test?')) return;
+
+            let score = 0, total = PARTS[PARTS.length - 1].qEnd;
+            const results = {};
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const corr = correctAnswers[key];
+                let user = null, isCorrect = false;
+
+                const radios = document.querySelectorAll(`input[name="${key}"][type="radio"]`);
+                const text = document.querySelector(`input[name="${key}"][type="text"]`);
+                const sel = document.querySelector(`select[name="${key}"]`);
+                const cbs = document.querySelectorAll(`input[name="${key}"][type="checkbox"]`);
+
+                if (radios.length > 0) {
+                    const c = Array.from(radios).find(r => r.checked);
+                    if (c) { user = c.value; isCorrect = (user.toLowerCase() === corr.toLowerCase()); radios.forEach(r => r.disabled = true); }
+                } else if (cbs.length > 0) {
+                    user = Array.from(cbs).filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
+                    if (user) {
+                        const corrArr = Array.isArray(corr) ? corr.sort().join(',') : '';
+                        isCorrect = user === corrArr;
+                        cbs.forEach(cb => cb.disabled = true);
+                    }
+                } else if (text) {
+                    user = (text.value || '').trim();
+                    if (user) {
+                        const norm = (s) => String(s).trim().toLowerCase().replace(/\s+/g, ' ');
+                        isCorrect = norm(user) === norm(corr);
+                        text.disabled = true;
+                    }
+                } else if (sel) {
+                    user = sel.value;
+                    if (user) { isCorrect = user === corr; sel.disabled = true; }
+                }
+
+                if (isCorrect) score++;
+                results[key] = { userAnswer: user || 'No answer', correct: corr, isCorrect };
+            }
+
+            for (let q = 1; q <= total; q++) {
+                const res = results[`q${q}`];
+                const ch = document.querySelector(`.progress-item[data-question="${q}"]`);
+                if (ch) {
+                    ch.classList.remove('current', 'answered');
+                    if (res) ch.classList.add(res.isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+
+            el('score-display').textContent = `${score}/${total}`;
+            const breakdown = el('score-breakdown');
+            breakdown.innerHTML = PARTS.map(p => {
+                const partScore = Array.from({ length: p.qEnd - p.qStart + 1 }, (_, i) => results[`q${p.qStart + i}`])
+                    .filter(r => r && r.isCorrect).length;
+                return `<div class="score-item"><span>Passage ${p.id}:</span><span>${partScore}/${p.qEnd - p.qStart + 1}</span></div>`;
+            }).join('');
+            el('results-modal').style.display = 'flex';
+
+            el('review-answers').onclick = () => {
+                el('results-modal').style.display = 'none';
+                showCorrectIndicators(results);
+            };
+        });
+
+        function showCorrectIndicators(results) {
+            document.querySelectorAll('.answer-indicator').forEach(e => e.remove());
+            const total = PARTS[PARTS.length - 1].qEnd;
+
+            for (let q = 1; q <= total; q++) {
+                const key = `q${q}`;
+                const res = results[key];
+                if (!res) continue;
+
+                let target = null;
+                const qEl = document.querySelector(`[data-question="${q}"] .options`);
+                if (qEl) target = qEl;
+                if (!target) {
+                    const input = document.querySelector(`input[name="${key}"]`);
+                    if (input) target = input.parentNode;
+                }
+                if (!target) {
+                    const sel = document.querySelector(`select[name="${key}"]`);
+                    if (sel) target = sel.parentNode;
+                }
+                if (!target) continue;
+
+                const box = document.createElement('div');
+                box.className = 'answer-indicator ' + (res.isCorrect ? 'correct' : 'incorrect');
+                box.style.display = 'block';
+                box.style.marginTop = '6px';
+                box.innerHTML = res.isCorrect
+                    ? `<i class="fas fa-check"></i> Correct!`
+                    : `<i class="fas fa-times"></i> Incorrect. Your answer: <strong>${res.userAnswer}</strong> <strong>Correct:</strong> ${Array.isArray(res.correct) ? res.correct.join(', ') : res.correct}`;
+                target.appendChild(box);
+            }
+        }
+
+        const timerSpan = document.querySelector('#globalTimer span');
+        const timerContainer = document.querySelector('#globalTimer');
+        function updateTimer() {
+            seconds--;
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            timerSpan.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (seconds <= 2 * 60) timerContainer.classList.add('warning');
+            if (seconds <= 0) { clearInterval(timerInterval); alert('Time is up! Submitting all passages.'); el('submit-all-btn').click(); }
+        }
+
+        function startTest() {
+            el('startScreen').classList.add('hidden');
+            el('testContainer').classList.remove('hidden');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        window.startTest = startTest;
+
+        setTimeout(() => { el('loadingScreen').classList.add('hidden'); el('startScreen').classList.remove('hidden'); }, 900);
+
+        PARTS.forEach(p => {
+            if (p.id === 1) { el(p.passagePanel).classList.remove('hidden'); el(p.questionsPanel).classList.remove('hidden'); }
+            else { el(p.passagePanel).classList.add('hidden'); el(p.questionsPanel).classList.add('hidden'); }
+        });
+        renderBottomTabs();
+        attachAnsweredListeners();
+
+        let isResizing = false;
+        document.querySelectorAll('.resizer').forEach(resizer => {
+            resizer.addEventListener('mousedown', () => { isResizing = true; document.body.style.cursor = 'col-resize'; document.body.style.userSelect = 'none'; });
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const container = document.querySelector('.main-content');
+            const rect = container.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const leftPct = (mouseX / rect.width) * 100;
+            const rightPct = 100 - leftPct;
+            if (leftPct >= 30 && leftPct <= 70) {
+                const passage = document.querySelector('.passage-container:not(.hidden)');
+                const questions = document.querySelector('.questions-container:not(.hidden)');
+                if (passage) passage.style.flex = leftPct + '%';
+                if (questions) questions.style.flex = rightPct + '%';
+            }
+        });
+        document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
+
+        const highlightBtn = el('highlight-btn');
+        const removeHighlightBtn = el('remove-highlight-btn');
+        const passagePanels = PARTS.map(p => el(p.passagePanel));
+        const questionsPanels = PARTS.map(p => el(p.questionsPanel));
+        let lastSelection = null, highlightTarget = null, currentPanel = null;
+
+        function getValidSelection() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            if (passagePanels.some(pp => pp && pp.contains(range.commonAncestorContainer))) {
+                currentPanel = passagePanels.find(pp => pp.contains(range.commonAncestorContainer));
+            } else if (questionsPanels.some(qp => qp && qp.contains(range.commonAncestorContainer))) {
+                currentPanel = questionsPanels.find(qp => qp.contains(range.commonAncestorContainer));
+            } else return null;
+            return range;
+        }
+        function showHighlightBtn(range) {
+            const rect = range.getBoundingClientRect();
+            highlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            highlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            highlightBtn.style.display = 'block';
+        }
+        function hideHighlightBtn() { highlightBtn.style.display = 'none'; }
+        function showRemoveBtn(span) {
+            const rect = span.getBoundingClientRect();
+            removeHighlightBtn.style.top = (window.scrollY + rect.top - 35) + 'px';
+            removeHighlightBtn.style.left = (window.scrollX + rect.left) + 'px';
+            removeHighlightBtn.style.display = 'block';
+            highlightTarget = span;
+        }
+        function hideRemoveBtn() { removeHighlightBtn.style.display = 'none'; highlightTarget = null; }
+
+        highlightBtn.addEventListener('click', () => {
+            if (lastSelection) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                span.appendChild(lastSelection.extractContents());
+                lastSelection.insertNode(span);
+                window.getSelection().removeAllRanges();
+                hideHighlightBtn();
+            }
+        });
+        removeHighlightBtn.addEventListener('click', () => {
+            if (highlightTarget) {
+                const parent = highlightTarget.parentNode;
+                while (highlightTarget.firstChild) parent.insertBefore(highlightTarget.firstChild, highlightTarget);
+                parent.removeChild(highlightTarget);
+                hideRemoveBtn();
+            }
+        });
+        document.addEventListener('selectionchange', () => {
+            hideHighlightBtn(); hideRemoveBtn();
+            const range = getValidSelection();
+            if (range) { lastSelection = range; showHighlightBtn(range); } else { lastSelection = null; }
+        });
+        document.addEventListener('mousedown', (e) => {
+            if (e.target !== highlightBtn && e.target !== removeHighlightBtn) { hideHighlightBtn(); hideRemoveBtn(); }
+        });
+        document.addEventListener('click', (e) => {
+            if (e.target.classList && e.target.classList.contains('highlight')) { e.preventDefault(); showRemoveBtn(e.target); }
+        });
+
+        el('close-modal').addEventListener('click', () => { el('results-modal').style.display = 'none'; });
+    </script>
+</body>
+
+</html>

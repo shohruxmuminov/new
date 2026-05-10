@@ -91,35 +91,14 @@ const modules = [
 ];
 
 const stats = [
-  { icon: Users, value: 12500, suffix: '+', label: 'Active Students' },
-  { icon: Award, value: 95, suffix: '%', label: 'Success Rate' },
-  { icon: Globe, value: 48, suffix: '+', label: 'Countries' },
-  { icon: TrendingUp, value: 7, suffix: '.5+', label: 'Avg Band Score' },
+  { icon: Award, value: 100, suffix: '%', label: 'Real Materials' },
+  { icon: Globe, value: 1, suffix: '', label: 'Global Standard' },
+  { icon: TrendingUp, value: 0, suffix: '', label: 'Practice Daily' },
 ];
 
-const testimonials = [
-  {
-    name: 'Sarah Chen',
-    country: 'China',
-    score: '8.0',
-    text: 'CDI Prep transformed my preparation. The speaking module helped me gain confidence and the reading tests were very close to the real exam.',
-    avatar: 'SC',
-  },
-  {
-    name: 'Ahmed Hassan',
-    country: 'Egypt',
-    score: '7.5',
-    text: 'The timed practice tests and instant scoring helped me improve my speed and accuracy. I got my target score on the first attempt!',
-    avatar: 'AH',
-  },
-  {
-    name: 'Maria Silva',
-    country: 'Brazil',
-    score: '8.5',
-    text: 'The writing templates and vocabulary suggestions were incredibly useful. The platform has a beautiful design that makes studying enjoyable.',
-    avatar: 'MS',
-  },
-];
+
+const testimonials: any[] = [];
+
 
 const faqs = [
   {
@@ -187,7 +166,7 @@ export default function LandingPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
               style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
               <Zap size={14} className="text-yellow-400" />
-              <span className="text-white/80 text-sm font-medium">Trusted by 12,500+ students worldwide</span>
+              <span className="text-white/80 text-sm font-medium">Real IELTS Preparation Materials</span>
             </div>
           </motion.div>
 
@@ -414,41 +393,43 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card p-6"
-              >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                    style={{ background: 'var(--gradient-primary)' }}
-                  >
-                    {t.avatar}
+          {testimonials.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {testimonials.map((t, i) => (
+                <motion.div
+                  key={t.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card p-6"
+                >
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
-                    <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                      {t.country} · Band {t.score}
-                    </p>
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                      style={{ background: 'var(--gradient-primary)' }}
+                    >
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                        {t.country} · Band {t.score}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

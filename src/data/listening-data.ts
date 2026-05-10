@@ -38,5 +38,13 @@ export const listeningTests: ListeningTest[] = [
     duration: 30,
     htmlUrl: '/test materials/listening/IELTSwithJurabek Listening (5).html',
     sections: []
+  },
+  {
+    id: 'l2',
+    title: 'Listening Test 2',
+    audioUrl: '/test materials/listening/2.mp3',
+    duration: 30,
+    htmlUrl: '/test materials/listening/2.html',
+    sections: []
   }
 ];

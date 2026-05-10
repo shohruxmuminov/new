@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, CheckCircle, XCircle, ArrowLeft, Send, RotateCcw, Headphones, ChevronRight, Maximize, Minimize } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, ArrowLeft, Send, RotateCcw, Headphones, ChevronRight, Maximize, Minimize, Play } from 'lucide-react';
 import { listeningTests } from '@/data/listening-data';
 import { formatTime, calculateScore, getBandScore } from '@/lib/utils';
 import Link from 'next/link';
@@ -15,17 +15,27 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
   const [submitted, setSubmitted] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
   const [timer, setTimer] = useState(test ? test.duration * 60 : 0);
-  const [timerActive, setTimerActive] = useState(true);
+  const [timerActive, setTimerActive] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (timerActive && timer > 0) {
+    if (hasStarted && timerActive && timer > 0) {
       timerRef.current = setInterval(() => setTimer(t => t - 1), 1000);
     } else if (timer === 0 && timerActive) {
       setTimerActive(false); setSubmitted(true);
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [timerActive, timer]);
+  }, [hasStarted, timerActive, timer]);
+
+  const handleStart = () => {
+    setHasStarted(true);
+    setTimerActive(true);
+    if (audioRef.current) {
+      audioRef.current.play().catch(e => console.log('Audio autoplay blocked', e));
+    }
+  };
 
   const { enter: enterFS, exit: exitFS } = useFullscreen();
   const [isFS, setIsFS] = useState(false);
@@ -37,6 +47,28 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
   }, []);
 
   if (!test) return <div className="min-h-screen pt-24 flex items-center justify-center"><p style={{ color: 'var(--text-secondary)' }}>Test not found.</p></div>;
+
+  if (!hasStarted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-surface p-4">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-md w-full glass-card p-10 text-center">
+          <div className="w-20 h-20 mx-auto rounded-3xl bg-indigo-500/10 flex items-center justify-center mb-6">
+            <Headphones size={32} className="text-indigo-400" />
+          </div>
+          <h1 className="text-2xl font-black text-primary mb-2">{test.title}</h1>
+          <p className="text-secondary text-sm mb-8">
+            This test takes {test.duration} minutes. Make sure your audio is ready. The audio will start playing automatically when you begin.
+          </p>
+          <button onClick={handleStart} className="btn-primary w-full justify-center py-4 text-base">
+            <Play size={18} /> Start Test
+          </button>
+          <Link href="/listening" className="inline-block mt-6 text-sm text-tertiary hover:text-secondary">
+            ← Back
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
 
   if (test.htmlUrl) {
     return (
@@ -50,6 +82,11 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
             {isFS ? <><Minimize size={14}/> Exit Fullscreen</> : <><Maximize size={14}/> Fullscreen</>}
           </button>
         </header>
+        {test.audioUrl && (
+          <div className="px-6 py-2 border-b border-default bg-secondary flex justify-center">
+            <audio ref={audioRef} src={test.audioUrl} controls className="h-10 w-full max-w-md" />
+          </div>
+        )}
         <div className="flex-1 w-full bg-white">
           <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />
         </div>
@@ -74,7 +111,12 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
           <Link href="/listening" className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
             <ArrowLeft size={16} /> Back
           </Link>
-          <h2 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{test.title}</h2>
+          <h2 className="text-sm font-bold hidden md:block" style={{ color: 'var(--text-primary)' }}>{test.title}</h2>
+          
+          {test.audioUrl && (
+             <audio ref={audioRef} src={test.audioUrl} controls className="h-8 max-w-[200px] hidden sm:block" />
+          )}
+
           <div className="flex items-center gap-3">
             <Clock size={16} style={{ color: timer < 60 ? '#ef4444' : 'var(--text-tertiary)' }} />
             <span className="font-mono font-bold text-sm" style={{ color: timer < 60 ? '#ef4444' : 'var(--text-primary)' }}>{formatTime(timer)}</span>
@@ -85,6 +127,12 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
             )}
           </div>
         </div>
+        {/* Mobile audio player if needed */}
+        {test.audioUrl && (
+          <div className="sm:hidden mt-2 flex justify-center">
+             <audio ref={audioRef} src={test.audioUrl} controls className="h-8 w-full" />
+          </div>
+        )}
       </div>
 
       {/* Results */}

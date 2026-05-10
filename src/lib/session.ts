@@ -10,8 +10,14 @@ export function setSession(user: object) {
 export function getSession() {
   if (typeof window === 'undefined') return null;
   const user = localStorage.getItem(SESSION_KEY);
-  const lastActive = localStorage.getItem(LAST_ACTIVE_KEY);
-  if (!user || !lastActive) return null;
+  if (!user) return null;
+  
+  let lastActive = localStorage.getItem(LAST_ACTIVE_KEY);
+  if (!lastActive) {
+    lastActive = Date.now().toString();
+    localStorage.setItem(LAST_ACTIVE_KEY, lastActive);
+  }
+  
   if (Date.now() - parseInt(lastActive) > THIRTY_DAYS_MS) {
     clearSession();
     return null;
