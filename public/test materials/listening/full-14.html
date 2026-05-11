@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Listening Full Test 14</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; padding-bottom: 100px; }
+        header { height: 64px; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 100; padding: 0 20px; }
+        .audio-player { width: 100%; max-width: 500px; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .part-section { margin-bottom: 40px; background: white; padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .part-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--primary-light); padding-bottom: 10px; }
+        .question { margin-bottom: 20px; padding: 15px; border-radius: 12px; transition: all 0.2s; }
+        .question:hover { background: #f1f5f9; }
+        .q-num { font-weight: 800; color: var(--primary); margin-right: 10px; }
+        .fill-input { border: 2px solid var(--border); border-radius: 8px; padding: 6px 12px; outline: none; width: 100%; max-width: 250px; transition: border-color 0.2s; }
+        .fill-input:focus { border-color: var(--primary); }
+        .options { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .options label { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; transition: background 0.2s; }
+        .options label:hover { background: #f8fafc; }
+        footer { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid var(--border); padding: 20px; display: flex; justify-content: center; z-index: 100; }
+        .submit-btn { background: var(--primary); color: white; border: none; padding: 12px 40px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform 0.2s; }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .correct-answer { color: var(--success); font-weight: 700; margin-top: 5px; font-size: 0.9rem; }
+        .wrong-answer { border-color: var(--error) !important; background: rgba(239, 64, 64, 0.05) !important; }
+        .correct-bg { border-color: var(--success) !important; background: rgba(16, 185, 129, 0.05) !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <audio id="mainAudio" class="audio-player" controls></audio>
+    </header>
+
+    <div class="container">
+        <h1>IELTS Listening Test 14</h1>
+        
+        <!-- Part 1 -->
+        <div class="part-section">
+            <div class="part-title">Part 1</div>
+            <div class="question">
+                <p><span class="q-num">1</span> Name: <input type="text" name="q1" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">2</span> Date of birth: <input type="text" name="q2" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">3</span> Address: <input type="text" name="q3" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">4</span> Postcode: <input type="text" name="q4" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">5</span> Contact number: <input type="text" name="q5" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">6</span> Reason for visit: <input type="text" name="q6" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">7</span> Occupation: <input type="text" name="q7" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">8</span> Previous experience: <input type="text" name="q8" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">9</span> Preferred day: <input type="text" name="q9" class="fill-input"></p>
+            </div>
+            <div class="question">
+                <p><span class="q-num">10</span> Source of information: <input type="text" name="q10" class="fill-input"></p>
+            </div>
+            <button onclick="playPart(1)" class="submit-btn" style="background:#818cf8; margin-top:10px;">Play Part 1</button>
+        </div>
+
+        <!-- Part 2 -->
+        <div class="part-section">
+            <div class="part-title">Part 2</div>
+            <div class="question">
+                <p><span class="q-num">11</span> Why did the speaker choose this location?</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="A"> A. It's close to the city center</label>
+                    <label><input type="radio" name="q11" value="B"> B. It has good facilities</label>
+                    <label><input type="radio" name="q11" value="C"> C. It was recommended by a friend</label>
+                </div>
+            </div>
+            <div class="question">
+                <p><span class="q-num">12</span> What is the main problem mentioned?</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="A"> A. Noise</label>
+                    <label><input type="radio" name="q12" value="B"> B. Cost</label>
+                    <label><input type="radio" name="q12" value="C"> C. Distance</label>
+                </div>
+            </div>
+            <!-- Additional questions for Part 2 (13-20) can be added here -->
+            <button onclick="playPart(2)" class="submit-btn" style="background:#818cf8; margin-top:10px;">Play Part 2</button>
+        </div>
+
+        <!-- Part 3 -->
+        <div class="part-section">
+            <div class="part-title">Part 3</div>
+            <p>Listen and answer questions 21-30.</p>
+            <button onclick="playPart(3)" class="submit-btn" style="background:#818cf8; margin-top:10px;">Play Part 3</button>
+        </div>
+
+        <!-- Part 4 -->
+        <div class="part-section">
+            <div class="part-title">Part 4</div>
+            <p>Listen and answer questions 31-40.</p>
+            <button onclick="playPart(4)" class="submit-btn" style="background:#818cf8; margin-top:10px;">Play Part 4</button>
+        </div>
+    </div>
+
+    <footer>
+        <button class="submit-btn" onclick="submitTest()">Submit Test</button>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('mainAudio');
+        const parts = {
+            1: '/test materials/listening/14/part1.mp3',
+            2: '/test materials/listening/14/part2.mp3',
+            3: '/test materials/listening/14/part3.mp3',
+            4: '/test materials/listening/14/part4.mp3'
+        };
+
+        function playPart(n) {
+            audio.src = parts[n];
+            audio.play();
+        }
+
+        const answers = {
+            q1: "jason", q2: "15th may", q3: "river road", q4: "br1 4pt", q5: "0123456789",
+            q11: "B", q12: "A"
+        };
+
+        function submitTest() {
+            let score = 0;
+            for(let key in answers) {
+                const inputs = document.getElementsByName(key);
+                let userVal = "";
+                if(inputs[0].type === "radio") {
+                    for(let i of inputs) if(i.checked) userVal = i.value;
+                } else {
+                    userVal = inputs[0].value.trim().toLowerCase();
+                }
+
+                const correct = answers[key].toLowerCase();
+                const qDiv = inputs[0].closest('.question');
+                
+                if(userVal === correct) {
+                    score++;
+                    qDiv.classList.add('correct-bg');
+                } else {
+                    qDiv.classList.add('wrong-answer');
+                    const msg = document.createElement('div');
+                    msg.className = 'correct-answer';
+                    msg.innerText = "Correct: " + answers[key];
+                    qDiv.appendChild(msg);
+                }
+            }
+            alert("Your score: " + score);
+        }
+    </script>
+</body>
+</html>
