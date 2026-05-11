@@ -124,8 +124,10 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
 }
 
-export const metadata: Metadata = {
-  title: 'IELTSPRO2 — Premium IELTS CDI Preparation',
-  description: 'Master your IELTS exam with IELTSPRO2. The most advanced simulator for Computer-Delivered IELTS preparation.',
-  keywords: ['IELTS', 'CDI', 'IELTSPRO2', 'exam preparation', 'speaking', 'reading', 'listening', 'writing'],
-};
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float 8s ease-in-out 2s infinite; }
