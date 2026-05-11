@@ -41,6 +41,42 @@ export const speakingPart1: SpeakingTask[] = [
     topic: 'Work or Study',
     question: 'Do you work or are you a student?',
     sampleAnswer: 'I am currently a final-year student at university, majoring in Computer Science. I really enjoy my studies, especially the practical coding parts.'
+  },
+  {
+    id: 'w_jan1_p1_1',
+    part: 1,
+    topic: 'News',
+    question: 'How do most people find out about the news in your country?',
+  },
+  {
+    id: 'w_jan1_p1_2',
+    part: 1,
+    topic: 'News',
+    question: 'Do you think the news is important?',
+  },
+  {
+    id: 'w_jan1_p1_3',
+    part: 1,
+    topic: 'News',
+    question: 'What kind of news do you usually watch or read?',
+  },
+  {
+    id: 'w_jan1_p1_4',
+    part: 1,
+    topic: 'News',
+    question: 'How has the way we get news changed over the years?',
+  },
+  {
+    id: 'w_jan1_p1_5',
+    part: 1,
+    topic: 'News',
+    question: 'Do you prefer to read newspapers or get news online?',
+  },
+  {
+    id: 'w_jan1_p1_6',
+    part: 1,
+    topic: 'News',
+    question: 'Can we always trust the news we read on the internet?',
   }
 ];
 
@@ -51,6 +87,30 @@ export const speakingPart3: SpeakingTask[] = [
     topic: 'Education',
     question: 'What are the most important qualities of a good teacher?',
     sampleAnswer: 'In my opinion, a good teacher should be patient, knowledgeable, and able to inspire students. They should also be adaptable to different learning styles.'
+  },
+  {
+    id: 'w_jan1_p3_1',
+    part: 3,
+    topic: 'Sharing News',
+    question: 'How do people usually share good news in your culture?',
+  },
+  {
+    id: 'w_jan1_p3_2',
+    part: 3,
+    topic: 'Sharing News',
+    question: 'Is it always necessary to tell the truth, even if the news is bad?',
+  },
+  {
+    id: 'w_jan1_p3_3',
+    part: 3,
+    topic: 'Sharing News',
+    question: 'Do you think children should be exposed to bad news from a young age?',
+  },
+  {
+    id: 'w_jan1_p3_4',
+    part: 3,
+    topic: 'Sharing News',
+    question: 'How does the media influence the way we perceive news?',
   }
 ];
 
@@ -71,6 +131,24 @@ export const cueCards: CueCard[] = [
     followUpQuestions: [
       'Do you think modern cities are beautiful?',
       'Why do you think nature is important for people?'
+    ]
+  },
+  {
+    id: 'cc_jan1',
+    topic: 'Good News',
+    prompt: 'Describe a piece of good news you received.',
+    bulletPoints: [
+      'What the news was',
+      'When you received it',
+      'Who gave you the news',
+      'And explain how you felt about it.'
+    ],
+    sampleAnswer: '',
+    followUpQuestions: [
+      'How do people usually share good news in your culture?',
+      'Is it always necessary to tell the truth, even if the news is bad?',
+      'Do you think children should be exposed to bad news from a young age?',
+      'How does the media influence the way we perceive news?'
     ]
   }
 ];
@@ -95,6 +173,40 @@ export const mockTests: SpeakingMockTest[] = [
         part: 3,
         duration: '4-5 mins',
         questions: ['Why do people like to visit beautiful places?', 'Do you think modern architecture is as beautiful as traditional one?']
+      }
+    ]
+  },
+  {
+    id: 'wisdom_jan1',
+    title: 'Wisdom Speaking – January Set 1 (News)',
+    duration: '11-14 mins',
+    parts: [
+      {
+        part: 1,
+        duration: '4-5 mins',
+        questions: [
+          'How do most people find out about the news in your country?',
+          'Do you think the news is important?',
+          'What kind of news do you usually watch or read?',
+          'How has the way we get news changed over the years?',
+          'Do you prefer to read newspapers or get news online?',
+          'Can we always trust the news we read on the internet?'
+        ]
+      },
+      {
+        part: 2,
+        duration: '3-4 mins',
+        cueCard: 'cc_jan1'
+      },
+      {
+        part: 3,
+        duration: '4-5 mins',
+        questions: [
+          'How do people usually share good news in your culture?',
+          'Is it always necessary to tell the truth, even if the news is bad?',
+          'Do you think children should be exposed to bad news from a young age?',
+          'How does the media influence the way we perceive news?'
+        ]
       }
     ]
   }
