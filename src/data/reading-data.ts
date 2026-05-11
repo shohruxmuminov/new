@@ -77,5 +77,14 @@ export const readingTests: ReadingTest[] = [
     htmlUrl: '/test materials/reading/wisdom-fp-9.html',
     passages: [],
     questions: []
+  },
+  {
+    id: 'r_sanokulov_dynamic1',
+    title: 'Sanokulov Reading – Dynamic 1 (The kākāpō)',
+    difficulty: 'Medium',
+    duration: 20,
+    htmlUrl: '/test materials/reading/sanokulov-dynamic-1.html',
+    passages: [],
+    questions: []
   }
 ];

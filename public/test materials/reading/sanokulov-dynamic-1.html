@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 1: The kākāpō</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#fff;color:#1a1a1a;height:100vh;overflow:hidden;}
+.header{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;border-bottom:1px solid #e5e7eb;background:#fff;position:fixed;top:0;left:0;right:0;z-index:100;height:48px;}
+.header-left{display:flex;align-items:center;gap:16px;}
+.logo{font-weight:900;font-size:1rem;letter-spacing:-0.5px;}
+.part-title{font-size:0.85rem;font-weight:600;color:#555;}
+.timer{display:flex;align-items:center;gap:8px;font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 14px;border-radius:20px;}
+.timer svg{width:16px;height:16px;}
+.main{display:flex;height:calc(100vh - 48px);margin-top:48px;}
+.passage-panel{flex:1;overflow-y:auto;padding:32px 40px;border-right:1px solid #e5e7eb;line-height:1.9;font-size:0.95rem;}
+.passage-panel h2{margin-bottom:1.5rem;font-size:1.5rem;font-weight:800;text-transform:uppercase;}
+.passage-panel p{margin-bottom:1.4rem;text-align:justify;}
+.questions-panel{width:420px;min-width:380px;overflow-y:auto;padding:24px;background:#fafafa;}
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.q-header h3{font-size:1rem;font-weight:800;}
+.q-header a{font-size:0.8rem;color:#2563eb;cursor:pointer;text-decoration:none;}
+.q-block{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 20px;margin-bottom:16px;}
+.q-group-title{font-weight:800;font-size:0.9rem;margin-bottom:8px;text-transform:uppercase;color:#475569;}
+.instructions{font-size:0.8rem;font-style:italic;color:#64748b;margin-bottom:16px;line-height:1.4;}
+.q-text{font-weight:700;font-size:0.9rem;margin-bottom:12px;line-height:1.5;}
+.q-block label{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:0.85rem;transition:all 0.15s;}
+.q-block label:hover{background:#f0f0ff;border-color:#8b5cf6;}
+.q-block label input{accent-color:#8b5cf6;}
+.q-numbers{display:flex;gap:4px;padding:10px 0;border-top:1px solid #e5e7eb;margin-top:8px;position:fixed;bottom:0;left:calc(100% - 420px);width:420px;background:#fff;padding:8px 24px;z-index:50;}
+.q-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;border:1px solid #d1d5db;cursor:pointer;background:#fff;}
+.q-num.answered{background:#8b5cf6;color:#fff;border-color:#8b5cf6;}
+.submit-float{position:fixed;bottom:12px;right:16px;padding:8px 20px;background:#1e293b;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer;z-index:100;display:flex;align-items:center;gap:6px;}
+.submit-float:hover{background:#0f172a;}
+.result-bar{display:none;position:fixed;bottom:50px;left:calc(100% - 420px);width:420px;background:#fff;border-top:2px solid #8b5cf6;padding:12px 24px;z-index:60;font-weight:700;}
+.correct{color:#16a34a;} .incorrect{color:#dc2626;}
+.q-block input[type="text"]{border:none;border-bottom:2px solid #cbd5e1;background:transparent;font-size:0.85rem;width:120px;text-align:center;outline:none;font-weight:600;padding:2px 4px;}
+.q-block input[type="text"]:focus{border-bottom-color:#8b5cf6;}
+.notes-container{background:#f8fafc;border-left:4px solid #8b5cf6;padding:12px 16px;margin-bottom:12px;font-size:0.85rem;}
+@media(max-width:768px){.main{flex-direction:column;}.passage-panel{border-right:none;border-bottom:1px solid #e5e7eb;max-height:50vh;}.questions-panel{width:100%;min-width:unset;}.q-numbers,.result-bar{left:0;width:100%;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <span class="logo">IELTSPRO2</span>
+    <span class="part-title">The kākāpō</span>
+  </div>
+  <div class="timer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span id="time">20:00</span></div>
+</div>
+
+<div class="main">
+  <div class="passage-panel">
+    <h2>The kākāpō</h2>
+    <p>The kākāpō, also known as the owl parrot, is a large, forest-dwelling bird, with a pale owl-like face. Up to 64 cm in length, it has predominantly yellow-green feathers, forward-facing eyes, a large grey beak, large blue feet, and relatively short wings and tail. It is the world’s only flightless parrot, and is also possibly one of the world’s longest-living birds, with a reported lifespan of up to 100 years.</p>
+    <p>Kākāpō are solitary birds and tend to occupy the same home range for many years. They forage on the ground and climb high into trees. They often leap from trees and flap their wings, but at best manage a controlled descent to the ground. They are entirely vegetarian, with their diet including the leaves, roots and bark of trees as well as bulbs, and fern fronds.</p>
+    <p>Kākāpō breed in summer and autumn, but only in years when food is plentiful. Males play no part in incubation or chick-rearing – females alone incubate eggs and feed the chicks. The 1-4 eggs are laid in soil, which is repeatedly turned over before and during incubation. The female kākāpō has to spend long periods away from the nest searching for food, which leaves the unattended eggs and chicks particularly vulnerable to predators.</p>
+    <p>Before humans arrived, kākāpō were common throughout New Zealand’s forests. However, this all changed with the arrival of the first Polynesian settlers about 700 years ago. For the early settlers, the flightless kākāpō was easy prey. They ate its meat and used its feathers to make soft cloaks. With them came the Polynesian dog and rat, which also preyed on kākāpō. By the time European colonisers arrived in the early 1800s, kākāpō had become confined to the central North Island and forested parts of the South Island. The fall in kākāpō numbers was accelerated by European colonisation. A great deal of habitat was lost through forest clearance, and introduced species such as deer depleted the remaining forests of food. Other predators such as cats, stoats and two more species of rat were also introduced. The kākāpō were in serious trouble.</p>
+    <p>In 1894, the New Zealand government launched its first attempt to save the kākāpō. Conservationist Richard Henry led an effort to relocate several hundred of the birds to predator-free Resolution Island in Fiordland. Unfortunately, the island didn’t remain predator free – stoats arrived within six years, eventually destroying the kākāpō population. By the mid-1900s, the kākāpō was practically a lost species. Only a few clung to life in the most isolated parts of New Zealand.</p>
+    <p>From 1949 to 1973, the newly formed New Zealand Wildlife Service made over 60 expeditions to find kākāpō, focusing mainly on Fiordland. Six were caught, but there were no females amongst them and all but one died within a few months of captivity. In 1974, a new initiative was launched, and by 1977, 18 more kākāpō were found in Fiordland. However, there were still no females. In 1977, a large population of males was spotted in Rakiura – a large island free from stoats, ferrets and weasels. There were about 200 individuals, and in 1980 it was confirmed females were also present. These birds have been the foundation of all subsequent work in managing the species.</p>
+    <p>Unfortunately, predation by feral cats on Rakiura Island led to a rapid decline in kākāpō numbers. As a result, during 1980-97, the surviving population was evacuated to three island sanctuaries: Codfish Island, Maud Island and Little Barrier Island. However, breeding success was hard to achieve. Rats were found to be a major predator of kākāpō chicks and an insufficient number of chicks survived to offset adult mortality. By 1995, although at least 12 chicks had been produced on the islands, only three had survived. The kākāpō population had dropped to 51 birds. The critical situation prompted an urgent review of kākāpō management in New Zealand.</p>
+    <p>In 1996, a new Recovery Plan was launched, together with a specialist advisory group called the Kākāpō Scientific and Technical Advisory Committee and a higher amount of funding. Renewed steps were taken to control predators on the three islands. Cats were eradicated from Little Barrier Island in 1980, and possums were eradicated from Codfish Island by 1986. However, the population did not start to increase until rats were removed from all three islands, and the birds were more intensively managed. This involved moving the birds between islands, supplementary feeding of adults and rescuing and hand-raising any failing chicks.</p>
+    <p>After the first five years of the Recovery Plan, the population was on target. By 2000, five new females had been produced, and the total population had grown to 62 birds. For the first time, there was cautious optimism for the future of kākāpō and by June 2020, a total of 210 birds was recorded. Today, kākāpō management continues to be guided by the kākāpō Recovery Plan. Its key goals are: minimise the loss of genetic diversity in the kākāpō population, restore or maintain sufficient habitat to accommodate the expected increase in the kākāpō population, and ensure stakeholders continue to be fully engaged in the preservation of the species.</p>
+  </div>
+
+  <div class="questions-panel" id="qPanel">
+    <div class="q-header"><h3>Questions 1-13</h3><a onclick="checkAnswers()">Submit Test</a></div>
+
+    <div class="q-group-title">Questions 1–6</div>
+    <div class="instructions">Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.</div>
+    
+    <div class="q-block"><div class="q-text">1. There are other parrots that share the kakapo’s inability to fly.</div><label><input type="radio" name="q1" value="TRUE"> TRUE</label><label><input type="radio" name="q1" value="FALSE"> FALSE</label><label><input type="radio" name="q1" value="NOT GIVEN"> NOT GIVEN</label></div>
+    <div class="q-block"><div class="q-text">2. Adult kakapo produce chicks every year.</div><label><input type="radio" name="q2" value="TRUE"> TRUE</label><label><input type="radio" name="q2" value="FALSE"> FALSE</label><label><input type="radio" name="q2" value="NOT GIVEN"> NOT GIVEN</label></div>
+    <div class="q-block"><div class="q-text">3. Adult male kakapo bring food back to nesting females.</div><label><input type="radio" name="q3" value="TRUE"> TRUE</label><label><input type="radio" name="q3" value="FALSE"> FALSE</label><label><input type="radio" name="q3" value="NOT GIVEN"> NOT GIVEN</label></div>
+    <div class="q-block"><div class="q-text">4. The Polynesian rat was a greater threat to the kakapo than Polynesian settlers.</div><label><input type="radio" name="q4" value="TRUE"> TRUE</label><label><input type="radio" name="q4" value="FALSE"> FALSE</label><label><input type="radio" name="q4" value="NOT GIVEN"> NOT GIVEN</label></div>
+    <div class="q-block"><div class="q-text">5. Kakapo were transferred from Rakiura Island to other locations because they were at risk from feral cats.</div><label><input type="radio" name="q5" value="TRUE"> TRUE</label><label><input type="radio" name="q5" value="FALSE"> FALSE</label><label><input type="radio" name="q5" value="NOT GIVEN"> NOT GIVEN</label></div>
+    <div class="q-block"><div class="q-text">6. One Recovery Plan initiative that helped increase the kakapo population size was caring for struggling young birds.</div><label><input type="radio" name="q6" value="TRUE"> TRUE</label><label><input type="radio" name="q6" value="FALSE"> FALSE</label><label><input type="radio" name="q6" value="NOT GIVEN"> NOT GIVEN</label></div>
+
+    <div class="q-group-title">Questions 7–13</div>
+    <div class="instructions">Complete the notes below. Choose ONE WORD AND/OR A NUMBER from the passage for each answer.</div>
+
+    <div class="q-block">
+      <div class="notes-container">
+        <strong>A type of parrot:</strong><br>
+        ● diet consists of fern fronds, various parts of a tree and 7 <input type="text" id="q7" data-ans="bulbs"><br>
+        ● nests are created in 8 <input type="text" id="q8" data-ans="soil"> where eggs are laid.
+      </div>
+      <div class="notes-container">
+        <strong>Arrival of Polynesian settlers</strong><br>
+        ● the 9 <input type="text" id="q9" data-ans="feathers"> of the kākāpō were used to make clothes.
+      </div>
+      <div class="notes-container">
+        <strong>Arrival of European colonisers</strong><br>
+        ● 10 <input type="text" id="q10" data-ans="deer"> were an animal which they introduced that ate the kākāpō’s food sources.
+      </div>
+      <div class="notes-container">
+        <strong>Protecting kākāpō</strong><br>
+        ● a sighting of female kākāpō on Rakiura Island was reported in 11 <input type="text" id="q11" data-ans="1980"><br>
+        ● the Recovery Plan included an increase in 12 <input type="text" id="q12" data-ans="funding"><br>
+        ● a current goal of the Recovery Plan is to maintain the involvement of 13 <input type="text" id="q13" data-ans="stakeholders"> in protection.
+      </div>
+    </div>
+
+    <div style="height:80px;"></div>
+  </div>
+</div>
+
+<button class="submit-float" onclick="checkAnswers()">✓ Submit Test</button>
+<div class="result-bar" id="result"></div>
+
+<script>
+const ans={q1:'FALSE',q2:'FALSE',q3:'FALSE',q4:'NOT GIVEN',q5:'TRUE',q6:'TRUE',q7:'bulbs',q8:'soil',q9:'feathers',q10:'deer',q11:'1980',q12:'funding',q13:'stakeholders'};
+let sec=1200;
+const ti=setInterval(()=>{sec--;if(sec<=0){clearInterval(ti);checkAnswers();}document.getElementById('time').textContent=Math.floor(sec/60)+':'+(sec%60<10?'0':'')+sec%60;},1000);
+function checkAnswers(){clearInterval(ti);let s=0,t=13,h='';for(let i=1;i<=6;i++){const r=document.querySelector('input[name="q'+i+'"]:checked');const u=r?r.value:'';const c=ans['q'+i];const ok=u===c;if(ok)s++;h+='<span style="margin-right:8px;" class="'+(ok?'correct':'incorrect')+'">Q'+i+': '+(ok?'✓':'✗ → '+c)+'</span>';}for(let i=7;i<=13;i++){const input=document.getElementById('q'+i);const u=input.value.trim().toLowerCase();const c=ans['q'+i].toLowerCase();const ok=u===c;if(ok)s++;h+='<span style="margin-right:8px;" class="'+(ok?'correct':'incorrect')+'">Q'+i+': '+(ok?'✓':'✗ → '+c)+'</span>';}const rd=document.getElementById('result');rd.innerHTML='<strong>Score: '+s+'/'+t+'</strong><br>'+h;rd.style.display='block';}
+</script>
+</body>
+</html>
