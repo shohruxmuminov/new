@@ -40,6 +40,7 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
 
   const { enter: enterFS, exit: exitFS } = useFullscreen();
   const [isFS, setIsFS] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     const handler = () => setIsFS(!!document.fullscreenElement);
@@ -70,8 +71,6 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
       </div>
     );
   }
-
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleIframeLoad = () => {
     try {

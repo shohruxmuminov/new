@@ -35,6 +35,8 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
 
   const { enter: enterFS, exit: exitFS } = useFullscreen();
   const [isFS, setIsFS] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const passageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setIsFS(!!document.fullscreenElement);
@@ -43,9 +45,6 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
   }, []);
 
   if (!test) return <div className="min-h-screen pt-24 flex items-center justify-center bg-surface"><p className="text-secondary">Test not found.</p></div>;
-
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const passageRef = useRef<HTMLDivElement>(null);
 
   const handleIframeLoad = () => {
     try {
