@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listening: Full Test 1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding-bottom:100px;}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid #e5e7eb;background:#fff;position:sticky;top:0;z-index:100;}
+.logo{font-weight:900;font-size:1.2rem;letter-spacing:-1px;}
+.container{max-width:800px;margin:0 auto;padding:24px;}
+.audio-player{background:#f8fafc;border:2px solid #000;padding:20px;border-radius:12px;margin-bottom:32px;display:flex;flex-direction:column;gap:8px;box-shadow:6px 6px 0 0 rgba(0,0,0,1);}
+.audio-player h3{font-size:0.9rem;font-weight:800;text-transform:uppercase;color:#64748b;}
+audio{width:100%;height:40px;}
+.section{margin-bottom:40px;padding:24px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;}
+.section-title{font-size:1.1rem;font-weight:900;margin-bottom:8px;text-transform:uppercase;color:#1e293b;border-bottom:3px solid #8b5cf6;display:inline-block;padding-bottom:2px;}
+.instructions{font-size:0.85rem;font-style:italic;color:#64748b;margin-bottom:20px;background:#f1f5f9;padding:10px 16px;border-radius:8px;}
+.q-title{font-weight:800;font-size:1rem;margin-bottom:12px;color:#111;text-transform:uppercase;}
+.question{margin-bottom:12px;font-size:0.95rem;line-height:1.6;}
+.q-num{font-weight:800;margin-right:8px;color:#8b5cf6;}
+input[type="text"]{border:none;border-bottom:2px solid #cbd5e1;background:transparent;font-size:0.95rem;width:150px;outline:none;font-weight:600;padding:2px 4px;transition:all 0.2s;}
+input[type="text"]:focus{border-bottom-color:#8b5cf6;background:#f5f3ff;}
+.options-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px;display:grid;gap:10px;}
+.option-item{font-weight:700;font-size:0.85rem;}
+.mcq-option{display:block;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.mcq-option:hover{background:#f5f3ff;border-color:#8b5cf6;}
+.mcq-option input{margin-right:10px;accent-color:#8b5cf6;}
+.submit-area{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;padding:16px 24px;display:flex;justify-content:center;z-index:100;}
+.btn-submit{background:#000;color:#fff;border:none;padding:12px 40px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border-radius:8px;cursor:pointer;box-shadow:4px 4px 0 0 rgba(139, 92, 246, 0.5);transition:all 0.1s;}
+.btn-submit:hover{transform:translate(-2px, -2px);box-shadow:6px 6px 0 0 rgba(139, 92, 246, 1);}
+.result-panel{display:none;margin-top:20px;padding:20px;border:4px solid #000;background:#fff;border-radius:12px;}
+.correct{color:#16a34a;font-weight:bold;} .incorrect{color:#dc2626;font-weight:bold;}
+@media(max-width:600px){.container{padding:12px;}}
+::selection { background: #fef08a; color: #000; }
+.highlighted { background-color: #fef08a; color: #000; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">IELTSPRO2</div>
+  <div style="font-weight:700; font-size:0.9rem;">Listening Test 1</div>
+</div>
+
+<div class="container" id="testContent">
+  <div class="audio-player">
+    <h3>Listening Audio</h3>
+    <div id="audioStatus" style="font-size:0.85rem; font-weight:700; color:#8b5cf6;">Playing: Part 1</div>
+    <audio id="audioPlayer" controls>
+      <source id="audioSource" src="/test materials/sanokulov listening/test1_p1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="section">
+    <div class="section-title">Part 1</div>
+    <div class="instructions">Complete the table below. Write ONE WORD AND/OR A NUMBER for each answer.</div>
+    <div class="q-title">The London Relocation Services</div>
+    
+    <div class="question"><span class="q-num">1</span> Current address: 118 <input type="text" id="q1" data-ans="fordyce"></div>
+    <div class="question"><span class="q-num">2</span> Phone No: <input type="text" id="q2" data-ans="07840051963"> (Mobile)</div>
+    <div class="question"><span class="q-num">3</span> Work Goal: Anna is hoping to find work as a <input type="text" id="q3" data-ans="nurse"></div>
+    <div class="question"><span class="q-num">4</span> Education: She needs to find a <input type="text" id="q4" data-ans="primary"> school for her son.</div>
+    <div class="question"><span class="q-num">5</span> Preferred Location: In the <input type="text" id="q5" data-ans="south"> of the city.</div>
+    <div class="question"><span class="q-num">6</span> Husband's preference: Would like to be near a <input type="text" id="q6" data-ans="station"></div>
+    <div class="question"><span class="q-num">7</span> Son's preference: Would prefer to be close to a <input type="text" id="q7" data-ans="park"></div>
+    <div class="question"><span class="q-num">8</span> Property Type: She would like to live in a <input type="text" id="q8" data-ans="house"></div>
+    <div class="question"><span class="q-num">9</span> Bedrooms: She would prefer <input type="text" id="q9" data-ans="three"> bedrooms.</div>
+    <div class="question"><span class="q-num">10</span> Extra Room: A small <input type="text" id="q10" data-ans="office"> is also desirable.</div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="section">
+    <div class="section-title">Part 2</div>
+    <div class="q-title">Canadian Festival Theatre</div>
+    <div class="instructions">Questions 11–14: Choose the correct letter, A, B or C.</div>
+    
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">11</span> Special offer for regular theatre-goers:</div>
+      <label class="mcq-option"><input type="radio" name="q11" value="A"> A. They can see a second play at a reduced price.</label>
+      <label class="mcq-option"><input type="radio" name="q11" value="B"> B. They can attend exclusive rehearsals.</label>
+      <label class="mcq-option"><input type="radio" name="q11" value="C"> C. They receive free backstage passes.</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">12</span> Information about study guides:</div>
+      <label class="mcq-option"><input type="radio" name="q12" value="A"> A. They are aimed at students only.</label>
+      <label class="mcq-option"><input type="radio" name="q12" value="B"> B. They summarize the play.</label>
+      <label class="mcq-option"><input type="radio" name="q12" value="C"> C. They give ideas for discussion.</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">13</span> 'Bring a friend' special:</div>
+      <label class="mcq-option"><input type="radio" name="q13" value="A"> A. It allows friends to go free.</label>
+      <label class="mcq-option"><input type="radio" name="q13" value="B"> B. It applies to a number of productions.</label>
+      <label class="mcq-option"><input type="radio" name="q13" value="C"> C. It is valid for children only.</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">14</span> About actor Christopher Plunket:</div>
+      <label class="mcq-option"><input type="radio" name="q14" value="A"> A. He may retire from acting soon.</label>
+      <label class="mcq-option"><input type="radio" name="q14" value="B"> B. He has won several major awards.</label>
+      <label class="mcq-option"><input type="radio" name="q14" value="C"> C. He will star in a new movie.</label>
+    </div>
+
+    <div class="instructions" style="margin-top:30px">Questions 15-20: Match the musical to its main theme (A-H).</div>
+    <div class="options-box" style="grid-template-columns: 1fr 1fr;">
+      <div class="option-item">A. living in a different century</div>
+      <div class="option-item">B. managing to achieve success</div>
+      <div class="option-item">C. finding true love</div>
+      <div class="option-item">D. growing up</div>
+      <div class="option-item">E. experiencing disappointment</div>
+      <div class="option-item">F. living in a magical place</div>
+      <div class="option-item">G. traveling the world</div>
+      <div class="option-item">H. handling conflict</div>
+    </div>
+    
+    <div class="question"><span class="q-num">15</span> The Climb: <input type="text" id="q15" style="width:50px" data-ans="B"></div>
+    <div class="question"><span class="q-num">16</span> The Voyagers: <input type="text" id="q16" style="width:50px" data-ans="A"></div>
+    <div class="question"><span class="q-num">17</span> Joey Brown: <input type="text" id="q17" style="width:50px" data-ans="H"></div>
+    <div class="question"><span class="q-num">18</span> Main Street: <input type="text" id="q18" style="width:50px" data-ans="E"></div>
+    <div class="question"><span class="q-num">19</span> Millie and Mike: <input type="text" id="q19" style="width:50px" data-ans="D"></div>
+    <div class="question"><span class="q-num">20</span> Windswept: <input type="text" id="q20" style="width:50px" data-ans="F"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="section">
+    <div class="section-title">Part 3</div>
+    <div class="q-title">Kathy's Dissertation on Water Pumps</div>
+    <div class="instructions">Questions 21–26: Choose the correct letter, A, B or C.</div>
+    
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">21</span> Part just read by tutor:</div>
+      <label class="mcq-option"><input type="radio" name="q21" value="A"> A. her final conclusions</label>
+      <label class="mcq-option"><input type="radio" name="q21" value="B"> B. her introductory chapter</label>
+      <label class="mcq-option"><input type="radio" name="q21" value="C"> C. her methodology section</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">22</span> What the tutor liked:</div>
+      <label class="mcq-option"><input type="radio" name="q22" value="A"> A. the organisation</label>
+      <label class="mcq-option"><input type="radio" name="q22" value="B"> B. the depth of research</label>
+      <label class="mcq-option"><input type="radio" name="q22" value="C"> C. the quality of writing</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">23</span> Kathy needs to:</div>
+      <label class="mcq-option"><input type="radio" name="q23" value="A"> A. interview more people</label>
+      <label class="mcq-option"><input type="radio" name="q23" value="B"> B. record more data</label>
+      <label class="mcq-option"><input type="radio" name="q23" value="C"> C. change her topic</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">24</span> Tutor's example purpose:</div>
+      <label class="mcq-option"><input type="radio" name="q24" value="A"> A. to point out a mistake</label>
+      <label class="mcq-option"><input type="radio" name="q24" value="B"> B. to illustrate a common error</label>
+      <label class="mcq-option"><input type="radio" name="q24" value="C"> C. to encourage Kathy to do something similar</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">25</span> Advice needed on:</div>
+      <label class="mcq-option"><input type="radio" name="q25" value="A"> A. references</label>
+      <label class="mcq-option"><input type="radio" name="q25" value="B"> B. formatting</label>
+      <label class="mcq-option"><input type="radio" name="q25" value="C"> C. appendices</label>
+    </div>
+    <div class="question">
+      <div style="font-weight:700;margin-bottom:8px;"><span class="q-num">26</span> Next step:</div>
+      <label class="mcq-option"><input type="radio" name="q26" value="A"> A. try out some software</label>
+      <label class="mcq-option"><input type="radio" name="q26" value="B"> B. visit a library</label>
+      <label class="mcq-option"><input type="radio" name="q26" value="C"> C. conduct a survey</label>
+    </div>
+
+    <div class="instructions" style="margin-top:30px">Questions 27-30: Match the activity to its benefit (A-F).</div>
+    <div class="options-box" style="grid-template-columns: 1fr;">
+      <div class="option-item">A. broadens practical experience of the field</div>
+      <div class="option-item">B. chance to publicise own work</div>
+      <div class="option-item">C. effective way of keeping up-to-date</div>
+      <div class="option-item">D. helps to improve writing skills</div>
+      <div class="option-item">E. provides funding opportunities</div>
+      <div class="option-item">F. way to make useful contacts</div>
+    </div>
+    <div class="question"><span class="q-num">27</span> Mechanical Engineers' Society meetings: <input type="text" id="q27" style="width:50px" data-ans="F"></div>
+    <div class="question"><span class="q-num">28</span> Visiting different workplaces: <input type="text" id="q28" style="width:50px" data-ans="C"></div>
+    <div class="question"><span class="q-num">29</span> Work experience abroad: <input type="text" id="q29" style="width:50px" data-ans="A"></div>
+    <div class="question"><span class="q-num">30</span> Attending an international conference: <input type="text" id="q30" style="width:50px" data-ans="B"></div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="section">
+    <div class="section-title">Part 4</div>
+    <div class="instructions">Complete the notes below. Write ONE WORD ONLY for each answer.</div>
+    <div class="q-title">Risk Assessment - Food Safety Standards</div>
+    
+    <div class="question"><span class="q-num">31</span> Potential problems with: the product's <input type="text" id="q31" data-ans="ingredients"></div>
+    <div class="question"><span class="q-num">32</span> Distribution concern: how products are <input type="text" id="q32" data-ans="stored"> and distributed</div>
+    <div class="question"><span class="q-num">33</span> Supermarkets concern: changes in <input type="text" id="q33" data-ans="temperature"></div>
+    <div class="question"><span class="q-num">34</span> Consumer attitudes: growth of the <input type="text" id="q34" data-ans="organic"> food market in Australia</div>
+    <div class="question"><span class="q-num">35</span> Selling strategy: supermarkets may use price or <input type="text" id="q35" data-ans="image"></div>
+    <div class="question"><span class="q-num">36</span> Mass media: now the main source of <input type="text" id="q36" data-ans="information"> for many</div>
+    <div class="question"><span class="q-num">37</span> Negative effect (Not objective): concern for <input type="text" id="q37" data-ans="sales"></div>
+    <div class="question"><span class="q-num">38</span> News nature: news is now a form of <input type="text" id="q38" data-ans="entertainment"></div>
+    <div class="question"><span class="q-num">39</span> Program gaps: few programmes deal with food safety or <input type="text" id="q39" data-ans="nutrition"></div>
+    <div class="question"><span class="q-num">40</span> Education importance: children can influence their <input type="text" id="q40" data-ans="parents"></div>
+  </div>
+
+  <div class="result-panel" id="result"></div>
+</div>
+
+<div class="submit-area">
+  <button class="btn-submit" onclick="checkAnswers()">Check Answers</button>
+</div>
+
+<script>
+// Auto Play Logic for Part 1 to Part 4
+const audioFiles = [
+  "/test materials/sanokulov listening/test1_p1.mp3",
+  "/test materials/sanokulov listening/test1_p2.mp3",
+  "/test materials/sanokulov listening/test1_p3.mp3",
+  "/test materials/sanokulov listening/test1_p4.mp3"
+];
+let currentAudioIndex = 0;
+const audioPlayer = document.getElementById('audioPlayer');
+const audioSource = document.getElementById('audioSource');
+const audioStatus = document.getElementById('audioStatus');
+
+audioPlayer.addEventListener('ended', () => {
+  currentAudioIndex++;
+  if(currentAudioIndex < audioFiles.length) {
+    audioSource.src = audioFiles[currentAudioIndex];
+    audioStatus.textContent = 'Playing: Part ' + (currentAudioIndex + 1);
+    audioPlayer.load();
+    audioPlayer.play();
+  } else {
+    audioStatus.textContent = 'Audio playback completed.';
+  }
+});
+
+// Highlighting Logic
+document.getElementById('testContent').addEventListener('mouseup', () => {
+  const selection = window.getSelection();
+  if(selection.toString().trim().length > 0) {
+    const range = selection.getRangeAt(0);
+    const span = document.createElement('span');
+    span.className = 'highlighted';
+    try {
+      range.surroundContents(span);
+    } catch(e) {}
+  }
+});
+
+// Answer Checking
+const ans={q1:'fordyce',q2:'07840051963',q3:'nurse',q4:'primary',q5:'south',q6:'station',q7:'park',q8:'house',q9:'three',q10:'office',q11:'A',q12:'C',q13:'B',q14:'A',q15:'B',q16:'A',q17:'H',q18:'E',q19:'D',q20:'F',q21:'B',q22:'A',q23:'B',q24:'C',q25:'C',q26:'A',q27:'F',q28:'C',q29:'A',q30:'B',q31:'ingredients',q32:'stored',q33:'temperature',q34:'organic',q35:'image',q36:'information',q37:'sales',q38:'entertainment',q39:'nutrition',q40:'parents'};
+
+function checkAnswers(){
+  let score=0; let total=40;
+  let h='<h3 style="margin-bottom:10px">Results</h3>';
+  
+  // Custom fix for answers that might be '3' instead of 'three'
+  ans.q9_alt = '3';
+
+  for(let id in ans){
+    if(id.includes('_alt')) continue;
+    const input = document.getElementById(id);
+    if(!input && document.querySelector(`input[name="${id}"]`)) {
+      // radio button
+      const r = document.querySelector(`input[name="${id}"]:checked`);
+      const u = r ? r.value : '';
+      const c = ans[id];
+      if(u===c) score++;
+      h+='<div style="margin-bottom:4px; font-size:0.85rem">Q'+id.substring(1)+': '+(u===c?'<span class="correct">✓</span>':'<span class="incorrect">✗ → '+c+'</span>')+'</div>';
+      continue;
+    }
+    if(!input) continue;
+    let u = input.value.trim().toLowerCase();
+    let c = ans[id].toLowerCase();
+    let ok = u===c || (ans[id+'_alt'] && u===ans[id+'_alt'].toLowerCase());
+    if(ok) score++;
+    h+='<div style="margin-bottom:4px; font-size:0.85rem">Q'+id.substring(1)+': '+(ok?'<span class="correct">✓</span>':'<span class="incorrect">✗ → '+ans[id]+'</span>')+'</div>';
+  }
+  
+  const res = document.getElementById('result');
+  res.innerHTML = h + '<h2 style="margin-top:15px">Score: '+score+'/'+total+'</h2>';
+  res.style.display = 'block';
+  res.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
