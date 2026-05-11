@@ -45,143 +45,73 @@ export default function DashboardPage() {
 
   const unreadCount = messages.filter(m => !m.read).length;
 
-  return (
-    <div className="max-w-7xl mx-auto space-y-10 pb-20 pt-24 px-4">
+  retur    <div className="max-w-7xl mx-auto space-y-10 pb-20 pt-24 px-4">
       {/* Hero Welcome Banner */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-        className="relative rounded-[32px] p-8 lg:p-12 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/5"
-        style={{ background: 'linear-gradient(225deg, #4f46e5 0%, #7c3aed 100%)' }}>
+        className="relative p-8 lg:p-12 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        style={{ background: '#8b5cf6' }}>
         
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none" style={{ 
-          backgroundImage: 'radial-gradient(circle at 100% 0%, white, transparent 70%)' 
-        }} />
-
-        <div className="relative z-10 max-w-xl">
+        <div className="relative z-10 max-w-xl text-white">
            <div className="flex items-center gap-4 mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border-2 border-black">
                  <Zap size={14} className="text-yellow-300" />
-                 <span className="text-[10px] font-bold text-white uppercase tracking-widest">New mock tests available</span>
+                 <span className="text-[10px] font-black uppercase tracking-widest text-white">New mock tests available</span>
               </div>
               
               <button 
                 onClick={() => setShowMessages(true)}
-                className="relative p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all border border-white/10"
+                className="relative p-2 bg-white border-2 border-black hover:translate-x-0.5 hover:translate-y-0.5 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
               >
-                 <Bell size={18} className="text-white" />
+                 <Bell size={18} className="text-black" />
                  {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] font-bold flex items-center justify-center text-white ring-2 ring-indigo-600">
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-black rounded-full text-[10px] font-bold flex items-center justify-center text-white">
                        {unreadCount}
                     </span>
                  )}
               </button>
            </div>
-           <h1 className="text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight">
-              Ready to learn, {user?.name?.split(' ')[0] || 'Scholar'}?
+           <h1 className="text-4xl lg:text-6xl font-black mb-4 tracking-tighter uppercase leading-none">
+              Ready to learn,<br />{user?.name?.split(' ')[0] || 'Scholar'}?
            </h1>
-           <p className="text-lg text-indigo-100 font-medium opacity-90 leading-relaxed">
-              Track your progress, join live sessions, and master the IELTS with our premium CDI simulator.
+           <p className="text-lg font-bold opacity-90 leading-tight uppercase">
+              Track your progress and master the IELTS with IELTSPRO2.
            </p>
         </div>
-
-        <div className="relative z-10 flex flex-wrap gap-4">
-           {/* Metric sections removed as per request to keep it authentic */}
-        </div>
       </motion.div>
-
-      {/* Message Modal */}
-      <AnimatePresence>
-         {showMessages && (
-            <>
-               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowMessages(false)} className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]" />
-               <motion.div initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 100 }} className="fixed top-0 right-0 h-full w-full max-w-md bg-surface z-[101] shadow-2xl border-l border-default">
-                  <div className="p-6 flex items-center justify-between border-b border-default">
-                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 flex items-center justify-center">
-                           <Bell size={20} className="text-indigo-400" />
-                        </div>
-                        <h3 className="text-xl font-black text-primary">Notifications</h3>
-                     </div>
-                     <button onClick={() => setShowMessages(false)} className="p-2 rounded-xl hover:bg-surface-soft transition-colors">
-                        <X size={20} className="text-tertiary" />
-                     </button>
-                  </div>
-
-                  <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-80px)]">
-                     {messages.length === 0 ? (
-                        <div className="text-center py-20">
-                           <Mail size={40} className="text-tertiary mx-auto mb-4 opacity-20" />
-                           <p className="text-secondary font-bold">No messages yet</p>
-                           <p className="text-xs text-tertiary mt-1">Updates from CEO and Teachers will appear here.</p>
-                        </div>
-                     ) : (
-                        messages.map(msg => (
-                           <div key={msg.id} 
-                             className={`p-5 rounded-2xl border transition-all ${msg.read ? 'bg-surface border-default' : 'bg-indigo-500/5 border-indigo-500/20'}`}
-                             onClick={() => markAsRead(msg.id)}
-                           >
-                              <div className="flex items-center justify-between mb-3">
-                                 <span className={`text-[10px] font-black px-2 py-1 rounded uppercase ${msg.from === 'CEO' ? 'bg-amber-500/10 text-amber-500' : 'bg-pink-500/10 text-pink-500'}`}>
-                                    Email from {msg.from}
-                                 </span>
-                                 <span className="text-[10px] text-tertiary">{new Date(msg.timestamp).toLocaleDateString()}</span>
-                              </div>
-                              <p className="text-sm text-secondary leading-relaxed">{msg.text}</p>
-                           </div>
-                        ))
-                     )}
-                  </div>
-               </motion.div>
-            </>
-         )}
-      </AnimatePresence>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Main Content Area */}
         <div className="lg:col-span-2 space-y-8">
            
            {/* Video Ad Section */}
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Video 1 */}
-              <div className="glass-card overflow-hidden border-none shadow-xl">
+              <div className="neo-card overflow-hidden">
                  <div className="aspect-video relative group">
                     <video 
                       src="/dashboard video/video-1.mp4" 
                       className="w-full h-full object-cover"
-                      loop
-                      muted
-                      autoPlay
-                      playsInline
+                      loop muted autoPlay playsInline
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
-                       <h4 className="text-white font-black text-xl mb-1">Elite Preparation</h4>
-                       <p className="text-white/80 text-xs font-medium">Achieve your target band with our proven strategies.</p>
-                    </div>
-                    <div className="absolute top-4 right-4 z-10 flex gap-2">
-                       <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
-                          <PlayIcon size={10} fill="white" /> Featured Video
+                    <div className="absolute top-4 right-4 z-10">
+                       <div className="px-3 py-1 bg-black border-2 border-white text-[10px] font-black text-white uppercase tracking-widest">
+                          Elite Prep
                        </div>
                     </div>
                  </div>
               </div>
 
               {/* Video 2 */}
-              <div className="glass-card overflow-hidden border-none shadow-xl">
+              <div className="neo-card overflow-hidden">
                  <div className="aspect-video relative group">
                     <video 
                       src="/dashboard video/video-2.mp4" 
                       className="w-full h-full object-cover"
-                      loop
-                      muted
-                      autoPlay
-                      playsInline
+                      loop muted autoPlay playsInline
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
-                       <h4 className="text-white font-black text-xl mb-1">Student Success</h4>
-                       <p className="text-white/80 text-xs font-medium">Real results from our global community.</p>
-                    </div>
-                    <div className="absolute top-4 right-4 z-10 flex gap-2">
-                       <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
-                          <PlayIcon size={10} fill="white" /> Featured Video
+                    <div className="absolute top-4 right-4 z-10">
+                       <div className="px-3 py-1 bg-black border-2 border-white text-[10px] font-black text-white uppercase tracking-widest">
+                          Success
                        </div>
                     </div>
                  </div>
@@ -189,31 +119,30 @@ export default function DashboardPage() {
            </div>
 
            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-black text-primary tracking-tight">Practice Modules</h2>
-              <Link href="#" className="text-sm font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 group">
-                 See All <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              <h2 className="text-3xl font-black uppercase tracking-tighter">Practice Modules</h2>
+              <Link href="#" className="text-sm font-black uppercase border-b-4 border-black hover:text-purple-600 transition-colors">
+                 See All →
               </Link>
            </div>
            
-           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {modules.map((mod, i) => (
                 <Link key={mod.id} href={mod.href}>
-                  <motion.div whileHover={{ y: -5 }} className="glass-card p-6 flex items-center gap-6 group">
-                     <div className="w-16 h-16 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-black/20" 
-                       style={{ background: `linear-gradient(135deg, ${mod.color}20, ${mod.color}10)`, color: mod.color }}>
-                        <mod.icon size={28} />
+                  <div className="neo-card p-6 flex items-center gap-6 group hover:bg-gray-50">
+                     <div className="w-16 h-16 border-4 border-black flex items-center justify-center shrink-0" 
+                       style={{ background: mod.color }}>
+                        <mod.icon size={28} className="text-white" />
                      </div>
                      <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                           <h3 className="text-lg font-bold text-primary group-hover:text-indigo-500 transition-colors">{mod.title}</h3>
-                           <span className="text-xs font-black" style={{ color: mod.color }}>{mod.band}</span>
+                           <h3 className="text-xl font-black uppercase tracking-tighter">{mod.title}</h3>
+                           <span className="text-sm font-black px-2 py-0.5 bg-black text-white">{mod.band}</span>
                         </div>
-                        <p className="text-xs text-tertiary mb-4">{mod.desc}</p>
-                        <div className="w-full h-1.5 rounded-full bg-surface-soft overflow-hidden">
-                           <div className="h-full rounded-full transition-all duration-500" style={{ width: `${mod.progress}%`, background: mod.color }} />
+                        <div className="w-full h-4 border-2 border-black bg-white overflow-hidden mt-2">
+                           <div className="h-full transition-all duration-500" style={{ width: `${mod.progress}%`, background: mod.color }} />
                         </div>
                      </div>
-                  </motion.div>
+                  </div>
                 </Link>
               ))}
            </div>
@@ -221,14 +150,12 @@ export default function DashboardPage() {
 
         {/* Sidebar Widgets */}
         <div className="space-y-8">
-           <h2 className="text-2xl font-black text-primary tracking-tight">Your Schedule</h2>
+           <h2 className="text-3xl font-black uppercase tracking-tighter">Your Schedule</h2>
            
-           <div className="glass-card p-6 space-y-6 border-none">
-              <div className="flex items-center justify-between">
-                 <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-indigo-500" />
-                    <span className="text-sm font-bold text-primary">Daily Goals</span>
-                 </div>
+           <div className="neo-card p-6 space-y-6">
+              <div className="flex items-center gap-2 mb-4">
+                 <Calendar size={20} className="text-black" />
+                 <span className="text-lg font-black uppercase">Daily Goals</span>
               </div>
 
               <div className="space-y-4">
@@ -240,26 +167,23 @@ export default function DashboardPage() {
                    { task: 'Review Vocabulary List', done: false },
                  ].map((t, i) => (
                    <div key={i} className="flex items-center gap-3">
-                      <div className={`w-5 h-5 rounded-lg flex items-center justify-center border transition-all ${t.done ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-default bg-surface'}`}>
-                         {t.done && <Star size={10} fill="currentColor" />}
+                      <div className={`w-6 h-6 border-2 border-black flex items-center justify-center transition-all ${t.done ? 'bg-black text-white' : 'bg-white'}`}>
+                         {t.done && <Star size={12} fill="currentColor" />}
                       </div>
-                      <span className={`text-sm font-medium ${t.done ? 'text-tertiary line-through' : 'text-secondary'}`}>{t.task}</span>
+                      <span className={`text-sm font-bold uppercase ${t.done ? 'text-gray-400 line-through' : 'text-black'}`}>{t.task}</span>
                    </div>
                  ))}
               </div>
            </div>
 
            {/* Community Card */}
-           <div className="rounded-3xl p-6 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)' }}>
-              <div className="absolute top-0 right-0 p-4 opacity-20">
-                 <Users size={80} className="text-white" />
-              </div>
+           <div className="p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" style={{ background: '#0ea5e9' }}>
               <div className="relative z-10">
-                 <h4 className="text-xl font-black text-white mb-2">Live Workshop</h4>
-                 <p className="text-xs text-orange-50 font-medium mb-6 opacity-90 leading-relaxed">
-                    Join Mr. Jurabek for a deep dive into Writing Task 2. Starts in 45 minutes.
+                 <h4 className="text-2xl font-black text-white uppercase mb-2">Live Workshop</h4>
+                 <p className="text-sm text-white font-bold mb-6 uppercase leading-tight">
+                    Join Mr. Jurabek for Writing Task 2. Starts in 45 min.
                  </p>
-                 <button className="w-full py-3 rounded-xl bg-white text-orange-600 text-xs font-black shadow-lg shadow-black/10 hover:scale-[1.02] transition-all">
+                 <button className="btn-neo w-full justify-center bg-white text-black border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                     Join Live Stream
                  </button>
               </div>
@@ -267,5 +191,6 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+iv>
   );
 }

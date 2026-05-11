@@ -69,125 +69,63 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'glass-strong shadow-lg'
+            ? 'bg-white dark:bg-slate-950 border-b-4 border-black shadow-[0_4px_0_0_rgba(0,0,0,1)]'
             : 'bg-transparent'
         }`}
-        style={{ borderBottom: scrolled ? '1px solid var(--border-default)' : 'none' }}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xs shadow-lg shadow-purple-500/20"
-              style={{ background: 'var(--gradient-primary)' }}>
+            <div className="w-12 h-12 border-4 border-black flex items-center justify-center text-white font-black text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all"
+              style={{ background: '#8b5cf6' }}>
               I2
             </div>
-            <span className="text-xl font-black tracking-tighter" style={{ color: 'var(--text-primary)' }}>
-              IELTS<span className="gradient-text">PRO2</span>
+            <span className="text-2xl font-black tracking-tighter uppercase italic" style={{ color: 'var(--text-primary)' }}>
+              IELTS<span className="text-purple-600">PRO2</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => {
               const isActive = pathname.startsWith(link.href);
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
-                  style={{
-                    color: isActive ? '#6366f1' : 'var(--text-secondary)',
-                    background: isActive ? 'var(--gradient-card)' : 'transparent',
-                  }}
+                  className={`px-4 py-2 text-sm font-black uppercase tracking-widest transition-all ${
+                    isActive ? 'bg-black text-white border-2 border-black' : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-slate-800'
+                  }`}
                 >
-                  <span className="flex items-center gap-2">
-                    <link.icon size={16} />
-                    {link.label}
-                  </span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full"
-                      style={{ background: 'var(--gradient-primary)' }}
-                    />
-                  )}
+                  {link.label}
                 </Link>
               );
             })}
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="btn-ghost flex items-center gap-2 text-sm"
-              style={{ color: 'var(--text-tertiary)' }}
-            >
-              <Search size={16} />
-              <span className="hidden lg:inline">Search</span>
-              <kbd className="hidden lg:inline px-1.5 py-0.5 rounded text-xs border" 
-                style={{ borderColor: 'var(--border-default)', color: 'var(--text-tertiary)', fontSize: '10px' }}>
-                ⌘K
-              </kbd>
-            </button>
-
+          <div className="hidden md:flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl transition-all duration-200 hover:scale-110"
+              className="w-10 h-10 border-2 border-black flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-800 transition-all"
               style={{ color: 'var(--text-secondary)' }}
-              aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
-
-            <Link
-              href="/ceo"
-              className="btn-ghost flex items-center gap-2 text-sm"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              <Shield size={16} />
-              CEO
-            </Link>
-
-            <Link
-              href="/teacher"
-              className="btn-ghost flex items-center gap-2 text-sm"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              <Shield size={16} />
-              Teacher
-            </Link>
 
             <Link
               href="/dashboard"
-              className="btn-ghost flex items-center gap-2 text-sm"
-              style={{ color: 'var(--text-secondary)' }}
+              className="bg-black text-white px-6 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(139,92,246,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-xs font-black uppercase tracking-widest"
             >
-              <LayoutDashboard size={16} />
-              {user ? user.name.split(' ')[0] : 'Dashboard'}
+              {user ? user.name.split(' ')[0] : 'DASHBOARD'}
             </Link>
-
-            {!user && (
-              <Link
-                href="/login"
-                className="btn-primary text-sm"
-                style={{ padding: '8px 20px', fontSize: '0.85rem' }}
-              >
-                <LogIn size={16} />
-                Sign In
-              </Link>
-            )}
           </div>
 
           {/* Mobile Toggle */}
           <div className="flex md:hidden items-center gap-2">
-            <button onClick={toggleTheme} className="p-2 rounded-xl" style={{ color: 'var(--text-secondary)' }}>
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl"
-              style={{ color: 'var(--text-primary)' }}
+              className="w-10 h-10 border-2 border-black flex items-center justify-center"
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
