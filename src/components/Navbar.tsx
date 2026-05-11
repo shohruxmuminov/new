@@ -77,12 +77,12 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm"
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xs shadow-lg shadow-purple-500/20"
               style={{ background: 'var(--gradient-primary)' }}>
-              CDI
+              I2
             </div>
-            <span className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-              CDI <span className="gradient-text">Prep</span>
+            <span className="text-xl font-black tracking-tighter" style={{ color: 'var(--text-primary)' }}>
+              IELTS<span className="gradient-text">PRO2</span>
             </span>
           </Link>
 

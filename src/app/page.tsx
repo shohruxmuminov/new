@@ -174,17 +174,10 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6"
+            className="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-[0.9] mb-6 tracking-tight"
           >
-            Master Your{' '}
-            <span className="relative inline-block">
-              IELTS CDI
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                <path d="M2 8C50 2 100 2 150 6C200 10 250 4 298 8" stroke="rgba(250,204,21,0.6)" strokeWidth="3" strokeLinecap="round" />
-              </svg>
-            </span>
-            <br />
-            <span className="text-white/70">With Confidence</span>
+            BECOME <span className="gradient-text">IELTS</span><br />
+            <span className="text-white/90">PRO WITH I2</span>
           </motion.h1>
 
           <motion.p
@@ -412,6 +405,16 @@ export default function LandingPage() {
                   <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
                     &ldquo;{t.text}&rdquo;
                   </p>
+                  {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xs shadow-lg shadow-purple-500/20"
+              style={{ background: 'var(--gradient-primary)' }}>
+              I2
+            </div>
+            <span className="text-xl font-black tracking-tighter" style={{ color: 'var(--text-primary)' }}>
+              IELTS<span className="gradient-text">PRO2</span>
+            </span>
+          </Link>
                   <div className="flex items-center gap-3">
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
