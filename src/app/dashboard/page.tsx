@@ -52,7 +52,7 @@ export default function DashboardPage() {
         className="w-full p-6 lg:p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center gap-6 md:gap-10" 
         style={{ background: '#fed7aa' }}>
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-black overflow-hidden shrink-0 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-             <img src="/avatar-ceo.jpg" alt="Muminov Shohrukh" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display='none'; e.currentTarget.parentElement?.querySelector('.fallback-icon')?.classList.remove('hidden'); }} />
+             <img src="/avatarceo/Shohrux%203x4.jpg" alt="Muminov Shohrukh" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display='none'; e.currentTarget.parentElement?.querySelector('.fallback-icon')?.classList.remove('hidden'); }} />
              <Users size={48} className="text-black fallback-icon hidden" />
           </div>
           
