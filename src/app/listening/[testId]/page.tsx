@@ -74,10 +74,14 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleIframeLoad = () => {
-    if (iframeRef.current && iframeRef.current.contentDocument) {
-      const script = iframeRef.current.contentDocument.createElement('script');
-      script.textContent = highlighterScript;
-      iframeRef.current.contentDocument.body.appendChild(script);
+    try {
+      if (iframeRef.current && iframeRef.current.contentDocument) {
+        const script = iframeRef.current.contentDocument.createElement('script');
+        script.textContent = highlighterScript;
+        iframeRef.current.contentDocument.body.appendChild(script);
+      }
+    } catch (error) {
+      console.warn('Iframe script injection blocked (CORS or permissions)', error);
     }
   };
 

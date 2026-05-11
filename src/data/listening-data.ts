@@ -16,7 +16,7 @@ export interface ListeningSection {
 export interface ListeningTest {
   id: string;
   title: string;
-  audioUrl: string;
+  audioUrl?: string;
   duration: number;
   htmlUrl?: string;
   sections: ListeningSection[];
@@ -74,7 +74,6 @@ export const listeningTests: ListeningTest[] = [
   {
     id: 'l_sanokulov_test1',
     title: 'Sanokulov Listening – Test 1 (Full)',
-    audioUrl: '', 
     duration: 30,
     htmlUrl: '/test%20materials/listening/sanokulov-test1-full.html',
     sections: []
