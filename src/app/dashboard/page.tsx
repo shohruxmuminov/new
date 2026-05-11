@@ -218,6 +218,19 @@ export default function DashboardPage() {
            </div>
         </div>
       </div>
+      {/* Staff Access Section - At the very bottom */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-20 pt-10 border-t-4 border-black flex flex-col items-center gap-6">
+         <h4 className="text-xl font-black uppercase tracking-tighter">Staff Access</h4>
+         <div className="flex gap-4">
+            <Link href="/ceo" className="btn-neo bg-black text-white text-xs px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(139,92,246,1)]">
+               <Shield size={16} /> CEO Panel
+            </Link>
+            <Link href="/teacher" className="btn-neo bg-white text-black text-xs px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+               <Shield size={16} /> Teacher Panel
+            </Link>
+         </div>
+         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Restricted area. Authorized personnel only.</p>
+      </motion.div>
     </div>
   );
 }
