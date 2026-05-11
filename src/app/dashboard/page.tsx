@@ -45,7 +45,8 @@ export default function DashboardPage() {
 
   const unreadCount = messages.filter(m => !m.read).length;
 
-  retur    <div className="max-w-7xl mx-auto space-y-10 pb-20 pt-24 px-4">
+  return (
+    <div className="max-w-7xl mx-auto space-y-10 pb-20 pt-24 px-4">
       {/* Hero Welcome Banner */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative p-8 lg:p-12 overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
