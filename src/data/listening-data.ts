@@ -54,5 +54,13 @@ export const listeningTests: ListeningTest[] = [
     duration: 30,
     htmlUrl: '/test materials/listening/full-14.html',
     sections: []
+  },
+  {
+    id: 'l_sanokulov_dynamic14',
+    title: 'Sanokulov Listening – Dynamic 14 (Test Plus 3)',
+    difficulty: 'Hard',
+    duration: 30,
+    htmlUrl: '/test materials/listening/sanokulov-dynamic-14.html',
+    sections: []
   }
 ];
