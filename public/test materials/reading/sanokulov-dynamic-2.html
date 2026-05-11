@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 2: To Britain – Reintroducing Elms</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#fff;color:#1a1a1a;height:100vh;overflow:hidden;}
+.header{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;border-bottom:1px solid #e5e7eb;background:#fff;position:fixed;top:0;left:0;right:0;z-index:100;height:48px;}
+.header-left{display:flex;align-items:center;gap:16px;}
+.logo{font-weight:900;font-size:1rem;letter-spacing:-0.5px;}
+.part-title{font-size:0.85rem;font-weight:600;color:#555;}
+.timer{display:flex;align-items:center;gap:8px;font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 14px;border-radius:20px;}
+.timer svg{width:16px;height:16px;}
+.main{display:flex;height:calc(100vh - 48px);margin-top:48px;}
+.passage-panel{flex:1;overflow-y:auto;padding:32px 40px;border-right:1px solid #e5e7eb;line-height:1.9;font-size:0.95rem;}
+.passage-panel h2{margin-bottom:0.5rem;font-size:1.5rem;font-weight:800;text-transform:uppercase;}
+.passage-panel h4{margin-bottom:1.5rem;font-size:1rem;font-weight:600;color:#475569;font-style:italic;}
+.passage-panel h3{margin-top:2rem;margin-bottom:0.5rem;font-size:1.1rem;font-weight:800;color:#1e293b;}
+.passage-panel p{margin-bottom:1.4rem;text-align:justify;}
+.questions-panel{width:420px;min-width:380px;overflow-y:auto;padding:24px;background:#fafafa;}
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.q-header h3{font-size:1rem;font-weight:800;}
+.q-header a{font-size:0.8rem;color:#2563eb;cursor:pointer;text-decoration:none;}
+.q-block{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 20px;margin-bottom:16px;}
+.q-group-title{font-weight:800;font-size:0.9rem;margin-bottom:8px;text-transform:uppercase;color:#475569;}
+.instructions{font-size:0.8rem;font-style:italic;color:#64748b;margin-bottom:16px;line-height:1.4;}
+.q-text{font-weight:700;font-size:0.9rem;margin-bottom:12px;line-height:1.5;}
+.q-block label{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:0.85rem;transition:all 0.15s;}
+.q-block label:hover{background:#f0f0ff;border-color:#8b5cf6;}
+.q-block label input{accent-color:#8b5cf6;}
+.submit-float{position:fixed;bottom:12px;right:16px;padding:8px 20px;background:#1e293b;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer;z-index:100;}
+.result-bar{display:none;position:fixed;bottom:50px;left:calc(100% - 420px);width:420px;background:#fff;border-top:2px solid #8b5cf6;padding:12px 24px;z-index:60;font-weight:700;}
+.correct{color:#16a34a;} .incorrect{color:#dc2626;}
+.q-block input[type="text"]{border:none;border-bottom:2px solid #cbd5e1;background:transparent;font-size:0.85rem;width:100px;text-align:center;outline:none;font-weight:600;padding:2px 4px;}
+.q-block input[type="text"]:focus{border-bottom-color:#8b5cf6;}
+.matching-list{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;margin-bottom:12px;font-size:0.85rem;}
+.matching-list h4{font-weight:800;font-size:0.8rem;margin-bottom:6px;text-transform:uppercase;color:#64748b;}
+@media(max-width:768px){.main{flex-direction:column;}.passage-panel{border-right:none;border-bottom:1px solid #e5e7eb;max-height:50vh;}.questions-panel{width:100%;min-width:unset;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <span class="logo">IELTSPRO2</span>
+    <span class="part-title">To Britain – Reintroducing Elms</span>
+  </div>
+  <div class="timer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span id="time">20:00</span></div>
+</div>
+
+<div class="main">
+  <div class="passage-panel">
+    <h2>To Britain</h2>
+    <h4>Mark Rowe investigates attempts to reintroduce elms to Britain</h4>
+
+    <h3>Section A</h3>
+    <p>Around 25 million elms, accounting for 90% of all elm trees in the UK, died during the 1960s and ’70s of Dutch elm disease. In the aftermath, the elm, once so dominant in the British landscape, was largely forgotten. However, there’s now hope the elm may be reintroduced to the countryside of central and southern England. Any reintroduction will start from a very low base. ‘The impact of the disease is difficult to picture if you hadn’t seen what was there before,’ says Matt Elliot of the Woodland Trust. ‘You look at old photographs from the 1960s and it’s only then that you realise the impact [elms had] … They were significant, large trees… then they were gone.’</p>
+
+    <h3>Section B</h3>
+    <p>The disease is caused by a fungus that blocks the elms’ vascular (water, nutrient and food transport) system, causing branches to wilt and die. A first epidemic, which occurred in the 1920s, gradually died down, but in the ’70s a second epidemic was triggered by shipments of elm from Canada. The wood came in the form of logs destined for boat building and its intact bark was perfect for the elm bark beetles that spread the deadly fungus. This time, the beetles carried a much more virulent strain that destroyed the vast majority of British elms.</p>
+
+    <h3>Section C</h3>
+    <p>Today, elms still exist in the southern English countryside but mostly only in low hedgerows between fields. ‘We have millions of small elms in hedgerows but they get targeted by the beetle as soon as they reach a certain size,’ says Karen Russell, co-author of the report ‘Where we are with elm’. Once the trunk of the elm reaches 10-15 centimetres or so in diameter, it becomes a perfect size for beetles to lay eggs and for the fungus to take hold. Yet mature specimens have been identified, in counties such as Cambridgeshire, that are hundreds of years old, and have mysteriously escaped the epidemic.</p>
+    <p>The key, Russell says, is to identify and study those trees that have survived and work out why they stood tall when millions of others succumbed. Nevertheless, opportunities are limited as the number of these mature survivors is relatively small. ‘What are the reasons for their survival?’ asks Russell. ‘Avoidance, tolerance, resistance? We don’t know where the balance lies between the three. I don’t see how it can be entirely down to luck.’</p>
+
+    <h3>Section D</h3>
+    <p>For centuries, elm ran a close second to oak as the hardwood tree of choice in Britain and was in many instances the most prominent tree in the landscape. Not only was elm common in European forests, it became a key component of birch, ash and hazel woodlands. The use of elm is thought to go back to the Bronze Age, when it was widely used for tools. Elm was also the preferred material for shields and early swords. In the 18th century, it was planted more widely and its wood was used for items such as storage crates and flooring. It was also suitable for items that experienced high levels of impact and was used to build the keel of the 19th-century sailing ship Cutty Sark as well as mining equipment.</p>
+
+    <h3>Section E</h3>
+    <p>Given how ingrained elm is in British culture, it’s unsurprising the tree has many advocates. Amongst them is Peter Bourne of the National Elm Collection in Brighton. ‘I saw Dutch elm disease unfold as a small boy,’ he says. ‘The elm seemed to be part of rural England, but I remember watching trees just lose their leaves and that really stayed with me.’ Today, the city of Brighton’s elms total about 17,000. Local factors appear to have contributed to their survival. Strong winds from the sea make it difficult for the determined elm bark beetle to attack this coastal city’s elm population. However, the situation is precarious. ‘The beetles can just march in if we’re not careful, as the threat is right on our doorstep,’ says Bourne.</p>
+
+    <h3>Section F</h3>
+    <p>Any prospect of the elm returning relies heavily on trees being either resistant to, or tolerant of, the disease. This means a widespread reintroduction would involve existing or new hybrid strains derived from resistant, generally non-native elm species. A new generation of seedlings have been bred and tested to see if they can withstand the fungus by cutting a small slit on the bark and injecting a tiny amount of the pathogen. ‘The effects are very quick,’ says Russell. ‘You return in four to six weeks and trees that are resistant show no symptoms, whereas those that are susceptible show leaf loss and may even have died completely.’</p>
+
+    <h3>Section G</h3>
+    <p>All of this raises questions of social acceptance, acknowledges Russell. ‘If we’re putting elm back into the landscape, a small element of it is not native – are we bothered about that?’ For her, the environmental case for reintroducing elm is strong. ‘They will host wildlife, which is a good thing. Others are more wary. ‘On the face of it, it seems like a good idea,’ says Elliot. The problem, he suggests, is that, ‘You’re replacing a native species with a horticultural analogue*. You’re effectively cloning.’ There’s also the risk of introducing new diseases. Rather than plant new elms, the Woodland Trust emphasises providing space to those elms that have survived independently. ‘Sometimes the best thing you can do is just give nature time to recover over time, you might get resistance,’ says Elliot.</p>
+  </div>
+
+  <div class="questions-panel" id="qPanel">
+    <div class="q-header"><h3>Questions 14-26</h3><a onclick="checkAnswers()">Submit Test</a></div>
+
+    <div class="q-group-title">Questions 14–18</div>
+    <div class="instructions">Reading Passage 2 has seven sections, A–G. Which section contains the following information? Write the correct letter, A–G.</div>
+    
+    <div class="q-block"><div class="q-text">14. reference to the research problems that arise from there being only a few surviving large elms</div><input type="text" id="q14" data-ans="C"></div>
+    <div class="q-block"><div class="q-text">15. details of a difference of opinion about the value of reintroducing elms to Britain</div><input type="text" id="q15" data-ans="G"></div>
+    <div class="q-block"><div class="q-text">16. reference to how Dutch elm disease was brought into Britain</div><input type="text" id="q16" data-ans="B"></div>
+    <div class="q-block"><div class="q-text">17. a description of the conditions that have enabled a location in Britain to escape Dutch elm disease</div><input type="text" id="q17" data-ans="E"></div>
+    <div class="q-block"><div class="q-text">18. reference to the stage at which young elms become vulnerable to Dutch elm disease</div><input type="text" id="q18" data-ans="C"></div>
+
+    <div class="q-group-title">Questions 19–23</div>
+    <div class="instructions">Match each statement with the correct person, A, B, or C.</div>
+    <div class="matching-list"><h4>List of People</h4>A. MATT ELLIOT | B. KAREN RUSSELL | C. PETER BOURNE</div>
+
+    <div class="q-block"><div class="q-text">19. If a tree gets infected with Dutch elm disease, the damage rapidly becomes visible.</div><label><input type="radio" name="q19" value="B"> B</label><label><input type="radio" name="q19" value="A"> A</label><label><input type="radio" name="q19" value="C"> C</label></div>
+    <div class="q-block"><div class="q-text">20. It may be better to wait and see if the mature elms that have survived continue to flourish.</div><label><input type="radio" name="q20" value="A"> A</label><label><input type="radio" name="q20" value="B"> B</label><label><input type="radio" name="q20" value="C"> C</label></div>
+    <div class="q-block"><div class="q-text">21. There must be an explanation for the survival of some mature elms.</div><label><input type="radio" name="q21" value="B"> B</label><label><input type="radio" name="q21" value="A"> A</label><label><input type="radio" name="q21" value="C"> C</label></div>
+    <div class="q-block"><div class="q-text">22. We need to be aware that insects carrying Dutch elm disease are not very far away.</div><label><input type="radio" name="q22" value="C"> C</label><label><input type="radio" name="q22" value="A"> A</label><label><input type="radio" name="q22" value="B"> B</label></div>
+    <div class="q-block"><div class="q-text">23. You understand the effect Dutch elm disease has had when you see evidence of how prominent the tree once was.</div><label><input type="radio" name="q23" value="A"> A</label><label><input type="radio" name="q23" value="B"> B</label><label><input type="radio" name="q23" value="C"> C</label></div>
+
+    <div class="q-group-title">Questions 24–26</div>
+    <div class="instructions">Complete the summary below. Choose ONE WORD ONLY from the passage.</div>
+    <div class="q-block">
+      <div class="q-text">For hundreds of years, the only tree that was more popular in Britain than elm was 24 <input type="text" id="q24" data-ans="oak">. Starting in the Bronze Age, many tools were made from elm and people also used it to make weapons. In the 18th century, it was grown to provide wood for boxes and 25 <input type="text" id="q25" data-ans="flooring">. Due to its strength, elm was often used for mining equipment and the Cutty Sark’s 26 <input type="text" id="q26" data-ans="keel"> was also constructed from elm.</div>
+    </div>
+
+    <div style="height:80px;"></div>
+  </div>
+</div>
+
+<button class="submit-float" onclick="checkAnswers()">✓ Submit Test</button>
+<div class="result-bar" id="result"></div>
+
+<script>
+const ans={q14:'C',q15:'G',q16:'B',q17:'E',q18:'C',q19:'B',q20:'A',q21:'B',q22:'C',q23:'A',q24:'oak',q25:'flooring',q26:'keel'};
+let sec=1200;
+const ti=setInterval(()=>{sec--;if(sec<=0){clearInterval(ti);checkAnswers();}document.getElementById('time').textContent=Math.floor(sec/60)+':'+(sec%60<10?'0':'')+sec%60;},1000);
+function checkAnswers(){clearInterval(ti);let s=0,t=13,h='';for(let i=14;i<=18;i++){const input=document.getElementById('q'+i);const u=input.value.trim().toUpperCase();const c=ans['q'+i];const ok=u===c;if(ok)s++;h+='<span class="'+(ok?'correct':'incorrect')+'">Q'+i+': '+(ok?'✓':'✗→'+c)+' </span>';}for(let i=19;i<=23;i++){const r=document.querySelector('input[name="q'+i+'"]:checked');const u=r?r.value:'';const c=ans['q'+i];const ok=u===c;if(ok)s++;h+='<span class="'+(ok?'correct':'incorrect')+'">Q'+i+': '+(ok?'✓':'✗→'+c)+' </span>';}for(let i=24;i<=26;i++){const input=document.getElementById('q'+i);const u=input.value.trim().toLowerCase();const c=ans['q'+i].toLowerCase();const ok=u===c;if(ok)s++;h+='<span class="'+(ok?'correct':'incorrect')+'">Q'+i+': '+(ok?'✓':'✗→'+c)+' </span>';}document.getElementById('result').innerHTML='<strong>Score: '+s+'/'+t+'</strong><br>'+h;document.getElementById('result').style.display='block';}
+</script>
+</body>
+</html>

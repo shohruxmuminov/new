@@ -86,5 +86,23 @@ export const readingTests: ReadingTest[] = [
     htmlUrl: '/test materials/reading/sanokulov-dynamic-1.html',
     passages: [],
     questions: []
+  },
+  {
+    id: 'r_sanokulov_dynamic2',
+    title: 'Sanokulov Reading – Dynamic 2 (To Britain)',
+    difficulty: 'Hard',
+    duration: 20,
+    htmlUrl: '/test materials/reading/sanokulov-dynamic-2.html',
+    passages: [],
+    questions: []
+  },
+  {
+    id: 'r_sanokulov_dynamic3',
+    title: 'Sanokulov Reading – Dynamic 3 (Stress & Judgement)',
+    difficulty: 'Hard',
+    duration: 20,
+    htmlUrl: '/test materials/reading/sanokulov-dynamic-3.html',
+    passages: [],
+    questions: []
   }
 ];
