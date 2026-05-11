@@ -68,5 +68,14 @@ export const readingTests: ReadingTest[] = [
     htmlUrl: '/test materials/reading/IELTSwithJurabek Reading (2).html',
     passages: [],
     questions: []
+  },
+  {
+    id: 'r_dynamic_1',
+    title: 'IELTS Reading Dynamic 1',
+    difficulty: 'Medium',
+    duration: 60,
+    htmlUrl: '/test materials/reading/full-dynamic-1.html',
+    passages: [],
+    questions: []
   }
 ];
