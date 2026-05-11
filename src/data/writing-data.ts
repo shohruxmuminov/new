@@ -84,5 +84,16 @@ export const writingTasks: WritingTask[] = [
     sampleEssay: '',
     template: '',
     vocabulary: []
+  },
+  {
+    id: 'w_wisdom_mt1',
+    title: 'Wisdom Writing – Mock Test 1',
+    type: 'Task 2',
+    duration: 40,
+    minWords: 250,
+    prompt: 'Completing university education is thought by some to be the best way to get a good job. On the other hand, other people think that getting experience and developing soft skills is more important. Discuss both sides and give your opinion.',
+    sampleEssay: '',
+    template: '',
+    vocabulary: []
   }
 ];
