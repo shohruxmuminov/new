@@ -68,5 +68,14 @@ export const readingTests: ReadingTest[] = [
     htmlUrl: '/test materials/reading/IELTSwithJurabek Reading (2).html',
     passages: [],
     questions: []
+  },
+  {
+    id: 'r_wisdom_fp9',
+    title: 'Wisdom Reading – Full Practice 9',
+    difficulty: 'Medium',
+    duration: 20,
+    htmlUrl: '/test materials/reading/wisdom-fp-9.html',
+    passages: [],
+    questions: []
   }
 ];
