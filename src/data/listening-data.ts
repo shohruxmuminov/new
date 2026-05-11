@@ -77,5 +77,19 @@ export const listeningTests: ListeningTest[] = [
     duration: 30,
     htmlUrl: '/test%20materials/listening/sanokulov-test1-full.html',
     sections: []
+  },
+  {
+    id: 'l_sanokulov_test2',
+    title: 'Sanokulov Listening – Test 2 (Full)',
+    duration: 30,
+    htmlUrl: '/test%20materials/listening/sanokulov-test2-full.html',
+    sections: []
+  },
+  {
+    id: 'l_sanokulov_test3',
+    title: 'Sanokulov Listening – Test 3 (Full)',
+    duration: 30,
+    htmlUrl: '/test%20materials/listening/sanokulov-test3-full.html',
+    sections: []
   }
 ];
