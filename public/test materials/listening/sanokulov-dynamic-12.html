@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listening: Dynamic Test 12</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#fff;color:#1a1a1a;padding-bottom:100px;}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1px solid #e5e7eb;background:#fff;position:sticky;top:0;z-index:100;}
+.logo{font-weight:900;font-size:1.2rem;letter-spacing:-1px;}
+.container{max-width:800px;margin:0 auto;padding:24px;}
+.audio-player{background:#f8fafc;border:2px solid #000;padding:20px;border-radius:12px;margin-bottom:32px;display:flex;flex-direction:column;gap:12px;box-shadow:6px 6px 0 0 rgba(0,0,0,1);}
+.audio-player h3{font-size:0.9rem;font-weight:800;text-transform:uppercase;color:#64748b;}
+audio{width:100%;height:40px;}
+.section{margin-bottom:40px;padding:24px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;}
+.section-title{font-size:1.1rem;font-weight:900;margin-bottom:8px;text-transform:uppercase;color:#1e293b;border-bottom:3px solid #8b5cf6;display:inline-block;padding-bottom:2px;}
+.instructions{font-size:0.85rem;font-style:italic;color:#64748b;margin-bottom:20px;background:#f1f5f9;padding:10px 16px;border-radius:8px;}
+.q-title{font-weight:800;font-size:1rem;margin-bottom:12px;color:#111;text-transform:uppercase;}
+.question{margin-bottom:12px;font-size:0.95rem;line-height:1.6;}
+.q-num{font-weight:800;margin-right:8px;color:#8b5cf6;}
+input[type="text"]{border:none;border-bottom:2px solid #cbd5e1;background:transparent;font-size:0.95rem;width:150px;outline:none;font-weight:600;padding:2px 4px;transition:all 0.2s;}
+input[type="text"]:focus{border-bottom-color:#8b5cf6;background:#f5f3ff;}
+.options-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:10px;}
+.option-item{font-weight:700;font-size:0.85rem;}
+.mcq-option{display:block;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.mcq-option:hover{background:#f5f3ff;border-color:#8b5cf6;}
+.mcq-option input{margin-right:10px;accent-color:#8b5cf6;}
+.submit-area{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;padding:16px 24px;display:flex;justify-content:center;z-index:100;}
+.btn-submit{background:#000;color:#fff;border:none;padding:12px 40px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border-radius:8px;cursor:pointer;box-shadow:4px 4px 0 0 rgba(139, 92, 246, 0.5);transition:all 0.1s;}
+.btn-submit:hover{transform:translate(-2px, -2px);box-shadow:6px 6px 0 0 rgba(139, 92, 246, 1);}
+.result-panel{display:none;margin-top:20px;padding:20px;border:4px solid #000;background:#fff;border-radius:12px;}
+.correct{color:#16a34a;font-weight:bold;} .incorrect{color:#dc2626;font-weight:bold;}
+@media(max-width:600px){.container{padding:12px;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">IELTSPRO2</div>
+  <div style="font-weight:700; font-size:0.9rem;">Dynamic Listening 12</div>
+</div>
+
+<div class="container">
+  <div class="audio-player">
+    <h3>Listening Audio</h3>
+    <audio controls>
+      <source src="https://www.sanokulov.uz/media/listening_tests/audio/6be6c363335b437d9e83a11cf837e317.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="section">
+    <div class="section-title">Part 1</div>
+    <div class="instructions">Complete the notes below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.</div>
+    <div class="q-title">Car Rental Notes</div>
+    <div class="question">Example: Number of offices in Sydney: 3</div>
+    <div class="question"><span class="q-num">1</span> Booking reference number: <input type="text" id="q1" data-ans="743002"></div>
+    <div class="question"><span class="q-num">2</span> Office just by <input type="text" id="q2" data-ans="INTERNATIONAL"> terminal.</div>
+    <div class="question"><span class="q-num">3</span> Opening hours: <input type="text" id="q3" data-ans="6.45 AM"> to 6.15 PM</div>
+    <div class="question"><span class="q-num">4</span> After-hours charge: $ <input type="text" id="q4" data-ans="THIRTY"></div>
+    <div class="question"><span class="q-num">5</span> Cheapest model of car available: <input type="text" id="q5" data-ans="ECHO"></div>
+    <div class="question"><span class="q-num">6</span> Information needed when booking: <input type="text" id="q6" data-ans="CREDIT CARD"> number</div>
+    <div class="question"><span class="q-num">7</span> Length of hire period: <input type="text" id="q7" data-ans="SEVEN DAYS"></div>
+    <div class="question"><span class="q-num">8</span> Reduce cost by driving under <input type="text" id="q8" data-ans="ONE THOUSAND"> km per week.</div>
+    <div class="question"><span class="q-num">9</span> Insurance does not cover: <input type="text" id="q9" data-ans="HIS LUGGAGE"></div>
+    <div class="question"><span class="q-num">10</span> After hours put keys in box near the office on the <input type="text" id="q10" data-ans="PAVEMENT">.</div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="section">
+    <div class="section-title">Part 2</div>
+    <div class="instructions">Questions 11-15: The following are essential requirements for which jobs? Write the correct letter, A, B or C.</div>
+    <div class="options-box" style="grid-template-columns: 1fr;">
+      <div class="option-item">A. foreign languages</div>
+      <div class="option-item">B. willingness to travel abroad</div>
+      <div class="option-item">C. professional qualification</div>
+    </div>
+    <div class="question"><span class="q-num">11</span> conference organiser: <input type="text" id="q11" style="width:50px" data-ans="A"></div>
+    <div class="question"><span class="q-num">12</span> catering manager: <input type="text" id="q12" style="width:50px" data-ans="C"></div>
+    <div class="question"><span class="q-num">13</span> housekeeper: <input type="text" id="q13" style="width:50px" data-ans="B"></div>
+    <div class="question"><span class="q-num">14</span> fitness centre staff: <input type="text" id="q14" style="width:50px" data-ans="C"></div>
+    <div class="question"><span class="q-num">15</span> reservations assistant: <input type="text" id="q15" style="width:50px" data-ans="A"></div>
+    
+    <div class="instructions" style="margin-top:30px">Questions 16-20: Choose FIVE answers from the box and write the correct letter, A–G.</div>
+    <div class="options-box">
+      <div class="option-item">A. CV</div><div class="option-item">B. names of referees</div><div class="option-item">C. work permit</div>
+      <div class="option-item">D. recruitment seminar</div><div class="option-item">E. evidence of qualifications</div>
+      <div class="option-item">F. conditions of employment</div><div class="option-item">G. initial interview</div>
+    </div>
+    <div class="q-title">Recruitment Procedures</div>
+    <div class="question">register interest in working for International Finest Group<br>↓<br>receive personal code and check <span class="q-num">16</span> <input type="text" id="q16" style="width:50px" data-ans="F"><br>↓<br>download application form<br>↓<br>send in form and attach <span class="q-num">17</span> <input type="text" id="q17" style="width:50px" data-ans="A"><br>↓<br>receive reply and confirm <span class="q-num">18</span> <input type="text" id="q18" style="width:50px" data-ans="G"><br>↓<br>send in <span class="q-num">19</span> <input type="text" id="q19" style="width:50px" data-ans="E"><br>↓<br>attend <span class="q-num">20</span> <input type="text" id="q20" style="width:50px" data-ans="D"></div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="section">
+    <div class="section-title">Part 3</div>
+    <div class="instructions">Questions 21–24: Choose TWO letters, A–E.</div>
+    <div class="q-title">21-22. Which TWO possible objections to a roof garden are discussed?</div>
+    <div class="question">
+      <label class="mcq-option"><input type="checkbox" name="q21_22" value="A"> A. problems of access</label>
+      <label class="mcq-option"><input type="checkbox" name="q21_22" value="B"> B. the cost of construction</label>
+      <label class="mcq-option"><input type="checkbox" name="q21_22" value="C"> C. the time needed to install it</label>
+      <label class="mcq-option"><input type="checkbox" name="q21_22" value="D"> D. who will look after it</label>
+      <label class="mcq-option"><input type="checkbox" name="q21_22" value="E"> E. how to support the weight of it</label>
+    </div>
+
+    <div class="q-title" style="margin-top:20px">23-24. Which TWO recent developments in roof-garden building are mentioned?</div>
+    <div class="question">
+      <label class="mcq-option"><input type="checkbox" name="q23_24" value="A"> A. waterproof barrier materials</label>
+      <label class="mcq-option"><input type="checkbox" name="q23_24" value="B"> B. drainage systems</label>
+      <label class="mcq-option"><input type="checkbox" name="q23_24" value="C"> C. tank designs</label>
+      <label class="mcq-option"><input type="checkbox" name="q23_24" value="D"> D. lightweight construction materials</label>
+      <label class="mcq-option"><input type="checkbox" name="q23_24" value="E"> E. watering systems</label>
+    </div>
+
+    <div class="instructions" style="margin-top:30px">Questions 25–30: Label the diagram below (Light installation). Write the correct letter, A–H.</div>
+    <div class="options-box">
+      <div class="option-item">A, B, C, D, E, F, G, H</div>
+    </div>
+    <div class="question"><span class="q-num">25</span> wall: <input type="text" id="q25" style="width:50px" data-ans="F"></div>
+    <div class="question"><span class="q-num">26</span> electric wire: <input type="text" id="q26" style="width:50px" data-ans="H"></div>
+    <div class="question"><span class="q-num">27</span> fibre optic cable: <input type="text" id="q27" style="width:50px" data-ans="C"></div>
+    <div class="question"><span class="q-num">28</span> wooden post: <input type="text" id="q28" style="width:50px" data-ans="D"></div>
+    <div class="question"><span class="q-num">29</span> glass cap: <input type="text" id="q29" style="width:50px" data-ans="B"></div>
+    <div class="question"><span class="q-num">30</span> acrylic rod: <input type="text" id="q30" style="width:50px" data-ans="A"></div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="section">
+    <div class="section-title">Part 4</div>
+    <div class="instructions">Complete the notes below. Write NO MORE THAN TWO WORDS for each answer.</div>
+    <div class="q-title">The Argus system</div>
+    <div class="question">Research is vital for understanding of <span class="q-num">31</span> <input type="text" id="q31" data-ans="BEACH EROSION">.</div>
+    <div class="question">Matches information from under the water with information from a <span class="q-num">32</span> <input type="text" id="q32" data-ans="FIXED CAMERA">.</div>
+    <div class="question">According to S. Jeffress Williams, useful because can make observations during a <span class="q-num">33</span> <input type="text" id="q33" data-ans="STORM">.</div>
+    
+    <div class="q-title" style="margin-top:20px">Dr Holman’s sand collection</div>
+    <div class="question">Dr H. has samples from every <span class="q-num">34</span> <input type="text" id="q34" data-ans="CONTINENT">.</div>
+    <div class="question">Used in teaching students of <span class="q-num">35</span> <input type="text" id="q35" data-ans="GEOLOGY">.</div>
+    <div class="question">e.g. US East Coast display: grains from south are small, light-coloured and <span class="q-num">36</span> <input type="text" id="q36" data-ans="ROUNDED"> in shape.</div>
+
+    <div class="instructions" style="margin-top:30px">Complete the flow-chart below. Write NO MORE THAN THREE WORDS for each answer.</div>
+    <div class="q-title">Taking samples when travelling</div>
+    <div class="question">to dig sand, a plastic or metal <span class="q-num">37</span> <input type="text" id="q37" data-ans="SPOON"> is ideal<br>↓<br>store in plastic bags<br>↓<br>write date and place using a <span class="q-num">38</span> <input type="text" id="q38" data-ans="PERMANENT MARKER"></div>
+    <div class="q-title" style="margin-top:20px">After reaching home</div>
+    <div class="question">log samples (noting location)<br>↓<br>dry sample on <span class="q-num">39</span> <input type="text" id="q39" data-ans="NEWSPAPER"><br>↓<br>transfer to container<br>↓<br>add at least one <span class="q-num">40</span> <input type="text" id="q40" data-ans="IDENTIFICATION LABEL"> immediately</div>
+  </div>
+
+  <div class="result-panel" id="result"></div>
+</div>
+
+<div class="submit-area">
+  <button class="btn-submit" onclick="checkAnswers()">Check Answers</button>
+</div>
+
+<script>
+const ans={q1:'743002',q2:'INTERNATIONAL',q3:'6.45 AM',q4:'THIRTY',q5:'ECHO',q6:'CREDIT CARD',q7:'SEVEN DAYS',q8:'ONE THOUSAND',q9:'HIS LUGGAGE',q10:'PAVEMENT',q11:'A',q12:'C',q13:'B',q14:'C',q15:'A',q16:'F',q17:'A',q18:'G',q19:'E',q20:'D',q25:'F',q26:'H',q27:'C',q28:'D',q29:'B',q30:'A',q31:'BEACH EROSION',q32:'FIXED CAMERA',q33:'STORM',q34:'CONTINENT',q35:'GEOLOGY',q36:'ROUNDED',q37:'SPOON',q38:'PERMANENT MARKER',q39:'NEWSPAPER',q40:'IDENTIFICATION LABEL'};
+
+function checkAnswers(){
+  let score=0; let total=40;
+  let h='<h3 style="margin-bottom:10px">Results</h3>';
+  
+  for(let id in ans){
+    const input = document.getElementById(id);
+    if(!input) continue;
+    const u = input.value.trim().toLowerCase();
+    const c = ans[id].toLowerCase();
+    const ok = u===c;
+    if(ok) score++;
+    h+='<div style="margin-bottom:4px; font-size:0.85rem">Q'+id.substring(1)+': '+(ok?'<span class="correct">✓</span>':'<span class="incorrect">✗ → '+c+'</span>')+'</div>';
+  }
+  
+  // Custom check for checkboxes
+  const cb2122 = Array.from(document.querySelectorAll('input[name="q21_22"]:checked')).map(el=>el.value);
+  if(cb2122.includes('B')) score++;
+  if(cb2122.includes('D')) score++;
+  h+='<div style="margin-bottom:4px; font-size:0.85rem">Q21-22: '+(cb2122.includes('B')&&cb2122.includes('D')?'<span class="correct">✓</span>':'<span class="incorrect">✗ → B, D</span>')+'</div>';
+  
+  const cb2324 = Array.from(document.querySelectorAll('input[name="q23_24"]:checked')).map(el=>el.value);
+  if(cb2324.includes('A')) score++;
+  if(cb2324.includes('E')) score++;
+  h+='<div style="margin-bottom:4px; font-size:0.85rem">Q23-24: '+(cb2324.includes('A')&&cb2324.includes('E')?'<span class="correct">✓</span>':'<span class="incorrect">✗ → A, E</span>')+'</div>';
+
+  const res = document.getElementById('result');
+  res.innerHTML = h + '<h2 style="margin-top:15px">Score: '+score+'/'+total+'</h2>';
+  res.style.display = 'block';
+  res.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

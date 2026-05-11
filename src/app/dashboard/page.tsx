@@ -7,7 +7,7 @@ import {
   Mic, BookOpen, Headphones, PenTool, ArrowRight, Flame, 
   Target, Calendar, TrendingUp, Star, Award, Clock, 
   ArrowUpRight, Users, GraduationCap, Zap, Bell, X, Mail,
-  Play as PlayIcon, Volume2, Info
+  Play as PlayIcon, Volume2, Info, Send, Phone
 } from 'lucide-react';
 
 const modules = [
@@ -187,6 +187,33 @@ export default function DashboardPage() {
                  <button className="btn-neo w-full justify-center bg-white text-black border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                     Join Live Stream
                  </button>
+              </div>
+           </div>
+
+           {/* Developer Card */}
+           <div className="p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" style={{ background: '#fed7aa' }}>
+              <div className="flex items-start gap-4 mb-5">
+                 <div className="w-20 h-20 rounded-full border-4 border-black overflow-hidden shrink-0 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+                    <img src="/avatar-ceo.jpg" alt="Muminov Shohrukh" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display='none'; e.currentTarget.parentElement?.querySelector('.fallback-icon')?.classList.remove('hidden'); }} />
+                    <Users size={32} className="text-black fallback-icon hidden" />
+                 </div>
+                 
+                 <div className="pt-1">
+                    <h5 className="text-[10px] font-black text-orange-600 uppercase tracking-[2px] mb-1">Owner & CEO</h5>
+                    <h3 className="text-xl font-black tracking-tighter text-black uppercase leading-none mb-2">Muminov Shohrukh</h3>
+                    <p className="text-xs font-bold text-black/70 leading-tight">
+                       IELTS Pro asoschisi va platforma yaratuvchisi.
+                    </p>
+                 </div>
+              </div>
+
+              <div className="flex gap-3">
+                 <a href="https://t.me/M_Shoh_Rukh" target="_blank" rel="noopener noreferrer" className="btn-neo flex-1 justify-center bg-[#0ea5e9] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-[11px] py-2.5 px-0">
+                    <Send size={14} /> Telegram kanali
+                 </a>
+                 <a href="tel:+998777145526" className="btn-neo flex-1 justify-center bg-white text-black border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-[11px] py-2.5 px-0">
+                    <Phone size={14} /> +998 77 714 55 26
+                 </a>
               </div>
            </div>
         </div>
