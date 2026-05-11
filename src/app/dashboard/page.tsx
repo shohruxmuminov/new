@@ -140,39 +140,51 @@ export default function DashboardPage() {
         <div className="lg:col-span-2 space-y-8">
            
            {/* Video Ad Section */}
-           <div className="glass-card overflow-hidden border-none shadow-xl">
-              <div className="aspect-video relative group">
-                 <video 
-                   ref={videoRef}
-                   src="/dashboard video/ad.mp4" 
-                   className="w-full h-full object-cover"
-                   loop
-                   muted
-                   playsInline
-                   poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
-                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
-                    <h4 className="text-white font-black text-xl mb-1">Academy Showcase</h4>
-                    <p className="text-white/80 text-xs font-medium">Explore our facilities and teaching methods.</p>
-                 </div>
-                 <div className="absolute top-4 right-4 z-10 flex gap-2">
-                    <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
-                       <PlayIcon size={10} fill="white" /> Featured Video
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Video 1 */}
+              <div className="glass-card overflow-hidden border-none shadow-xl">
+                 <div className="aspect-video relative group">
+                    <video 
+                      src="/dashboard video/video-1.mp4" 
+                      className="w-full h-full object-cover"
+                      loop
+                      muted
+                      autoPlay
+                      playsInline
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
+                       <h4 className="text-white font-black text-xl mb-1">Elite Preparation</h4>
+                       <p className="text-white/80 text-xs font-medium">Achieve your target band with our proven strategies.</p>
+                    </div>
+                    <div className="absolute top-4 right-4 z-10 flex gap-2">
+                       <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
+                          <PlayIcon size={10} fill="white" /> Featured Video
+                       </div>
                     </div>
                  </div>
-                 <button 
-                   onClick={() => {
-                     if (videoRef.current) {
-                        if (videoRef.current.paused) videoRef.current.play();
-                        else videoRef.current.pause();
-                     }
-                   }}
-                   className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
-                 >
-                    <div className="w-16 h-16 rounded-full bg-indigo-500 text-white flex items-center justify-center shadow-2xl scale-90 group-hover:scale-100 transition-transform">
-                       <PlayIcon size={24} fill="white" />
+              </div>
+
+              {/* Video 2 */}
+              <div className="glass-card overflow-hidden border-none shadow-xl">
+                 <div className="aspect-video relative group">
+                    <video 
+                      src="/dashboard video/video-2.mp4" 
+                      className="w-full h-full object-cover"
+                      loop
+                      muted
+                      autoPlay
+                      playsInline
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
+                       <h4 className="text-white font-black text-xl mb-1">Student Success</h4>
+                       <p className="text-white/80 text-xs font-medium">Real results from our global community.</p>
                     </div>
-                 </button>
+                    <div className="absolute top-4 right-4 z-10 flex gap-2">
+                       <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
+                          <PlayIcon size={10} fill="white" /> Featured Video
+                       </div>
+                    </div>
+                 </div>
               </div>
            </div>
 
