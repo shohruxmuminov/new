@@ -7,6 +7,7 @@ import { listeningTests } from '@/data/listening-data';
 import { formatTime, calculateScore, getBandScore } from '@/lib/utils';
 import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
+import { highlighterScript } from '@/lib/highlighter-script';
 
 export default function ListeningTestPage({ params }: { params: Promise<{ testId: string }> }) {
   const { testId } = use(params);
@@ -70,6 +71,16 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
     );
   }
 
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const handleIframeLoad = () => {
+    if (iframeRef.current && iframeRef.current.contentDocument) {
+      const script = iframeRef.current.contentDocument.createElement('script');
+      script.textContent = highlighterScript;
+      iframeRef.current.contentDocument.body.appendChild(script);
+    }
+  };
+
   if (test.htmlUrl) {
     return (
       <div className="h-screen flex flex-col bg-surface overflow-hidden">
@@ -88,7 +99,13 @@ export default function ListeningTestPage({ params }: { params: Promise<{ testId
           </div>
         )}
         <div className="flex-1 w-full bg-white">
-          <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />
+          <iframe 
+            ref={iframeRef}
+            src={test.htmlUrl} 
+            className="w-full h-full border-none" 
+            title={test.title} 
+            onLoad={handleIframeLoad}
+          />
         </div>
       </div>
     );

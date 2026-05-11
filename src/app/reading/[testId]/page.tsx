@@ -11,6 +11,7 @@ import { readingTests } from '@/data/reading-data';
 import { formatTime, calculateScore, getBandScore } from '@/lib/utils';
 import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
+import { highlighterScript } from '@/lib/highlighter-script';
 
 export default function ReadingTestPage({ params }: { params: Promise<{ testId: string }> }) {
   const { testId } = use(params);
@@ -43,6 +44,25 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
 
   if (!test) return <div className="min-h-screen pt-24 flex items-center justify-center bg-surface"><p className="text-secondary">Test not found.</p></div>;
 
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const passageRef = useRef<HTMLDivElement>(null);
+
+  const handleIframeLoad = () => {
+    if (iframeRef.current && iframeRef.current.contentDocument) {
+      const script = iframeRef.current.contentDocument.createElement('script');
+      script.textContent = highlighterScript;
+      iframeRef.current.contentDocument.body.appendChild(script);
+    }
+  };
+
+  useEffect(() => {
+    if (passageRef.current) {
+      const script = document.createElement('script');
+      script.textContent = highlighterScript;
+      passageRef.current.appendChild(script);
+    }
+  }, [test]);
+
   if (test.htmlUrl) {
     return (
       <div className="h-screen flex flex-col bg-surface overflow-hidden">
@@ -56,7 +76,13 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
           </button>
         </header>
         <div className="flex-1 w-full bg-white">
-          <iframe src={test.htmlUrl} className="w-full h-full border-none" title={test.title} />
+          <iframe 
+            ref={iframeRef}
+            src={test.htmlUrl} 
+            className="w-full h-full border-none" 
+            title={test.title} 
+            onLoad={handleIframeLoad}
+          />
         </div>
       </div>
     );
@@ -111,7 +137,7 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
       <div className="flex-1 flex overflow-hidden">
         {/* Left: Passage Content (Wisdom Style) */}
         <div className="w-1/2 flex flex-col border-r overflow-hidden bg-surface" style={{ borderColor: 'var(--border-default)' }}>
-           <div className="flex-1 overflow-y-auto p-10 custom-scrollbar">
+           <div ref={passageRef} className="flex-1 overflow-y-auto p-10 custom-scrollbar">
               <div className="max-w-2xl mx-auto">
                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-500 text-[10px] font-bold uppercase tracking-widest mb-6">
                     Reading Passage {currentPassage}
