@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Shield, Users, MessageSquare, Ban, Unlock, Send, 
   Search, Lock, LogOut, Mail, Clock, Calendar, CheckCircle, 
-  AlertTriangle, Filter, ChevronRight, X
+  AlertTriangle, Filter, ChevronRight, X, Film, Upload, Plus, Trash2, Video
 } from 'lucide-react';
+import { Movie } from '@/types/movie';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -15,6 +16,7 @@ const CEO_AUTH_KEY = 'cdi-ceo-auth';
 const ALL_USERS_KEY = 'cdi-all-users';
 const BANNED_USERS_KEY = 'cdi-banned-users';
 const MESSAGES_KEY_PREFIX = 'cdi-messages-';
+const MOVIES_KEY = 'cdi-movies';
 
 interface Student {
   email: string;
@@ -31,7 +33,13 @@ export default function CEOPanel() {
   const [students, setStudents] = useState<Student[]>([]);
   const [bannedEmails, setBannedEmails] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'students' | 'broadcast'>('students');
+  const [activeTab, setActiveTab] = useState<'students' | 'broadcast' | 'movies'>('students');
+  
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [showAddMovie, setShowAddMovie] = useState(false);
+  const [newMovie, setNewMovie] = useState<Partial<Movie>>({
+    category: 'Film'
+  });
   
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [messageText, setMessageText] = useState('');
@@ -48,6 +56,10 @@ export default function CEOPanel() {
     // Load banned
     const savedBanned = localStorage.getItem(BANNED_USERS_KEY);
     if (savedBanned) setBannedEmails(JSON.parse(savedBanned));
+
+    // Load movies
+    const savedMovies = localStorage.getItem(MOVIES_KEY);
+    if (savedMovies) setMovies(JSON.parse(savedMovies));
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -104,6 +116,41 @@ export default function CEOPanel() {
       setSelectedStudent(null);
       setSending(false);
     }, 800);
+  };
+
+  const handleAddMovie = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMovie.title || !newMovie.videoUrl) {
+      toast.error('Please provide at least Title and Video URL');
+      return;
+    }
+
+    const movie: Movie = {
+      id: `movie-${Date.now()}`,
+      title: newMovie.title || '',
+      category: (newMovie.category as any) || 'Film',
+      videoUrl: newMovie.videoUrl || '',
+      subtitleUrl: newMovie.subtitleUrl || '',
+      thumbnailUrl: newMovie.thumbnailUrl || '',
+      uploadedAt: Date.now()
+    };
+
+    const updatedMovies = [movie, ...movies];
+    setMovies(updatedMovies);
+    localStorage.setItem(MOVIES_KEY, JSON.stringify(updatedMovies));
+    
+    toast.success('Movie added successfully!');
+    setNewMovie({ category: 'Film' });
+    setShowAddMovie(false);
+  };
+
+  const deleteMovie = (id: string) => {
+    if (confirm('Are you sure you want to delete this movie?')) {
+      const updatedMovies = movies.filter(m => m.id !== id);
+      setMovies(updatedMovies);
+      localStorage.setItem(MOVIES_KEY, JSON.stringify(updatedMovies));
+      toast.success('Movie deleted');
+    }
   };
 
   const filteredStudents = students.filter(s => 
@@ -199,6 +246,9 @@ export default function CEOPanel() {
               <button onClick={() => setActiveTab('broadcast')} className={`flex-1 py-4 text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'broadcast' ? 'bg-indigo-500/10 text-indigo-400 border-b-2 border-indigo-500' : 'text-tertiary hover:text-secondary'}`}>
                  System Broadcast
               </button>
+              <button onClick={() => setActiveTab('movies')} className={`flex-1 py-4 text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'movies' ? 'bg-indigo-500/10 text-indigo-400 border-b-2 border-indigo-500' : 'text-tertiary hover:text-secondary'}`}>
+                 English Movies
+              </button>
            </div>
 
            <div className="p-6">
@@ -284,7 +334,7 @@ export default function CEOPanel() {
                        </table>
                     </div>
                  </div>
-              ) : (
+              ) : activeTab === 'broadcast' ? (
                  <div className="p-10 text-center space-y-6">
                     <div className="w-16 h-16 rounded-3xl bg-amber-500/10 flex items-center justify-center mx-auto">
                        <AlertTriangle size={32} className="text-amber-500" />
@@ -304,6 +354,56 @@ export default function CEOPanel() {
                        </button>
                     </div>
                  </div>
+              ) : (
+                <div className="space-y-6">
+                   <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-black text-primary">English Movies Library</h3>
+                      <button 
+                        onClick={() => setShowAddMovie(true)}
+                        className="btn-primary py-3 px-6 text-xs font-black uppercase tracking-widest"
+                      >
+                         <Plus size={16} /> Add New Movie
+                      </button>
+                   </div>
+
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {movies.map(movie => (
+                        <div key={movie.id} className="glass-card p-4 flex flex-col gap-4">
+                           <div className="aspect-video rounded-xl bg-surface-soft border border-default overflow-hidden relative">
+                              {movie.thumbnailUrl ? (
+                                <img src={movie.thumbnailUrl} alt={movie.title} className="w-full h-full object-cover" />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-tertiary">
+                                   <Video size={32} />
+                                </div>
+                              )}
+                              <div className="absolute top-2 right-2">
+                                 <span className="text-[10px] font-black px-2 py-1 bg-indigo-500 text-white rounded-lg uppercase tracking-widest">
+                                    {movie.category}
+                                 </span>
+                              </div>
+                           </div>
+                           <div className="flex-1">
+                              <h4 className="font-bold text-primary truncate">{movie.title}</h4>
+                              <p className="text-[10px] text-tertiary mt-1">Uploaded: {new Date(movie.uploadedAt).toLocaleDateString()}</p>
+                           </div>
+                           <div className="flex items-center gap-2">
+                              <button 
+                                onClick={() => deleteMovie(movie.id)}
+                                className="flex-1 py-2 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-2"
+                              >
+                                 <Trash2 size={14} /> Delete
+                              </button>
+                           </div>
+                        </div>
+                      ))}
+                      {movies.length === 0 && (
+                        <div className="col-span-full py-20 text-center text-tertiary italic">
+                           No movies uploaded yet. Click "Add New Movie" to start.
+                        </div>
+                      )}
+                   </div>
+                </div>
               )}
            </div>
         </div>
@@ -352,6 +452,116 @@ export default function CEOPanel() {
                           className="btn-primary w-full justify-center py-4 font-black uppercase tracking-widest"
                         >
                            {sending ? 'Sending...' : <><Send size={18} /> Send Message</>}
+                        </button>
+                     </form>
+                  </div>
+               </motion.div>
+            </>
+         )}
+      </AnimatePresence>
+
+      {/* Add Movie Modal */}
+      <AnimatePresence>
+         {showAddMovie && (
+            <>
+               <motion.div 
+                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                 onClick={() => setShowAddMovie(false)}
+                 className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
+               />
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                 className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none"
+               >
+                  <div className="glass-card w-full max-w-2xl p-8 pointer-events-auto shadow-2xl max-h-[90vh] overflow-y-auto">
+                     <div className="flex items-center justify-between mb-8">
+                        <div>
+                           <h3 className="text-2xl font-black text-primary">Add English Movie</h3>
+                           <p className="text-sm text-tertiary mt-1">Upload movie content to the English Movies section</p>
+                        </div>
+                        <button onClick={() => setShowAddMovie(false)} className="p-2 rounded-xl hover:bg-surface-soft transition-colors">
+                           <X size={24} className="text-tertiary" />
+                        </button>
+                     </div>
+
+                     <form onSubmit={handleAddMovie} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="col-span-full space-y-2">
+                           <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Movie Title</label>
+                           <input 
+                             type="text"
+                             required
+                             value={newMovie.title || ''}
+                             onChange={e => setNewMovie({...newMovie, title: e.target.value})}
+                             placeholder="e.g. Inception, Toy Story, etc."
+                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
+                             style={{ color: 'var(--text-primary)' }}
+                           />
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Category</label>
+                           <select 
+                             value={newMovie.category}
+                             onChange={e => setNewMovie({...newMovie, category: e.target.value as any})}
+                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50 appearance-none"
+                             style={{ color: 'var(--text-primary)' }}
+                           >
+                              <option value="Film">Film</option>
+                              <option value="Cartoon">Cartoon</option>
+                              <option value="Tv Series">Tv Series</option>
+                              <option value="Anime">Anime</option>
+                              <option value="Tv shows">Tv shows</option>
+                           </select>
+                        </div>
+
+                        <div className="space-y-2">
+                           <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Thumbnail URL</label>
+                           <input 
+                             type="url"
+                             value={newMovie.thumbnailUrl || ''}
+                             onChange={e => setNewMovie({...newMovie, thumbnailUrl: e.target.value})}
+                             placeholder="Image URL (Poster)"
+                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
+                             style={{ color: 'var(--text-primary)' }}
+                           />
+                        </div>
+
+                        <div className="col-span-full space-y-2">
+                           <div className="flex items-center justify-between">
+                              <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Video File (MP4)</label>
+                              <span className="text-[9px] font-bold text-amber-500 uppercase tracking-tighter italic">* Local MP4 file support</span>
+                           </div>
+                           <input 
+                             type="text"
+                             required
+                             value={newMovie.videoUrl || ''}
+                             onChange={e => setNewMovie({...newMovie, videoUrl: e.target.value})}
+                             placeholder="URL to .mp4 file or local path"
+                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
+                             style={{ color: 'var(--text-primary)' }}
+                           />
+                        </div>
+
+                        <div className="col-span-full space-y-2">
+                           <div className="flex items-center justify-between">
+                              <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Subtitle File (VTT/SRT)</label>
+                              <span className="text-[9px] font-bold text-emerald-500 uppercase tracking-tighter italic">* Supports multi-language</span>
+                           </div>
+                           <input 
+                             type="text"
+                             value={newMovie.subtitleUrl || ''}
+                             onChange={e => setNewMovie({...newMovie, subtitleUrl: e.target.value})}
+                             placeholder="URL to .vtt or .srt subtitle file"
+                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
+                             style={{ color: 'var(--text-primary)' }}
+                           />
+                        </div>
+
+                        <button 
+                          type="submit" 
+                          className="col-span-full btn-primary w-full justify-center py-4 font-black uppercase tracking-widest mt-4"
+                        >
+                           <Upload size={18} /> Upload & Publish Movie
                         </button>
                      </form>
                   </div>

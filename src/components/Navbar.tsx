@@ -15,6 +15,7 @@ const navLinks = [
   { href: '/reading', label: 'Reading', icon: BookOpen, color: '#10b981' },
   { href: '/listening', label: 'Listening', icon: Headphones, color: '#6366f1' },
   { href: '/writing', label: 'Writing', icon: PenTool, color: '#ec4899' },
+  { href: '/movies', label: 'English Movies', icon: LayoutGrid, color: '#0ea5e9' },
   { href: '/mock-tests', label: 'Mock Tests', icon: LayoutGrid, color: '#8b5cf6' },
 ];
 
