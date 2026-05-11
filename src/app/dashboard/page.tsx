@@ -7,7 +7,7 @@ import {
   Mic, BookOpen, Headphones, PenTool, ArrowRight, Flame, 
   Target, Calendar, TrendingUp, Star, Award, Clock, 
   ArrowUpRight, Users, GraduationCap, Zap, Bell, X, Mail,
-  Play as PlayIcon, Volume2, Info, Send, Phone
+  Play as PlayIcon, Volume2, Info, Send, Phone, Shield
 } from 'lucide-react';
 
 const modules = [

@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Film, Play, Star, Clock, Search, ChevronRight, 
-  X, Maximize2, Volume2, Settings, Subtitles, Info
+  Film, Play, Clock, Search, X
 } from 'lucide-react';
 import { Movie } from '@/types/movie';
 import Link from 'next/link';

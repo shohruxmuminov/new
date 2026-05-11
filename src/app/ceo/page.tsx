@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Shield, Users, MessageSquare, Ban, Unlock, Send, 
-  Search, Lock, LogOut, Mail, Clock, Calendar, CheckCircle, 
-  AlertTriangle, Filter, ChevronRight, X, Film, Upload, Plus, Trash2, Video
+  Search, Lock, LogOut, Clock, 
+  AlertTriangle, X, Film, Upload, Plus, Trash2, Video
 } from 'lucide-react';
 import { Movie } from '@/types/movie';
 import Link from 'next/link';
