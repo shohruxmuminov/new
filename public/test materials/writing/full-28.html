@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Practice 28</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .task-card { background: var(--card); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        h1 { font-size: 2rem; font-weight: 800; margin-bottom: 30px; text-align: center; }
+        h2 { font-size: 1.25rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+        .task-topic { background: #f1f5f9; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .task-image { max-width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid var(--border); }
+        .instructions { color: #64748b; font-size: 0.9rem; font-style: italic; display: block; margin-top: 10px; }
+        .writing-area { width: 100%; min-height: 300px; padding: 20px; border: 2px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 1rem; resize: vertical; outline: none; transition: border-color 0.2s; }
+        .writing-area:focus { border-color: var(--primary); }
+        .word-count { text-align: right; font-size: 0.85rem; color: #64748b; margin-top: 5px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IELTS Writing Practice 28</h1>
+
+        <!-- Task 1 -->
+        <div class="task-card">
+            <h2>Writing Task 1</h2>
+            <div class="task-topic">
+                <p>The table shows the percentage of water used by four different countries.</p>
+                <span class="instructions"><strong>Instructions:</strong> Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.</span>
+            </div>
+            <img src="/test materials/writing/task1_28.jpg" alt="Task 1 Data Table" class="task-image">
+            <textarea class="writing-area" placeholder="Write your Task 1 response here..." oninput="updateWordCount(this, 'wc1')"></textarea>
+            <div class="word-count">Words: <span id="wc1">0</span></div>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task-card">
+            <h2>Writing Task 2</h2>
+            <div class="task-topic">
+                <p>There have been inventions in human history (for example the wheel). Some say that the most important invention is the internet.</p>
+                <div style="background: #e2e8f0; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p>To what extent do you agree or disagree?</p>
+                </div>
+                <span class="instructions"><strong>Instructions:</strong> Give reasons for your answer and include any relevant examples from your own knowledge and experience. Write at least 250 words.</span>
+            </div>
+            <textarea class="writing-area" placeholder="Write your Task 2 response here..." oninput="updateWordCount(this, 'wc2')"></textarea>
+            <div class="word-count">Words: <span id="wc2">0</span></div>
+        </div>
+    </div>
+
+    <script>
+        function updateWordCount(textarea, displayId) {
+            const text = textarea.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            document.getElementById(displayId).textContent = words;
+        }
+    </script>
+</body>
+</html>

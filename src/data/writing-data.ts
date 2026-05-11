@@ -72,5 +72,17 @@ export const writingTasks: WritingTask[] = [
     sampleEssay: '',
     template: '',
     vocabulary: []
+  },
+  {
+    id: 'w_practice_28',
+    title: 'Writing Practice - Set 28',
+    type: 'Task 2',
+    duration: 60,
+    minWords: 250,
+    prompt: 'Most important invention: The Internet.',
+    htmlUrl: '/test materials/writing/full-28.html',
+    sampleEssay: '',
+    template: '',
+    vocabulary: []
   }
 ];
