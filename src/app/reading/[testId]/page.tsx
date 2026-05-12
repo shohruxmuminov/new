@@ -149,7 +149,7 @@ export default function ReadingTestPage() {
                  </div>
                  <h1 className="text-3xl font-black text-primary mb-8 leading-tight">{test.title}</h1>
                  <div className="text-base leading-relaxed text-secondary space-y-6">
-                    {test.passages[currentPassage - 1]?.content.split('\n\n').map((p, i) => (
+                    {(test.passages[currentPassage - 1]?.content || '').split('\n\n').map((p, i) => (
                       <p key={i}>
                         {p}
                       </p>
