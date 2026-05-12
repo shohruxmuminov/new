@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDI Pack Mar-APR Reading Test 2</title>
+    <style>
+        :root { --primary: #10b981; --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .test-container { max-width: 1000px; margin: auto; background: var(--card); padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
+        h2 { color: var(--primary); font-weight: 800; border-bottom: 2px solid rgba(16,185,129,0.2); padding-bottom: 10px; margin-bottom: 30px; }
+        .passage { margin-bottom: 50px; background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; }
+        .passage-title { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; }
+        .passage-content { font-size: 1.05rem; text-align: justify; margin-bottom: 20px; }
+        .questions { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .question-group { margin-bottom: 30px; }
+        .question-type { font-weight: 700; color: var(--primary); margin-bottom: 15px; display: block; }
+        .q-item { margin-bottom: 10px; display: flex; align-items: baseline; gap: 10px; }
+        input[type="text"] { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 5px 10px; border-radius: 6px; outline: none; width: 150px; }
+        .options-list { list-style: none; padding-left: 0; }
+        .options-list li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h2>CDI Pack Mar-APR Reading Test 2</h2>
+        
+        <!-- Passage 1 -->
+        <div class="passage">
+            <div class="passage-title">PASSAGE 1: The History of the Chicken</div>
+            <div class="passage-content">
+                <p>The story begins 10,000 years ago in a jungle in Asia and ends today in kitchens all over the world. Chicken is the universal food of our era, crossing cultural boundaries with ease. Until the introduction of large-scale industrial production in the 20th century, the economic and nutritional contribution of chickens was small. Chickens were considered domestic birds that were useful to humanity, but unlike other animals such as the horse or the ox, they did little to change the course of history. Nonetheless, the chicken has inspired contributions to culture, art, cuisine, science and religion.</p>
+                <p>Recent DNA testing has shown that the chicken's wild ancestor is the red junglefowl. In its habitat from north-eastern India to the Philippines, the red junglefowl looks on the forest floor for insects, seeds and fruit. However, modern chickens inherited at least one trait, their yellow skin, from the grey junglefowl of southern India.</p>
+                <p>Once chickens were domesticated, they reached Egypt in around 1750 BC as fighting birds and additions to zoos. Drawings decorated royal tombs. Egyptians mastered artificial incubation, freeing hens to lay more eggs. They constructed vast complexes of large rooms (ovens) connected to vents to regulate heat. Around the Mediterranean, chickens were a delicacy among the Romans, who used wine-soaked bread to fatten them. After the fall of Rome, chicken farms vanished and birds returned to their original smaller size.</p>
+                <p>In the 20th century, the inclusion of antibiotics and vitamins in feed allowed chickens to be raised indoors, leading to factory farming. Today, modern chickens are highly efficient converters of grain into protein, outnumbering humans by nearly three to one.</p>
+            </div>
+            
+            <div class="questions">
+                <div class="question-group">
+                    <span class="question-type">Questions 1-7: True/False/Not Given</span>
+                    <div class="q-item">1. Chicken is globally popular because it can be used for different styles of cooking. <input type="text" id="rq1"></div>
+                    <div class="q-item">2. Chickens have poor capacity for flight compared to Junglefowl. <input type="text" id="rq2"></div>
+                    <div class="q-item">3. Scientists believe that the domestic chicken has more than one ancestor. <input type="text" id="rq3"></div>
+                    <div class="q-item">4. A modern chicken has the same skin colour as the grey junglefowl. <input type="text" id="rq4"></div>
+                    <div class="q-item">5. After the Roman Empire ended, chicken consumption in Europe declined. <input type="text" id="rq5"></div>
+                    <div class="q-item">6. Some people criticise the methods involved in factory farming chickens. <input type="text" id="rq6"></div>
+                    <div class="q-item">7. In the USA, fewer people are keeping expensive breeds of chicken at home. <input type="text" id="rq7"></div>
+                </div>
+                
+                <div class="question-group">
+                    <span class="question-type">Questions 8-13: Fill in the Blanks (One Word Only)</span>
+                    <div class="q-item">8. In 1750 BC the first chickens were seen in Egyptian <input type="text" id="rq8"> and used in fights.</div>
+                    <div class="q-item">9. Pictures of chickens were used on the <input type="text" id="rq9"> of kings and queens.</div>
+                    <div class="q-item">10. Egyptians developed a method of egg <input type="text" id="rq10"> that didn't involve hens.</div>
+                    <div class="q-item">11. For eggs to hatch, heat and <input type="text" id="rq11"> levels had to stay the same.</div>
+                    <div class="q-item">12. The eggs were hatched in rooms that functioned as <input type="text" id="rq12">.</div>
+                    <div class="q-item">13. Chickens were kept inside, safe from bad weather and <input type="text" id="rq13">.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passage 2 -->
+        <div class="passage">
+            <div class="passage-title">PASSAGE 2: A Study of Introvert and Extrovert Characters</div>
+            <div class="passage-content">
+                <p>According to Professor Brian Little, our traits are by no means fixed. In his book Me, Myself and Us, he suggests we adopt "free-traits" to reach goals or "personal projects." We act as "amateur scientists," testing what works. Research by Little and Sanna Balsari-Palsule focused on the workplace, where job fits are rarely perfect.</p>
+                <p>They found that extroverts initially have advantages in getting noticed. However, when introverts act out of character, they achieve equal performance ratings without negative effects, provided they use "restorative resources"—quiet spaces to recover. Conversely, extroverts find it hard and stressful to rein back their personalities. Younger extroverts may feel like "caged animals" when isolated.</p>
+                <p>Management is advised to rely less on pigeonholing surveys and instead build environments supportive of free-trait expression, which increases long-term productivity.</p>
+            </div>
+            
+            <div class="questions">
+                <div class="question-group">
+                    <span class="question-type">Questions 14-20: Matching Headings (i-viii)</span>
+                    <div class="q-item">14. Paragraph A: <input type="text" id="rq14"></div>
+                    <div class="q-item">15. Paragraph B: <input type="text" id="rq15"></div>
+                    <div class="q-item">16. Paragraph C: <input type="text" id="rq16"></div>
+                    <div class="q-item">17. Paragraph D: <input type="text" id="rq17"></div>
+                    <div class="q-item">18. Paragraph E: <input type="text" id="rq18"></div>
+                    <div class="q-item">19. Paragraph F: <input type="text" id="rq19"></div>
+                    <div class="q-item">20. Paragraph G: <input type="text" id="rq20"></div>
+                </div>
+                
+                <div class="question-group">
+                    <span class="question-type">Questions 21-22: Multiple Choice (Choose Two)</span>
+                    <p>Which two are made by Prof. Little in the first paragraph?</p>
+                    <ul class="options-list">
+                        <li>A. Affect happiness</li>
+                        <li>B. Not used all the time</li>
+                        <li>C. Influence profession</li>
+                        <li>D. Useful for objectives</li>
+                        <li>E. Let people act out of character</li>
+                    </ul>
+                    <div class="q-item">21. <input type="text" id="rq21"></div>
+                    <div class="q-item">22. <input type="text" id="rq22"></div>
+                </div>
+                
+                <div class="question-group">
+                    <span class="question-type">Questions 23-26: Fill in the Blanks (One Word Only)</span>
+                    <div class="q-item">23. Very <input type="text" id="rq23"> workplaces prevent employees from completing personal projects.</div>
+                    <div class="q-item">24. Research has many <input type="text" id="rq24"> for businesses.</div>
+                    <div class="q-item">25. Managers depend too much on <input type="text" id="rq25"> aimed at determining personality.</div>
+                    <div class="q-item">26. Relieving stress could boost a company's <input type="text" id="rq26"> over time.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passage 3 -->
+        <div class="passage">
+            <div class="passage-title">PASSAGE 3: Seeing the Colour of Sounds, Hearing the Colour of Numbers</div>
+            <div class="passage-content">
+                <p>Synesthesia is a condition where senses "leak" into one another (e.g., seeing "five" as green). Synesthetes often keep it secret. John Locke first described it in the 17th century. Recent brain imaging shows that synesthetes' brains light up in vision areas when listening to words. One theory is that we are all born with it, but connections are "pruned" as we grow.</p>
+                <p>Vilyanur Ramachandran used a test with mirrored 2s and 5s to show synesthetes "see" the color in the physical numbers. However, Daniel Smilek found that the concept of the number is what matters; paper color can interfere with a number color existing only in the subject's head.</p>
+            </div>
+            
+            <div class="questions">
+                <div class="question-group">
+                    <span class="question-type">Questions 27-30: Matching People (A-D)</span>
+                    <p>A. Smilek; B. Locke; C. Baron-Cohen; D. Ramachandran</p>
+                    <div class="q-item">27. Hearing names affects the brain like looking at things. <input type="text" id="rq27"></div>
+                    <div class="q-item">28. Consistent association of color with written symbols. <input type="text" id="rq28"></div>
+                    <div class="q-item">29. Heard a musical instrument when seeing a color. <input type="text" id="rq29"></div>
+                    <div class="q-item">30. Studying synesthesia gives perspectives on normal senses. <input type="text" id="rq30"></div>
+                </div>
+                
+                <div class="question-group">
+                    <span class="question-type">Questions 31-35: Information Matching (Paragraphs A-I)</span>
+                    <div class="q-item">31. Investigation using modern medical technology. <input type="text" id="rq31"></div>
+                    <div class="q-item">32. Mention of a writer who was a synesthete. <input type="text" id="rq32"></div>
+                    <div class="q-item">33. Definition of synesthesia. <input type="text" id="rq33"></div>
+                    <div class="q-item">34. Two explanations of why it is uncommon in adults. <input type="text" id="rq34"></div>
+                    <div class="q-item">35. Why some keep it secret. <input type="text" id="rq35"></div>
+                </div>
+                
+                <div class="question-group">
+                    <span class="question-type">Questions 36-40: True/False/Not Given</span>
+                    <div class="q-item">36. Kandinsky admired synesthetes. <input type="text" id="rq36"></div>
+                    <div class="q-item">37. No longer believed to be linked to mental illness. <input type="text" id="rq37"></div>
+                    <div class="q-item">38. Equal numbers of men and women have it. <input type="text" id="rq38"></div>
+                    <div class="q-item">39. Synesthetes have greater powers of logic. <input type="text" id="rq39"></div>
+                    <div class="q-item">40. Possible we are all born with it. <input type="text" id="rq40"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
