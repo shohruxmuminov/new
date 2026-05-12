@@ -14,6 +14,66 @@ export interface WritingTask {
 
 export const writingTasks: WritingTask[] = [
   {
+    id: 'w_cdi_writing_1',
+    type: 'Task 1',
+    title: 'CDI Writing – Set 1',
+    prompt: 'The graph below shows the average time spent by four car manufacturers to produce vehicles at their US factories.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/CDI WRITING.html'
+  },
+  {
+    id: 'w_cdi_writing_2',
+    type: 'Task 1',
+    title: 'CDI Writing – Set 2',
+    prompt: 'The bar chart below shows the percentage of the population in the UK who consumed the recommended daily amount of fruit and vegetables.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/CDI WRITING (2).html'
+  },
+  {
+    id: 'w_cdi_writing_3',
+    type: 'Task 1',
+    title: 'CDI Writing – Set 3',
+    prompt: 'Two trends show population of southern pacific ocean countries from 1950 and projections of 2040.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/CDI WRITING (3).html'
+  },
+  {
+    id: 'w_writing_full_a',
+    type: 'Task 1',
+    title: 'Writing Full Test – A',
+    prompt: 'The table below shows the postgraduate course fees in US Dollars that international students paid in three countries in 2007.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing.html'
+  },
+  {
+    id: 'w_writing_full_b',
+    type: 'Task 1',
+    title: 'Writing Full Test – B',
+    prompt: 'The diagram shows a small local museum and its surroundings in 1957 and 2007.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing (2).html'
+  },
+  {
     id: 'w_full_task_1_and_2_set1',
     type: 'Task 1',
     title: 'Writing Task 1 & 2 – Set 1',
