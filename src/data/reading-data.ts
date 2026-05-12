@@ -103,7 +103,7 @@ So which is it? At present, we don't know, but in the future neurologists may be
       { id: 'rq7', type: 'tfng', question: '7. In the USA, fewer people are keeping expensive breeds of chicken at home.', answer: 'FALSE', explanation: '' },
       { id: 'rq8', type: 'fill', question: '8. In 1750 BC the first chickens were seen in Egyptian _______ and used in fights.', answer: 'ZOOS', explanation: '' },
       { id: 'rq9', type: 'fill', question: '9. Pictures of chickens were used on the _______ of kings and queens.', answer: 'TOMBS', explanation: '' },
-      { id: 'rq10', type: 'fill', question: '10. Egyptians developed a method of egg _______ that didn't involve hens.', answer: 'INCUBATION', explanation: '' },
+      { id: 'rq10', type: 'fill', question: "10. Egyptians developed a method of egg _______ that didn't involve hens.", answer: 'INCUBATION', explanation: '' },
       { id: 'rq11', type: 'fill', question: '11. For eggs to hatch, heat and _______ levels had to stay the same.', answer: 'HUMIDITY', explanation: '' },
       { id: 'rq12', type: 'fill', question: '12. The eggs were hatched in rooms that functioned as _______.', answer: 'OVENS', explanation: '' },
       { id: 'rq13', type: 'fill', question: '13. Chickens were kept inside, safe from bad weather and _______.', answer: 'PREDATORS', explanation: '' },
@@ -120,7 +120,7 @@ So which is it? At present, we don't know, but in the future neurologists may be
       { id: 'rq23', type: 'fill', question: '23. In the second stage of her research, Balsari-Palsule will explore her theory that very _______ workplaces prevent employees from completing projects of personal importance.', answer: 'COMPETITIVE', explanation: '' },
       { id: 'rq24', type: 'fill', question: '24. The research done by Little and Balsari-Palsule has many _______ for businesses.', answer: 'IMPLICATIONS', explanation: '' },
       { id: 'rq25', type: 'fill', question: '25. Balsari-Palsule thinks that managers depend too much on _______ aimed at determining personality types.', answer: 'SURVEYS', explanation: '' },
-      { id: 'rq26', type: 'fill', question: '26. Balsari-Palsule thinks that relieving the stress caused by free-trait acting could boost a company\'s _______ over time.', answer: 'PRODUCTIVITY', explanation: '' },
+      { id: 'rq26', type: 'fill', question: "26. Balsari-Palsule thinks that relieving the stress caused by free-trait acting could boost a company's _______ over time.", answer: 'PRODUCTIVITY', explanation: '' },
       // Passage 3: 27-40
       { id: 'rq27', type: 'mcq', question: '27. For synesthetes, hearing the names of things affects the brain in the same way that looking at things does.', options: ['A. Daniel Smilek', 'B. John Locke', 'C. Simon Baron-Cohen', 'D. Vilyanur Ramachandran'], answer: 'C', explanation: '' },
       { id: 'rq28', type: 'mcq', question: '28. Synesthetes are consistent in their association of a certain colour with a certain written symbol.', options: ['A. Daniel Smilek', 'B. John Locke', 'C. Simon Baron-Cohen', 'D. Vilyanur Ramachandran'], answer: 'C', explanation: '' },
