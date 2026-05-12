@@ -5,42 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IELTS Writing Test</title>
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-            --panel-bg: #ffffff;
-            --header-bg: #ffffff;
-            --textarea-bg: #ffffff;
-            --textarea-border: #ccc;
-            --part-header-bg: #f1f2ec;
-            --success-bg: #28a745;
-            --timer-color: #333;
-            --telegram-color: #0088cc;
-            --button-bg: #4a90e2;
-            --button-hover: #357abd;
-            --nav-bg: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #f0f0f0;
-            --border-color: #444;
-            --panel-bg: #2d2d2d;
-            --header-bg: #2d2d2d;
-            --textarea-bg: #3a3a3a;
-            --textarea-border: #555;
-            --part-header-bg: #3a3a3a;
-            --success-bg: #2ecc71;
-            --timer-color: #f0f0f0;
-            --telegram-color: #4dabf7;
-            --button-bg: #5d9cec;
-            --button-hover: #4a89dc;
-            --nav-bg: #2d2d2d;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -49,19 +13,16 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: #ffffff;
             line-height: 1.4;
             font-size: 16px;
             padding-bottom: 90px;
-            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Header Styles */
         .header {
-            background-color: var(--header-bg);
+            background-color: #ffffff;
             padding: 12px 20px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -71,91 +32,36 @@
             right: 0;
             z-index: 100;
             height: 60px;
-            transition: all 0.3s;
         }
 
-        .header-left {
+        .timer-container {
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
             display: flex;
+            position: relative;
+            cursor: default;
             align-items: center;
-            gap: 20px;
-        }
-
-        .ielts-logo {
-            height: 32px;
-            width: auto;
         }
 
         .telegram-link {
-            color: var(--telegram-color);
+            color: #0088cc;
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
         }
 
         .telegram-link:hover {
             text-decoration: underline;
         }
 
-        .telegram-link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .dark-mode-btn {
-            background: none;
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: all 0.3s;
-        }
-
-        .dark-mode-btn:hover {
-            background-color: var(--panel-bg);
-            transform: scale(1.05);
-        }
-
-        .moon-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .sun-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .moon-icon {
-            display: block;
-        }
-
-        .timer-container {
-            color: var(--timer-color);
-            font-size: 16px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-            margin-right: 20px;
-        }
-
-        /* Main Content */
         .main-container {
             margin-top: 60px;
             display: flex;
-            background: var(--bg-color);
+            background: #ffffff;
             height: calc(100vh - 120px);
             flex-direction: column;
         }
@@ -169,10 +75,8 @@
         .left-panel {
             width: 50%;
             padding: 20px;
-            border-right: 1px solid var(--border-color);
+            border-right: 1px solid #e0e0e0;
             overflow-y: auto;
-            background: var(--panel-bg);
-            transition: all 0.3s;
         }
 
         .right-panel {
@@ -181,22 +85,19 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            background: var(--panel-bg);
-            transition: all 0.3s;
         }
 
         .part-header {
-            background-color: var(--part-header-bg);
+            background-color: #f1f2ec;
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
             margin-top: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #e0e0e0;
             width: auto;
             text-align: left;
             margin-left: 20px;
             margin-right: 20px;
-            transition: all 0.3s;
         }
 
         .part-header p {
@@ -215,7 +116,7 @@
         }
 
         .writing-textarea {
-            border: 1px solid var(--textarea-border);
+            border: 1px solid #ccc;
             padding: 15px;
             font-size: 16px;
             font-family: Arial, sans-serif;
@@ -225,19 +126,15 @@
             min-height: 300px;
             width: 100%;
             overflow: hidden;
-            background-color: var(--textarea-bg);
-            color: var(--text-color);
-            transition: all 0.3s;
         }
 
         .writing-textarea:focus {
-            border-color: var(--button-bg);
+            border-color: #4a90e2;
         }
 
         .writing-textarea:disabled {
-            background-color: var(--panel-bg) !important;
-            color: var(--text-color);
-            opacity: 0.7;
+            background-color: #f5f5f5 !important;
+            color: #666;
             cursor: not-allowed;
         }
 
@@ -245,8 +142,7 @@
             text-align: right;
             margin-top: 10px;
             font-size: 14px;
-            color: var(--text-color);
-            opacity: 0.8;
+            color: #666;
         }
 
         .instructions {
@@ -264,9 +160,8 @@
         .task-prompt {
             padding: 15px;
             margin: 20px 0;
-            border: 1px solid var(--border-color);
+            border: 1px solid #000;
             font-style: italic;
-            background: var(--panel-bg);
         }
 
         .task-prompt p {
@@ -277,8 +172,24 @@
             margin-bottom: 0;
         }
 
-        /* Messages */
-        .processing-message, .time-up-message {
+        /* Processing Message Styles */
+        .processing-message {
+            display: none !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Time's Up Message Styles */
+        .time-up-message {
             display: none !important;
             position: fixed;
             top: 0;
@@ -298,48 +209,46 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Success Message Styles */
         .success-message {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: var(--panel-bg);
-            color: var(--text-color);
+            background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 20px var(--shadow-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             text-align: center;
             z-index: 1000;
             max-width: 400px;
-            border: 1px solid var(--border-color);
         }
 
         .success-message h3 {
-            color: var(--success-bg);
+            color: #28a745;
             margin-bottom: 15px;
             font-size: 24px;
         }
 
         .success-message p {
-            color: var(--text-color);
+            color: #666;
             margin-bottom: 20px;
             line-height: 1.5;
         }
 
         .success-message .btn {
             padding: 10px 20px;
-            background: var(--success-bg);
+            background: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s;
         }
 
         .success-message .btn:hover {
-            opacity: 0.9;
+            background: #218838;
         }
 
         .overlay {
@@ -353,14 +262,14 @@
             z-index: 999;
         }
 
-        /* Navigation */
+        /* Bottom Navigation */
         .nav-row {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--nav-bg);
-            border-top: 1px solid var(--border-color);
+            background: #ffffff;
+            border-top: 1px solid #e0e0e0;
             padding: 0;
             display: flex;
             align-items: stretch;
@@ -383,7 +292,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background-color: var(--success-bg);
+            background-color: #28a745;
             z-index: 1;
         }
 
@@ -392,7 +301,7 @@
             border: none;
             font-size: 16px;
             font-weight: 600;
-            color: var(--text-color);
+            color: #333;
             cursor: pointer;
             display: flex;
             flex-direction: row;
@@ -406,31 +315,39 @@
             padding-left: 20px;
         }
 
-        .footer__questionNo___3WNct:hover {
-            background-color: var(--panel-bg);
+        .footer__questionWrapper___1tZ46 .footer__questionNo___3WNct:hover {
+            background-color: #f8f9fa;
         }
 
         .footer__questionNo___3WNct:disabled {
-            opacity: 0.5;
+            background-color: #f5f5f5 !important;
+            color: #999 !important;
             cursor: not-allowed !important;
         }
 
+        .footer__questionNo___3WNct:disabled:hover {
+            background-color: #f5f5f5 !important;
+        }
+
         .footer__questionWrapper___1tZ46.selected .footer__questionNo___3WNct {
-            background-color: var(--panel-bg);
-            color: var(--text-color);
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         .part-title {
             font-size: 18px;
             font-weight: bold;
-            color: var(--text-color);
+            color: #333;
             line-height: 1.2;
+        }
+
+        .footer__questionWrapper___1tZ46.selected .attemptedCount {
+            display: none;
         }
 
         .attemptedCount {
             font-size: 14px;
-            color: var(--text-color);
-            opacity: 0.8;
+            color: #666;
             font-weight: 400;
             line-height: 1.2;
         }
@@ -440,9 +357,9 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
             padding: 8px 12px;
             border-radius: 4px;
             font-size: 16px;
@@ -451,18 +368,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, border-color 0.2s;
             width: 40px;
             height: 40px;
         }
 
         .footer__deliverButton___3FM07:hover {
-            background-color: var(--button-hover);
+            background-color: #e0e0e0;
+            border-color: #bbb;
         }
 
         .footer__deliverButton___3FM07:disabled {
-            opacity: 0.5;
+            background-color: #f5f5f5 !important;
+            color: #999 !important;
             cursor: not-allowed !important;
+            border-color: #ddd !important;
+        }
+
+        .footer__deliverButton___3FM07:disabled:hover {
+            background-color: #f5f5f5 !important;
         }
 
         .fa-check::before {
@@ -474,9 +398,26 @@
             display: none;
         }
 
-        /* Instructions Window */
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-panel,
+            .right-panel {
+                width: 100% !important;
+                border-right: none;
+            }
+            
+            .left-panel {
+                border-bottom: 1px solid #e0e0e0;
+            }
+        }
+
+        /* Instructions Button */
         .instructions-button {
-            background: var(--button-bg);
+            background: #4a90e2;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -492,19 +433,20 @@
         }
 
         .instructions-button:hover {
-            background: var(--button-hover);
+            background: #357abd;
         }
 
+        /* Instructions Window */
         .instructions-window {
             position: fixed;
             top: 70px;
             right: 20px;
             width: 400px;
             max-height: 70vh;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
+            background: white;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 20px var(--shadow-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             z-index: 1000;
             display: none;
             overflow: hidden;
@@ -515,9 +457,9 @@
         }
 
         .instructions-header {
-            background: var(--part-header-bg);
+            background: #f8f9fa;
             padding: 15px 20px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -526,7 +468,7 @@
         .instructions-header h3 {
             margin: 0;
             font-size: 18px;
-            color: var(--text-color);
+            color: #333;
         }
 
         .instructions-close {
@@ -534,7 +476,7 @@
             border: none;
             font-size: 24px;
             cursor: pointer;
-            color: var(--text-color);
+            color: #666;
             padding: 0;
             width: 30px;
             height: 30px;
@@ -544,7 +486,7 @@
         }
 
         .instructions-close:hover {
-            opacity: 0.8;
+            color: #333;
         }
 
         .instructions-content {
@@ -556,7 +498,7 @@
         .instructions-content h4 {
             margin-top: 20px;
             margin-bottom: 10px;
-            color: var(--text-color);
+            color: #333;
             font-size: 16px;
         }
 
@@ -567,8 +509,7 @@
         .instructions-content p {
             margin-bottom: 10px;
             line-height: 1.6;
-            color: var(--text-color);
-            opacity: 0.9;
+            color: #555;
         }
 
         .instructions-content ul {
@@ -578,13 +519,12 @@
 
         .instructions-content li {
             margin-bottom: 8px;
-            color: var(--text-color);
+            color: #555;
             line-height: 1.6;
-            opacity: 0.9;
         }
 
         .copy-button {
-            background: var(--button-bg);
+            background: #4a90e2;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -596,16 +536,16 @@
         }
 
         .copy-button:hover {
-            background: var(--button-hover);
+            background: #357abd;
         }
 
         .copy-button.copied {
-            background: var(--success-bg);
+            background: #28a745;
         }
 
         .instructions-text {
-            background: var(--part-header-bg);
-            border: 1px solid var(--border-color);
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
             border-radius: 4px;
             padding: 15px;
             margin-top: 10px;
@@ -614,10 +554,9 @@
             line-height: 1.5;
             white-space: pre-wrap;
             user-select: text;
-            color: var(--text-color);
         }
 
-        /* PDF Download */
+        /* PDF Download Buttons */
         .pdf-download-container {
             display: flex;
             gap: 15px;
@@ -626,7 +565,7 @@
         }
 
         .pdf-download-btn {
-            background: var(--success-bg);
+            background: #28a745;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -642,7 +581,7 @@
         }
 
         .pdf-download-btn:hover {
-            opacity: 0.9;
+            background: #218838;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
@@ -659,97 +598,448 @@
             height: 18px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-            }
-            
-            .left-panel,
-            .right-panel {
-                width: 100% !important;
-                border-right: none;
-            }
-            
-            .left-panel {
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            .instructions-window {
-                width: calc(100% - 40px);
-                right: 20px;
-                left: 20px;
-            }
+        /* Login Screen Styles */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
         }
 
-        @media (max-width: 480px) {
-            .header {
-                padding: 12px 10px;
-            }
-            
-            .telegram-link span {
-                display: none;
-            }
-            
-            .telegram-link {
-                padding: 8px;
-            }
-            
-            .ielts-logo {
-                height: 24px;
-            }
-            
-            .left-panel,
-            .right-panel {
-                padding: 15px;
-            }
+        .login-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-logo {
+            margin-bottom: 30px;
+        }
+
+        .login-logo svg {
+            width: 60px;
+            height: 60px;
+            color: #667eea;
+        }
+
+        .login-content h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .login-content p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-button {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Candidate ID Screen Styles */
+        .candidate-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .candidate-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .candidate-logo {
+            margin-bottom: 30px;
+        }
+
+        .candidate-logo svg {
+            width: 60px;
+            height: 60px;
+            color: #667eea;
+        }
+
+        .candidate-content h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .candidate-content p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .candidate-id-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .candidate-id-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .candidate-button {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .candidate-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .candidate-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-button {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .back-button:hover {
+            background: #7f8c8d;
+        }
+
+        /* Hide other screens initially */
+        .start-screen {
+            display: none;
+        }
+
+        .header {
+            display: none;
+        }
+
+        .main-container {
+            display: none;
+        }
+
+        .nav-arrows {
+            display: none;
+        }
+
+        .nav-row {
+            display: none;
+        }
+
+        /* Start Screen Styles - Minimalist Design */
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .start-content {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 650px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .writing-icon {
+            color: #495057;
+            margin-bottom: 25px;
+        }
+
+        .start-content h1 {
+            color: #212529;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .main-description {
+            color: #6c757d;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .instructions-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            border-left: 4px solid #495057;
+        }
+
+        .instructions-section h3 {
+            color: #495057;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .instructions-section ul {
+            text-align: left;
+            color: #6c757d;
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instructions-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .start-test-button {
+            background: #495057;
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .start-test-button:hover {
+            background: #343a40;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(73, 80, 87, 0.3);
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 </head>
-<body data-theme="light">
-    <!-- Header with Dark Mode Button -->
-    <div class="header">
-        <div class="header-left">
-            <img
-                src="https://d2snzxottmona5.cloudfront.net/releases/3.46.0/images/logo/ielts.svg"
-                alt="IELTS Logo" class="ielts-logo">
-            <a href="https://t.me/ielts_material_full" target="_blank" class="telegram-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-.38.24-1.07.7-.96.66-1.89 1.28-1.89 1.28s-.17.11-.49.03c-.32-.08-.72-.26-1.16-.47-.54-.26-1.17-.53-1.17-.53s-.87-.55.62-1.14c.32-.13 1.96-.84 2.99-1.2 1.05-.37 2.86-1.01 2.86-1.01s1.02-.4 1.02 0z"
-                        fill="currentColor"/>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-content">
+            <div class="login-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-         Full Exam Materials
-            </a>
-        </div>
-        <div class="header-right">
-            <div class="timer-container">
-                <span class="timer-display">60:00</span>
             </div>
-            <!-- Dark Mode Button -->
-            <button class="dark-mode-btn" id="dark-mode-toggle" title="Toggle Dark Mode">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <h1>IELTS Writing Test</h1>
+            <p>Please enter the password to access the test</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="login-button" id="login-btn">Login</button>
+                <div class="error-message" id="login-error">Incorrect password. Please try again.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Candidate ID Screen -->
+    <div id="candidate-screen" class="candidate-screen">
+        <div class="candidate-content">
+            <div class="candidate-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </div>
+            <h1>Candidate Verification</h1>
+            <p>Please enter your candidate ID to proceed</p>
+            <form id="candidate-form">
+                <input type="text" id="candidate-id" class="candidate-id-input" placeholder="Enter Candidate ID" maxlength="10" required>
+                <button type="submit" class="candidate-button" id="candidate-btn">Continue</button>
+                <button type="button" class="back-button" id="back-to-login">Back to Login</button>
+                <div class="error-message" id="candidate-error">Please enter a valid candidate ID.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="start-screen">
+        <div class="start-content">
+            <div class="writing-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                    <path d="M2 2l7.586 7.586"></path>
+                    <circle cx="11" cy="11" r="2"></circle>
                 </svg>
-            </button>
+            </div>
+            <h1>IELTS Writing Mock Test</h1>
+            <p class="main-description">This is a timed writing test. You have 60 minutes to complete both Task 1 and Task 2.</p>
+            <div class="instructions-section">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li>Task 1: Spend about 20 minutes, write at least 150 words</li>
+                    <li>Task 2: Spend about 40 minutes, write at least 250 words</li>
+                    <li>You can switch between tasks at any time</li>
+                    <li>Word count is displayed below each writing area</li>
+                </ul>
+            </div>
+            <button id="start-test-btn" class="start-test-button">Start Test</button>
+        </div>
+    </div>
+    <div class="header">
+        <div class="timer-container">
+            <span class="timer-display">60:00</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span style="color: #333; font-size: 14px; font-weight: 500;">Candidate: <span id="header-candidate-id"></span></span>
+            <button id="logout-btn" style="background: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Logout</button>
+            <a href="https://t.me/ielts_material_full" target="_blank" class="telegram-link">
+                Full Exam Materials
+            </a>
         </div>
     </div>
 
     <!-- Test Interface -->
     <div class="main-container" id="mainContainer">
         <div id="part-header-1" class="part-header">
-            <p><strong>Writing Task-1</strong></p>
+            <p><strong>Part 1</strong></p>
             <p>You should spend about 20 minutes on this task. Write at least 150 words.</p>
         </div>
         <div id="part-header-2" class="part-header hidden">
-            <p><strong>Writing Task-2</strong></p>
+            <p><strong>Part 2</strong></p>
             <p>You should spend about 40 minutes on this task. Write at least 250 words.</p>
         </div>
 
@@ -757,25 +1047,18 @@
             <div class="left-panel">
                 <div id="part-1" class="writing-part">
                     <div class="task-prompt">
-                        <p><strong>The graph shows the information about international conferences in 3 capital cities in 1980-2010.</strong></p>
-                        <p><strong>Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</strong></p>
+                        <p><strong>The diagram shows a small local museum and its surroundings in 1957 and 2007<br><br>Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</strong></p>
                     </div>
 
-                    <div class="chart-container">
-                        <div class="image-container">
-                            <img src="https://writing9.com/_next/image?url=https%3A%2F%2Fimages.writing9.com%2F9ef0b6fee8664db772404b95467568d0.png&w=1920&q=75" alt="Chart" style="max-width: 100%; height: auto;"></p></p></p>
-                        </div>
-                    </div>
+                           <img src="https://engnovatewebsitestorage.blob.core.windows.net/ielts-writing-task-1-images/d46cdb928bc3230c" alt="">
                 </div>
 
                 <div id="part-2" class="writing-part hidden">
                     <div class="instructions">
                         <p><strong>Write about the following topic:</strong></p>
                         <div class="task-prompt">
-                            <p><em><strong>Many students find it is harder to study at university or college compared to when they were in grade school. Why is this? What are some possible solutions for this problem?
-
-
-</strong></em></p>
+                            <p><em><strong>Some students choose to work or travel after leaving school and before going to university. Many people, however, say that working experience is more useful in adult life than travel.</strong></em></p>
+                            <p><em><strong>To what extent do you agree or disagree?</strong></em></p>
                         </div>
                         <p>Give reasons for your answer and include any relevant examples from your own knowledge or experience.</p>
                     </div>
@@ -798,7 +1081,7 @@
         </div>
     </div>
 
-    <!-- Processing Message -->
+    <!-- Processing Message for Manual Submission -->
     <div class="overlay" id="overlay"></div>
     <div class="processing-message" id="processingMessage">
         <div style="text-align: center; padding: 40px; background: #333; border-radius: 10px; max-width: 500px; color: white;">
@@ -811,7 +1094,7 @@
         </div>
     </div>
 
-    <!-- Time's Up Message -->
+    <!-- Time's Up Message for Time Expiration -->
     <div class="time-up-message" id="timeUpMessage">
         <div style="text-align: center; padding: 40px; background: #333; border-radius: 10px; max-width: 500px; color: white;">
             <h2 style="color: #ff6b6b; margin-bottom: 20px;">Time's Up!</h2>
@@ -955,22 +1238,6 @@ COMMON MISTAKES TO AVOID:
         let timeInSeconds = 3600;
         let timerInterval;
         let partCompletionStatus = { 1: false, 2: false };
-        let candidateId = 'TEST_CANDIDATE';
-
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const body = document.body;
-        
-        darkModeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        body.setAttribute('data-theme', savedTheme);
 
         // Timer functionality
         function startTimer() {
@@ -1008,8 +1275,9 @@ COMMON MISTAKES TO AVOID:
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
-        // Test submission function
+        // Test submission function - automatically downloads PDFs
         function submitTest() {
+            // Get current content from textarea and memory
             const currentContent = document.getElementById('writingTextarea').value;
             if (currentPart === 1) {
                 window.task1Content = currentContent;
@@ -1056,6 +1324,8 @@ COMMON MISTAKES TO AVOID:
         function showSuccessMessage() {
             document.getElementById('overlay').style.display = 'block';
             document.getElementById('successMessage').style.display = 'block';
+            
+            // Disable all interactive elements
             disableTestInterface();
         }
 
@@ -1069,11 +1339,13 @@ COMMON MISTAKES TO AVOID:
 
         // Disable test interface after completion
         function disableTestInterface() {
+            // Disable textarea
             const textarea = document.getElementById('writingTextarea');
             textarea.disabled = true;
-            textarea.style.backgroundColor = 'var(--panel-bg)';
+            textarea.style.backgroundColor = '#f5f5f5';
             textarea.style.cursor = 'not-allowed';
             
+            // Disable navigation buttons
             const navButtons = document.querySelectorAll('.footer__questionNo___3WNct');
             navButtons.forEach(btn => {
                 btn.disabled = true;
@@ -1081,10 +1353,35 @@ COMMON MISTAKES TO AVOID:
                 btn.style.opacity = '0.5';
             });
             
+            // Disable submit button
             const submitBtn = document.getElementById('deliver-button');
             submitBtn.disabled = true;
             submitBtn.style.cursor = 'not-allowed';
             submitBtn.style.opacity = '0.5';
+            
+            // Disable logout button
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.disabled = true;
+            logoutBtn.style.cursor = 'not-allowed';
+            logoutBtn.style.opacity = '0.5';
+            
+            // Disable keyboard shortcuts
+            document.removeEventListener('keydown', handleKeyboardShortcuts);
+            
+            // Add overlay to prevent any interaction
+            const testOverlay = document.createElement('div');
+            testOverlay.id = 'test-complete-overlay';
+            testOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.1);
+                z-index: 50;
+                pointer-events: none;
+            `;
+            document.body.appendChild(testOverlay);
         }
 
         // Test interface functions
@@ -1112,6 +1409,7 @@ COMMON MISTAKES TO AVOID:
         }
 
         function switchPart(partNumber) {
+            // Store current content in memory (not localStorage)
             if (currentPart === 1) {
                 window.task1Content = document.getElementById('writingTextarea').value;
             } else {
@@ -1143,6 +1441,7 @@ COMMON MISTAKES TO AVOID:
                 btn.tabIndex = index === (partNumber - 1) ? -1 : 0;
             });
             
+            // Load content from memory
             if (partNumber === 1) {
                 document.getElementById('writingTextarea').value = window.task1Content || '';
             } else {
@@ -1162,6 +1461,7 @@ COMMON MISTAKES TO AVOID:
             const wordCount = text === '' ? 0 : text.split(/\s+/).length;
             document.getElementById('wordCount').textContent = wordCount;
             
+            // Store content in memory instead of localStorage
             if (currentPart === 1) {
                 window.task1Content = textarea.value;
             } else {
@@ -1170,18 +1470,257 @@ COMMON MISTAKES TO AVOID:
             
             updateCompletionIndicators();
             
+            // Update the attempted count indicator(s) robustly without relying on nth-child
+            const wrappers = document.querySelectorAll('.footer__questionWrapper___1tZ46');
             const minWords = currentPart === 1 ? 150 : 250;
             const isCompleted = wordCount >= minWords;
-            const attemptedCount = document.querySelector(`.footer__questionWrapper___1tZ46:nth-child(${currentPart}) .attemptedCount`);
-            if (attemptedCount) {
-                attemptedCount.textContent = isCompleted ? '1 of 1' : '0 of 1';
+
+            // Update the current part's indicator
+            const currentWrapper = wrappers[currentPart - 1];
+            if (currentWrapper) {
+                const attemptedCountEl = currentWrapper.querySelector('.attemptedCount');
+                if (attemptedCountEl) {
+                    attemptedCountEl.textContent = isCompleted ? '1 of 1' : '0 of 1';
+                }
+            }
+
+            // Optionally, also refresh the other part's indicator from stored content
+            // to keep both indicators accurate at all times
+            const otherPart = currentPart === 1 ? 2 : 1;
+            const otherWrapper = wrappers[otherPart - 1];
+            if (otherWrapper) {
+                const otherAttemptedCountEl = otherWrapper.querySelector('.attemptedCount');
+                if (otherAttemptedCountEl) {
+                    const otherContent = otherPart === 1 ? (window.task1Content || '') : (window.task2Content || '');
+                    const otherCount = otherContent.trim() === '' ? 0 : otherContent.trim().split(/\s+/).length;
+                    const otherMin = otherPart === 1 ? 150 : 250;
+                    otherAttemptedCountEl.textContent = otherCount >= otherMin ? '1 of 1' : '0 of 1';
+                }
             }
         }
 
-        // Initialize test
+        // Auto-save functionality removed - no longer saving to localStorage
+
+        // --- LOGIN STATE VARIABLES ---
+        const CORRECT_PASSWORD = '0123'; // You can change this password
+        let candidateId = '';
+        let isAuthenticated = false;
+        let sessionStartTime = null;
+        const SESSION_TIMEOUT = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+
+        // --- LOGIN FUNCTIONS ---
+        function initializeLogin() {
+            // Prevent browser back/forward navigation
+            window.history.pushState(null, null, window.location.href);
+            window.addEventListener('popstate', function() {
+                window.history.pushState(null, null, window.location.href);
+            });
+            
+            // Prevent right-click context menu
+            document.addEventListener('contextmenu', function(e) {
+                if (isAuthenticated) {
+                    e.preventDefault();
+                }
+            });
+            
+            // Login form submission
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            
+            // Candidate form submission
+            document.getElementById('candidate-form').addEventListener('submit', handleCandidateId);
+            
+            // Back button functionality
+            document.getElementById('back-to-login').addEventListener('click', () => {
+                document.getElementById('candidate-screen').style.display = 'none';
+                document.getElementById('login-screen').style.display = 'flex';
+                document.getElementById('password').value = '';
+                document.getElementById('login-error').style.display = 'none';
+            });
+
+            // Enter key support for password field
+            document.getElementById('password').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleLogin(e);
+                }
+            });
+
+            // Enter key support for candidate ID field
+            document.getElementById('candidate-id').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleCandidateId(e);
+                }
+            });
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('login-error');
+            const loginBtn = document.getElementById('login-btn');
+            
+            // Add loading state
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Verifying...';
+            loginBtn.classList.add('loading');
+            
+            // Simulate a small delay for better UX
+            setTimeout(() => {
+                if (password === CORRECT_PASSWORD) {
+                    errorElement.style.display = 'none';
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('candidate-screen').style.display = 'flex';
+                    document.getElementById('candidate-id').focus();
+                } else {
+                    errorElement.style.display = 'block';
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                    document.getElementById('login-screen').classList.add('shake');
+                    setTimeout(() => {
+                        document.getElementById('login-screen').classList.remove('shake');
+                    }, 500);
+                }
+                
+                // Reset button state
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login';
+                loginBtn.classList.remove('loading');
+            }, 500);
+        }
+
+        function handleCandidateId(e) {
+            e.preventDefault();
+            const candidateIdInput = document.getElementById('candidate-id').value.trim();
+            const errorElement = document.getElementById('candidate-error');
+            const candidateBtn = document.getElementById('candidate-btn');
+            
+            // Add loading state
+            candidateBtn.disabled = true;
+            candidateBtn.textContent = 'Verifying...';
+            candidateBtn.classList.add('loading');
+            
+            // Simulate a small delay for better UX
+            setTimeout(() => {
+                if (candidateIdInput.length >= 3) {
+                    candidateId = candidateIdInput;
+                    isAuthenticated = true;
+                    sessionStartTime = Date.now();
+                    errorElement.style.display = 'none';
+                    document.getElementById('candidate-screen').style.display = 'none';
+                    document.getElementById('start-screen').style.display = 'flex';
+                    
+                    // Update start screen with candidate ID
+                    const startContent = document.querySelector('.start-content');
+                    const candidateInfo = document.createElement('div');
+                    candidateInfo.style.cssText = 'background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #667eea;';
+                    candidateInfo.innerHTML = `<strong>Candidate ID:</strong> ${candidateId}`;
+                    startContent.insertBefore(candidateInfo, startContent.firstChild);
+                    
+                    // Start session timeout check
+                    setInterval(checkSessionTimeout, 60000); // Check every minute
+                } else {
+                    errorElement.style.display = 'block';
+                    document.getElementById('candidate-id').focus();
+                    document.getElementById('candidate-screen').classList.add('shake');
+                    setTimeout(() => {
+                        document.getElementById('candidate-screen').classList.remove('shake');
+                    }, 500);
+                }
+                
+                // Reset button state
+                candidateBtn.disabled = false;
+                candidateBtn.textContent = 'Continue';
+                candidateBtn.classList.remove('loading');
+            }, 500);
+        }
+
+        function checkSessionTimeout() {
+            if (sessionStartTime && (Date.now() - sessionStartTime) > SESSION_TIMEOUT) {
+                alert('Session expired. Please login again.');
+                logout();
+            }
+        }
+
+        function logout() {
+            // Reset authentication state
+            isAuthenticated = false;
+            candidateId = '';
+            sessionStartTime = null;
+            
+            // Hide all content
+            document.querySelector('.header').style.display = 'none';
+            document.querySelector('.main-container').style.display = 'none';
+            document.querySelector('.nav-row').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'none';
+            
+            // Show login screen
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('password').value = '';
+            document.getElementById('candidate-id').value = '';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('candidate-error').style.display = 'none';
+            
+            // Clear candidate info from start screen
+            const candidateInfo = document.querySelector('.start-content div[style*="background: #e8f4fd"]');
+            if (candidateInfo) {
+                candidateInfo.remove();
+            }
+        }
+
+        // Initialize login system
+        initializeLogin();
+
+        // Add logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout? This will end your test session.')) {
+                logout();
+            }
+        });
+
+        // Load saved content on page load
         window.addEventListener('load', () => {
-            startTimer();
-            updateWordCount();
+            // Hide all content initially except login screen
+            document.querySelector('.header').style.display = 'none';
+            document.querySelector('.main-container').style.display = 'none';
+            document.querySelector('.nav-row').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'none';
+            
+            // Add start button functionality
+            document.getElementById('start-test-btn').addEventListener('click', () => {
+                // Security check - ensure user is authenticated
+                if (!isAuthenticated || !candidateId) {
+                    alert('Authentication required. Please login with password and enter candidate ID.');
+                    document.getElementById('start-screen').style.display = 'none';
+                    document.getElementById('login-screen').style.display = 'flex';
+                    return;
+                }
+                
+                // Hide start screen
+                document.getElementById('start-screen').style.display = 'none';
+                
+                // Show main content
+                document.querySelector('.header').style.display = 'flex';
+                document.querySelector('.main-container').style.display = 'flex';
+                document.querySelector('.nav-row').style.display = 'flex';
+                
+                // Update header with candidate ID
+                document.getElementById('header-candidate-id').textContent = candidateId;
+                
+                // Start the test
+                startTimer();
+                
+                const savedContent = localStorage.getItem(`ielts-writing-part-${currentPart}`);
+                if (savedContent) {
+                    document.getElementById('writingTextarea').value = savedContent;
+                    updateWordCount();
+                }
+                updateCompletionIndicators();
+                
+                // Initial resize
+                const textarea = document.getElementById('writingTextarea');
+                textarea.style.overflowY = 'hidden';
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            });
         });
 
         // Keyboard shortcuts
@@ -1218,15 +1757,19 @@ COMMON MISTAKES TO AVOID:
             });
         };
 
+        // Close instructions window when clicking outside
         document.addEventListener('click', function(event) {
             const instructionsWindow = document.getElementById('instructions-window');
+            const instructionsBtn = document.getElementById('instructions-btn');
+            
             if (instructionsWindow.classList.contains('show') &&
-                !instructionsWindow.contains(event.target)) {
+                !instructionsWindow.contains(event.target) &&
+                !instructionsBtn.contains(event.target)) {
                 instructionsWindow.classList.remove('show');
             }
         });
 
-        // PDF Generation Function
+        // PDF Generation Function - Both Tasks in One File
         function downloadBothTasksPDF() {
             const part1Content = window.task1Content || '';
             const part2Content = window.task2Content || '';
@@ -1234,41 +1777,49 @@ COMMON MISTAKES TO AVOID:
             const dateString = currentDate.toLocaleDateString();
             const timeString = currentDate.toLocaleTimeString();
             
+            // Create PDF
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
+            // Set font
             doc.setFont("helvetica");
+            
+            // Title
             doc.setFontSize(24);
             doc.setFont("helvetica", "bold");
             doc.text("IELTS Writing Test", 105, 20, { align: "center" });
             
+            // Candidate info
             doc.setFontSize(12);
             doc.setFont("helvetica", "normal");
             doc.text(`Candidate ID: ${candidateId}`, 20, 35);
             doc.text(`Date: ${dateString}`, 20, 42);
             doc.text(`Time: ${timeString}`, 20, 49);
             
-            // Task 1
+            // ===== TASK 1 =====
             doc.setFontSize(18);
             doc.setFont("helvetica", "bold");
             doc.text("TASK 1", 20, 65);
             
+            // Task 1 description
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("Question:", 20, 75);
             
             doc.setFontSize(11);
             doc.setFont("helvetica", "normal");
-            const task1Question = "The plans below show the South Wing of Walton Museum in 2008 and in 2012 after it was redeveloped.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.";
+            const task1Question = "The diagram shows a small local museum and its surroundings in 1957 and 2007";
             
             const splitQuestion1 = doc.splitTextToSize(task1Question, 170);
             doc.text(splitQuestion1, 20, 85);
             
+            // Task 1 word count
             const wordCount1 = part1Content.trim() === '' ? 0 : part1Content.trim().split(/\s+/).length;
             doc.setFontSize(12);
             doc.setFont("helvetica", "bold");
             doc.text(`Word Count: ${wordCount1}`, 20, 130);
             
+            // Task 1 response
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("Response:", 20, 145);
@@ -1279,29 +1830,33 @@ COMMON MISTAKES TO AVOID:
             const splitResponse1 = doc.splitTextToSize(response1, 170);
             doc.text(splitResponse1, 20, 155);
             
-            // Task 2
+            // Add new page for Task 2
             doc.addPage();
             
+            // ===== TASK 2 =====
             doc.setFontSize(18);
             doc.setFont("helvetica", "bold");
             doc.text("TASK 2", 20, 20);
             
+            // Task 2 description
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("Question:", 20, 30);
             
             doc.setFontSize(11);
             doc.setFont("helvetica", "normal");
-            const task2Question = "Children are spending more time on computer games instead of doing regular exercise. Is this a positive or negative development?\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.";
+            const task2Question = "Some students choose to work or travel after leaving school and before going to university. Many people, however, say that working experience is more useful in adult life than travel.\n\nTo what extent do you agree or disagree?\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.";
             
             const splitQuestion2 = doc.splitTextToSize(task2Question, 170);
             doc.text(splitQuestion2, 20, 40);
             
+            // Task 2 word count
             const wordCount2 = part2Content.trim() === '' ? 0 : part2Content.trim().split(/\s+/).length;
             doc.setFontSize(12);
             doc.setFont("helvetica", "bold");
             doc.text(`Word Count: ${wordCount2}`, 20, 85);
             
+            // Task 2 response
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("Response:", 20, 100);
@@ -1312,7 +1867,7 @@ COMMON MISTAKES TO AVOID:
             const splitResponse2 = doc.splitTextToSize(response2, 170);
             doc.text(splitResponse2, 20, 110);
             
-            // Summary
+            // Summary on last page
             doc.addPage();
             doc.setFontSize(18);
             doc.setFont("helvetica", "bold");
@@ -1327,6 +1882,7 @@ COMMON MISTAKES TO AVOID:
             doc.text(`Time: ${timeString}`, 20, 75);
             doc.text(`Candidate ID: ${candidateId}`, 20, 85);
             
+            // Save PDF
             doc.save(`IELTS_Writing_Test_${candidateId}.pdf`);
         }
     </script>
