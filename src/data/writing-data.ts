@@ -14,6 +14,91 @@ export interface WritingTask {
 
 export const writingTasks: WritingTask[] = [
   {
+    id: 'w_new_cdi_1',
+    type: 'Task 1',
+    title: 'CDI Writing - New Set 1',
+    prompt: 'The graph below shows the average time spent by four car manufacturers to produce vehicles at their US factories.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/CDI WRITING.html'
+  },
+  {
+    id: 'w_new_cdi_2',
+    type: 'Task 1',
+    title: 'CDI Writing - New Set 2',
+    prompt: 'The bar chart below shows the percentage of the population in the UK who consumed the recommended daily amount of fruit and vegetables.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/CDI WRITING (2).html'
+  },
+  {
+    id: 'w_new_cdi_3',
+    type: 'Task 1',
+    title: 'CDI Writing - New Set 3',
+    prompt: 'Two trends show population of southern pacific ocean countries from 1950 and projections of 2040.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/CDI WRITING (3).html'
+  },
+  {
+    id: 'w_new_full_a',
+    type: 'Task 1',
+    title: 'Writing Full Test - New A',
+    prompt: 'The table below shows the postgraduate course fees in US Dollars that international students paid in three countries in 2007.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/Writing.html'
+  },
+  {
+    id: 'w_new_full_b',
+    type: 'Task 1',
+    title: 'Writing Full Test - New B',
+    prompt: 'The diagram shows a small local museum and its surroundings in 1957 and 2007.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/Writing (2).html'
+  },
+  {
+    id: 'w_new_task12_1',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 - New Set 1',
+    prompt: 'The bar chart shows the distribution of employment among agriculture, services, industries in three countries in 1980 and projected distribution in 2020.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/Writing-Task 1 and 2.html'
+  },
+  {
+    id: 'w_new_task12_2',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 - New Set 2',
+    prompt: 'The graph shows the information about international conferences in 3 capital cities in 1980-2010.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/new writing/Writing-Task 1 and 2 (2).html'
+  },
+  {
+
     id: 'w_cdi_writing_1',
     type: 'Task 1',
     title: 'CDI Writing – Set 1',
