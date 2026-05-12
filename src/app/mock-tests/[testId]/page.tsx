@@ -168,8 +168,11 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
   const filename = test.htmlUrl.split('/').pop() || '1.html';
   const iframeUrl = encodeURI(isSingleFileTest ? test.htmlUrl : `${currentSection.path}${filename}`);
   
-  // Hide React audio player for single-file tests as they have integrated players
-  const audioUrl = (!isSingleFileTest && currentSection.id === 'listening') 
+  // Hide React audio player for tests that have their own integrated players
+  const testsWithInternalPlayer = ['mock-2', 'mock-3'];
+  const hasInternalPlayer = testsWithInternalPlayer.includes(test.id) || test.htmlUrl.includes('/full mock/');
+  
+  const audioUrl = (!hasInternalPlayer && currentSection.id === 'listening') 
     ? `${currentSection.path}${filename.replace('.html', '.mp3')}` 
     : null;
 
