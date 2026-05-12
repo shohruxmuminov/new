@@ -11,5 +11,11 @@ export const mockTests: MockTest[] = [
     title: 'IELTS Full Mock Test 1',
     type: 'full',
     htmlUrl: '/test materials/mock test/mock listening/1.html'
+  },
+  {
+    id: 'mock-2',
+    title: 'IELTS Full Mock Test - Series 2',
+    type: 'full',
+    htmlUrl: '/test materials/mock test/full mock/full mock (1).html'
   }
 ];
