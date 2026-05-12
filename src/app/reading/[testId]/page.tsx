@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Clock, CheckCircle, XCircle, ArrowLeft, Send, 
+  Clock, CheckCircle, XCircle, ArrowLeft, 
   RotateCcw, ChevronLeft, ChevronRight, LayoutGrid,
-  FileText, Info, HelpCircle, X, Maximize, Minimize
+  FileText, HelpCircle, X, Maximize, Minimize
 } from 'lucide-react';
 import { readingTests } from '@/data/reading-data';
-import { formatTime, calculateScore, getBandScore, getReadingBandScore } from '@/lib/utils';
+import { formatTime, getReadingBandScore } from '@/lib/utils';
 import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { highlighterScript } from '@/lib/highlighter-script';
@@ -96,7 +96,6 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
     return acc + (userAns === q.answer.toLowerCase().trim() ? 1 : 0);
   }, 0);
 
-  const percentage = calculateScore(score, test.questions.length);
   const band = getReadingBandScore(score);
 
   const totalQuestions = test.questions.length;
