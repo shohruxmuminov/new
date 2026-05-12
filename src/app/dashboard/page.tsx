@@ -111,41 +111,6 @@ export default function DashboardPage() {
         {/* Main Content Area */}
         <div className="lg:col-span-2 space-y-8">
            
-           {/* Video Ad Section */}
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Video 1 */}
-              <div className="neo-card overflow-hidden">
-                 <div className="aspect-video relative group">
-                    <video 
-                      src="/dashboard video/video-1.mp4" 
-                      className="w-full h-full object-cover"
-                      loop muted autoPlay playsInline
-                    />
-                    <div className="absolute top-4 right-4 z-10">
-                       <div className="px-3 py-1 bg-black border-2 border-white text-[10px] font-black text-white uppercase tracking-widest">
-                          Elite Prep
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              {/* Video 2 */}
-              <div className="neo-card overflow-hidden">
-                 <div className="aspect-video relative group">
-                    <video 
-                      src="/dashboard video/video-2.mp4" 
-                      className="w-full h-full object-cover"
-                      loop muted autoPlay playsInline
-                    />
-                    <div className="absolute top-4 right-4 z-10">
-                       <div className="px-3 py-1 bg-black border-2 border-white text-[10px] font-black text-white uppercase tracking-widest">
-                          Success
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
-
            <div className="flex items-center justify-between">
               <h2 className="text-3xl font-black uppercase tracking-tighter">Practice Modules</h2>
               <Link href="#" className="text-sm font-black uppercase border-b-4 border-black hover:text-purple-600 transition-colors">

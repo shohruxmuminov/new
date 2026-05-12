@@ -14,6 +14,54 @@ export interface WritingTask {
 
 export const writingTasks: WritingTask[] = [
   {
+    id: 'w_full_task_1_and_2_set1',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 – Set 1',
+    prompt: 'The bar chart shows the distribution of employment among agriculture, services, industries in three countries in 1980 and projected distribution in 2020.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing-Task 1 and 2.html'
+  },
+  {
+    id: 'w_full_task_1_and_2_set2',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 – Set 2',
+    prompt: 'The charts below show the performance of spending on roads and transport in four countries from 1990 to 2005.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing-Task 1 and 2 (2).html'
+  },
+  {
+    id: 'w_full_task_1_and_2_set3',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 – Set 3',
+    prompt: 'The graph below shows the information about medical care in three European countries between 1980 and 2000.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing-Task 1 and 2 (3).html'
+  },
+  {
+    id: 'w_full_task_1_and_2_set4',
+    type: 'Task 1',
+    title: 'Writing Task 1 & 2 – Set 4',
+    prompt: 'The graph below shows the production levels of the main kinds of fuel in the UK between 1981 and 2000.',
+    minWords: 150,
+    duration: 60,
+    sampleEssay: '',
+    template: '',
+    vocabulary: [],
+    htmlUrl: '/test materials/writing/Writing-Task 1 and 2 (4).html'
+  },
+  {
     id: 'w_appeared_4',
     type: 'Task 1',
     title: 'Appeared Full Writing 4',
