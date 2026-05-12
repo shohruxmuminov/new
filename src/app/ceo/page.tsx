@@ -58,6 +58,11 @@ export default function CEOPanel() {
     const auth = sessionStorage.getItem(CEO_AUTH_KEY);
     if (auth === 'true') setAuthenticated(true);
     
+    if (!db) {
+      console.warn("Firebase Firestore is not initialized. Please check your environment variables.");
+      return;
+    }
+
     // Real-time listener for users
     const q = query(collection(db, 'users'), orderBy('registeredAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {

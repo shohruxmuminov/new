@@ -34,6 +34,11 @@ export default function DashboardPage() {
       const userData = JSON.parse(stored);
       setUser(userData);
       
+      if (!db) {
+        console.warn("Firebase Firestore is not initialized.");
+        return;
+      }
+
       // Real-time listener for personal messages and global broadcasts
       const q = query(
         collection(db, 'notifications'), 
