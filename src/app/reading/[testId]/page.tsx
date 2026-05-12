@@ -8,7 +8,7 @@ import {
   FileText, Info, HelpCircle, X, Maximize, Minimize
 } from 'lucide-react';
 import { readingTests } from '@/data/reading-data';
-import { formatTime, calculateScore, getBandScore } from '@/lib/utils';
+import { formatTime, calculateScore, getBandScore, getReadingBandScore } from '@/lib/utils';
 import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { highlighterScript } from '@/lib/highlighter-script';
@@ -97,7 +97,7 @@ export default function ReadingTestPage({ params }: { params: Promise<{ testId: 
   }, 0);
 
   const percentage = calculateScore(score, test.questions.length);
-  const band = getBandScore(percentage);
+  const band = getReadingBandScore(score);
 
   const totalQuestions = test.questions.length;
   const answeredCount = Object.keys(answers).length;

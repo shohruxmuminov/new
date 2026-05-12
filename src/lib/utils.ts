@@ -30,6 +30,24 @@ export function getBandScore(percentage: number): string {
   return '4.0';
 }
 
+export function getReadingBandScore(correct: number): string {
+  if (correct >= 40) return '9.0';
+  if (correct >= 39) return '8.5';
+  if (correct >= 37) return '8.0';
+  if (correct >= 36) return '7.5';
+  if (correct >= 34) return '7.0';
+  if (correct >= 32) return '6.5';
+  if (correct >= 30) return '6.0';
+  if (correct >= 27) return '5.5';
+  if (correct >= 23) return '5.0';
+  if (correct >= 19) return '4.5';
+  if (correct >= 15) return '4.0';
+  if (correct >= 12) return '3.5';
+  if (correct >= 9) return '3.0';
+  if (correct >= 6) return '2.5';
+  return '2.0';
+}
+
 export function getStorageItem<T>(key: string, defaultValue: T): T {
   if (typeof window === 'undefined') return defaultValue;
   try {
