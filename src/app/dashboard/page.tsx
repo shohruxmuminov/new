@@ -9,6 +9,11 @@ import {
   ArrowUpRight, Users, GraduationCap, Zap, Bell, X, Mail,
   Play as PlayIcon, Volume2, Info, Send, Phone, Shield
 } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { 
+  collection, query, where, onSnapshot, 
+  doc, updateDoc, orderBy 
+} from 'firebase/firestore';
 
 const modules = [
   { id: 'reading', icon: BookOpen, title: 'Reading', desc: '40 Questions · 60m', href: '/reading', color: '#10b981', progress: 42, band: '7.5' },
@@ -29,24 +34,33 @@ export default function DashboardPage() {
       const userData = JSON.parse(stored);
       setUser(userData);
       
-      // Load personal messages
-      const msgs = localStorage.getItem(`cdi-messages-${userData.email}`);
-      const personalMsgs = msgs ? JSON.parse(msgs) : [];
+      // Real-time listener for personal messages and global broadcasts
+      const q = query(
+        collection(db, 'notifications'), 
+        orderBy('timestamp', 'desc')
+      );
       
-      // Load global broadcasts
-      const globalMsgs = JSON.parse(localStorage.getItem('cdi-global-broadcasts') || '[]');
-      
-      // Combine and sort
-      const allMsgs = [...personalMsgs, ...globalMsgs].sort((a, b) => b.timestamp - a.timestamp);
-      setMessages(allMsgs);
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const allNotifications: any[] = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          // Filter client-side for simplicity, or use multiple queries
+          if (data.to === userData.email.toLowerCase() || data.to === 'all') {
+            allNotifications.push({ ...data, id: doc.id });
+          }
+        });
+        setMessages(allNotifications);
+      });
+
+      return () => unsubscribe();
     }
   }, []);
 
-  const markAsRead = (id: string) => {
-    const updated = messages.map(m => m.id === id ? { ...m, read: true } : m);
-    setMessages(updated);
-    if (user) {
-      localStorage.setItem(`cdi-messages-${user.email}`, JSON.stringify(updated));
+  const markAsRead = async (id: string) => {
+    try {
+      await updateDoc(doc(db, 'notifications', id), { read: true });
+    } catch (err) {
+      console.error("Error marking as read:", err);
     }
   };
 

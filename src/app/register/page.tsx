@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, UserPlus, Eye, EyeOff, ArrowRight, ShieldCheck, CheckCircle2, Sparkles } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -15,18 +17,34 @@ export default function RegisterPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      const newUser = { email, name, registeredAt: Date.now() };
-      localStorage.setItem('cdi-user', JSON.stringify(newUser));
-      
-      // Save to global user list for CEO
-      const allUsers = JSON.parse(localStorage.getItem('cdi-all-users') || '[]');
-      if (!allUsers.find((u: any) => u.email === email)) {
-        allUsers.push(newUser);
-        localStorage.setItem('cdi-all-users', JSON.stringify(allUsers));
-      }
+    setTimeout(async () => {
+      try {
+        const newUser = { 
+          email, 
+          name, 
+          registeredAt: Date.now(),
+          createdAt: serverTimestamp(),
+          status: 'active'
+        };
+        
+        // Save to LocalStorage for session persistence
+        localStorage.setItem('cdi-user', JSON.stringify(newUser));
+        
+        // Save to Firebase Firestore (Global)
+        await setDoc(doc(db, 'users', email.toLowerCase()), newUser);
+        
+        // Legacy support for LocalStorage CEO Panel (Syncing)
+        const allUsers = JSON.parse(localStorage.getItem('cdi-all-users') || '[]');
+        if (!allUsers.find((u: any) => u.email === email)) {
+          allUsers.push(newUser);
+          localStorage.setItem('cdi-all-users', JSON.stringify(allUsers));
+        }
 
-      window.location.href = '/dashboard';
+        window.location.href = '/dashboard';
+      } catch (err) {
+        console.error("Error registering user:", err);
+        setLoading(false);
+      }
     }, 1000);
   };
 

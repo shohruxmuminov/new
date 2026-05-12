@@ -10,6 +10,11 @@ import {
 import { Movie } from '@/types/movie';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { db } from '@/lib/firebase';
+import { 
+  collection, onSnapshot, doc, updateDoc, 
+  setDoc, deleteDoc, query, orderBy, serverTimestamp 
+} from 'firebase/firestore';
 
 const CEO_CODE = '2010';
 const CEO_AUTH_KEY = 'cdi-ceo-auth';
@@ -53,21 +58,35 @@ export default function CEOPanel() {
     const auth = sessionStorage.getItem(CEO_AUTH_KEY);
     if (auth === 'true') setAuthenticated(true);
     
-    // Load students
-    const savedUsers = localStorage.getItem(ALL_USERS_KEY);
-    if (savedUsers) setStudents(JSON.parse(savedUsers));
-    
-    // Load banned
-    const savedBanned = localStorage.getItem(BANNED_USERS_KEY);
-    if (savedBanned) setBannedEmails(JSON.parse(savedBanned));
+    // Real-time listener for users
+    const q = query(collection(db, 'users'), orderBy('registeredAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const usersList: Student[] = [];
+      snapshot.forEach((doc) => {
+        usersList.push(doc.data() as Student);
+      });
+      setStudents(usersList);
+      
+      // Update banned emails list based on Firestore data
+      const banned = usersList.filter(u => (u as any).status === 'banned').map(u => u.email);
+      setBannedEmails(banned);
+    });
 
     // Load movies
     const savedMovies = localStorage.getItem(MOVIES_KEY);
     if (savedMovies) setMovies(JSON.parse(savedMovies));
 
-    // Load published tests
-    const savedTests = localStorage.getItem(PUBLISHED_TESTS_KEY);
-    if (savedTests) setPublishedTests(JSON.parse(savedTests));
+    // Real-time listener for published tests (Global config)
+    const testUnsub = onSnapshot(doc(db, 'config', 'published-tests'), (doc) => {
+      if (doc.exists()) {
+        setPublishedTests(doc.data().ids || []);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+      testUnsub();
+    };
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -87,67 +106,68 @@ export default function CEOPanel() {
     setAuthenticated(false);
   };
 
-  const toggleBan = (email: string) => {
-    let newBanned;
-    if (bannedEmails.includes(email)) {
-      newBanned = bannedEmails.filter(e => e !== email);
-      toast.success('User unbanned');
-    } else {
-      newBanned = [...bannedEmails, email];
-      toast.error('User banned');
+  const toggleBan = async (email: string) => {
+    const isBanned = bannedEmails.includes(email);
+    try {
+      await updateDoc(doc(db, 'users', email.toLowerCase()), {
+        status: isBanned ? 'active' : 'banned'
+      });
+      toast.success(isBanned ? 'User unbanned' : 'User banned');
+    } catch (err) {
+      toast.error('Failed to update user status');
     }
-    setBannedEmails(newBanned);
-    localStorage.setItem(BANNED_USERS_KEY, JSON.stringify(newBanned));
   };
 
-  const sendMessage = (e: React.FormEvent) => {
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedStudent || !messageText.trim()) return;
     
     setSending(true);
-    setTimeout(() => {
-      const key = `${MESSAGES_KEY_PREFIX}${selectedStudent.email}`;
-      const savedMessages = JSON.parse(localStorage.getItem(key) || '[]');
-      
-      const newMessage = {
+    try {
+      const notification = {
         id: `msg-${Date.now()}`,
         from: 'CEO',
+        to: selectedStudent.email.toLowerCase(),
         text: messageText,
         timestamp: Date.now(),
-        read: false
+        read: false,
+        isGlobal: false
       };
       
-      localStorage.setItem(key, JSON.stringify([newMessage, ...savedMessages]));
+      await setDoc(doc(db, 'notifications', notification.id), notification);
       
       toast.success('Message sent to student dashboard');
       setMessageText('');
       setSelectedStudent(null);
-      setSending(false);
-    }, 800);
+    } catch (err) {
+      toast.error('Failed to send message');
+    }
+    setSending(false);
   };
   
-  const sendBroadcast = () => {
+  const sendBroadcast = async () => {
     if (!broadcastText.trim()) return;
     setSending(true);
     
-    setTimeout(() => {
-      const globalKey = 'cdi-global-broadcasts';
-      const savedBroadcasts = JSON.parse(localStorage.getItem(globalKey) || '[]');
-      
-      const newBroadcast = {
+    try {
+      const broadcast = {
         id: `bc-${Date.now()}`,
         from: 'CEO',
+        to: 'all',
         text: broadcastText,
         timestamp: Date.now(),
+        read: false,
         isGlobal: true
       };
       
-      localStorage.setItem(globalKey, JSON.stringify([newBroadcast, ...savedBroadcasts]));
+      await setDoc(doc(db, 'notifications', broadcast.id), broadcast);
       
       toast.success('Broadcast sent to all students!');
       setBroadcastText('');
-      setSending(false);
-    }, 800);
+    } catch (err) {
+      toast.error('Failed to send broadcast');
+    }
+    setSending(false);
   };
 
   const handleAddMovie = (e: React.FormEvent) => {
@@ -185,17 +205,18 @@ export default function CEOPanel() {
     }
   };
 
-  const toggleTestPublication = (id: string) => {
-    let newPublished;
-    if (publishedTests.includes(id)) {
-      newPublished = publishedTests.filter(tid => tid !== id);
-      toast.success('Test unpublished');
-    } else {
-      newPublished = [...publishedTests, id];
-      toast.success('Test published successfully!');
+  const toggleTestPublication = async (id: string) => {
+    const isPublished = publishedTests.includes(id);
+    const newPublished = isPublished 
+      ? publishedTests.filter(tid => tid !== id)
+      : [...publishedTests, id];
+    
+    try {
+      await setDoc(doc(db, 'config', 'published-tests'), { ids: newPublished });
+      toast.success(isPublished ? 'Test unpublished' : 'Test published successfully!');
+    } catch (err) {
+      toast.error('Failed to update test status');
     }
-    setPublishedTests(newPublished);
-    localStorage.setItem(PUBLISHED_TESTS_KEY, JSON.stringify(newPublished));
   };
 
   const filteredStudents = students.filter(s => 
