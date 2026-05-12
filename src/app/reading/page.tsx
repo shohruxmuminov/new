@@ -38,7 +38,7 @@ export default function ReadingPage() {
                   </div>
                   <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{test.title}</h3>
                   <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
-                    {test.passages[0]?.content.substring(0, 120)}...
+                    {(test.passages[0]?.content || '').substring(0, 120)}...
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1 text-xs" style={{ color: 'var(--text-tertiary)' }}>
