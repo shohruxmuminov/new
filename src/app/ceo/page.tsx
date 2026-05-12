@@ -574,31 +574,44 @@ export default function CEOPanel() {
                         </div>
 
                         <div className="space-y-2">
-                           <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Thumbnail URL</label>
-                           <input 
-                             type="url"
-                             value={newMovie.thumbnailUrl || ''}
-                             onChange={e => setNewMovie({...newMovie, thumbnailUrl: e.target.value})}
-                             placeholder="Image URL (Poster)"
-                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
-                             style={{ color: 'var(--text-primary)' }}
-                           />
+                           <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Thumbnail (Image)</label>
+                           <div className="flex gap-2">
+                             <input 
+                               type="file"
+                               accept="image/*"
+                               onChange={e => {
+                                 const file = e.target.files?.[0];
+                                 if (file) setNewMovie({...newMovie, thumbnailUrl: `/movies/${file.name}`});
+                               }}
+                               className="hidden"
+                               id="thumb-upload"
+                             />
+                             <label htmlFor="thumb-upload" className="flex-1 px-4 py-3 rounded-2xl bg-secondary border border-default text-tertiary text-xs cursor-pointer hover:border-indigo-500/50 transition-all flex items-center gap-2">
+                               <Plus size={14} /> {newMovie.thumbnailUrl ? newMovie.thumbnailUrl.split('/').pop() : 'Select Poster Image'}
+                             </label>
+                           </div>
                         </div>
 
                         <div className="col-span-full space-y-2">
                            <div className="flex items-center justify-between">
                               <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Video File (MP4)</label>
-                              <span className="text-[9px] font-bold text-amber-500 uppercase tracking-tighter italic">* Local MP4 file support</span>
+                              <span className="text-[9px] font-bold text-amber-500 uppercase tracking-tighter italic">* Select file from /public/movies/</span>
                            </div>
-                           <input 
-                             type="text"
-                             required
-                             value={newMovie.videoUrl || ''}
-                             onChange={e => setNewMovie({...newMovie, videoUrl: e.target.value})}
-                             placeholder="URL to .mp4 file or local path"
-                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
-                             style={{ color: 'var(--text-primary)' }}
-                           />
+                           <div className="flex gap-2">
+                             <input 
+                               type="file"
+                               accept="video/mp4"
+                               onChange={e => {
+                                 const file = e.target.files?.[0];
+                                 if (file) setNewMovie({...newMovie, videoUrl: `/movies/${file.name}`});
+                               }}
+                               className="hidden"
+                               id="video-upload"
+                             />
+                             <label htmlFor="video-upload" className="flex-1 px-4 py-3 rounded-2xl bg-secondary border border-default text-tertiary text-xs cursor-pointer hover:border-indigo-500/50 transition-all flex items-center gap-2">
+                               <Upload size={14} /> {newMovie.videoUrl ? newMovie.videoUrl.split('/').pop() : 'Choose MP4 File'}
+                             </label>
+                           </div>
                         </div>
 
                         <div className="col-span-full space-y-2">
@@ -606,14 +619,21 @@ export default function CEOPanel() {
                               <label className="text-[10px] font-black text-tertiary uppercase tracking-widest pl-1">Subtitle File (VTT/SRT)</label>
                               <span className="text-[9px] font-bold text-emerald-500 uppercase tracking-tighter italic">* Supports multi-language</span>
                            </div>
-                           <input 
-                             type="text"
-                             value={newMovie.subtitleUrl || ''}
-                             onChange={e => setNewMovie({...newMovie, subtitleUrl: e.target.value})}
-                             placeholder="URL to .vtt or .srt subtitle file"
-                             className="w-full px-4 py-3 rounded-2xl bg-secondary border border-default outline-none text-sm focus:border-indigo-500/50"
-                             style={{ color: 'var(--text-primary)' }}
-                           />
+                           <div className="flex gap-2">
+                             <input 
+                               type="file"
+                               accept=".vtt,.srt"
+                               onChange={e => {
+                                 const file = e.target.files?.[0];
+                                 if (file) setNewMovie({...newMovie, subtitleUrl: `/movies/${file.name}`});
+                               }}
+                               className="hidden"
+                               id="sub-upload"
+                             />
+                             <label htmlFor="sub-upload" className="flex-1 px-4 py-3 rounded-2xl bg-secondary border border-default text-tertiary text-xs cursor-pointer hover:border-indigo-500/50 transition-all flex items-center gap-2">
+                               <MessageSquare size={14} /> {newMovie.subtitleUrl ? newMovie.subtitleUrl.split('/').pop() : 'Select Subtitle File'}
+                             </label>
+                           </div>
                         </div>
 
                         <button 
