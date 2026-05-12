@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef, use } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Clock, CheckCircle, XCircle, ArrowLeft, Send, 
@@ -13,8 +14,9 @@ import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { highlighterScript } from '@/lib/highlighter-script';
 
-export default function ReadingTestPage({ params }: { params: Promise<{ testId: string }> }) {
-  const { testId } = use(params);
+export default function ReadingTestPage() {
+  const params = useParams();
+  const testId = params.testId as string;
   const test = readingTests.find(t => t.id === testId);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
