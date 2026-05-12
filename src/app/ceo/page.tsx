@@ -17,6 +17,8 @@ const ALL_USERS_KEY = 'cdi-all-users';
 const BANNED_USERS_KEY = 'cdi-banned-users';
 const MESSAGES_KEY_PREFIX = 'cdi-messages-';
 const MOVIES_KEY = 'cdi-movies';
+const PUBLISHED_TESTS_KEY = 'cdi-published-tests';
+import { mockTests } from '@/data/mock-test-data';
 
 interface Student {
   email: string;
@@ -33,7 +35,8 @@ export default function CEOPanel() {
   const [students, setStudents] = useState<Student[]>([]);
   const [bannedEmails, setBannedEmails] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'students' | 'broadcast' | 'movies'>('students');
+  const [activeTab, setActiveTab] = useState<'students' | 'broadcast' | 'movies' | 'mock-tests'>('students');
+  const [publishedTests, setPublishedTests] = useState<string[]>([]);
   
   const [movies, setMovies] = useState<Movie[]>([]);
   const [showAddMovie, setShowAddMovie] = useState(false);
@@ -60,6 +63,10 @@ export default function CEOPanel() {
     // Load movies
     const savedMovies = localStorage.getItem(MOVIES_KEY);
     if (savedMovies) setMovies(JSON.parse(savedMovies));
+
+    // Load published tests
+    const savedTests = localStorage.getItem(PUBLISHED_TESTS_KEY);
+    if (savedTests) setPublishedTests(JSON.parse(savedTests));
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -151,6 +158,19 @@ export default function CEOPanel() {
       localStorage.setItem(MOVIES_KEY, JSON.stringify(updatedMovies));
       toast.success('Movie deleted');
     }
+  };
+
+  const toggleTestPublication = (id: string) => {
+    let newPublished;
+    if (publishedTests.includes(id)) {
+      newPublished = publishedTests.filter(tid => tid !== id);
+      toast.success('Test unpublished');
+    } else {
+      newPublished = [...publishedTests, id];
+      toast.success('Test published successfully!');
+    }
+    setPublishedTests(newPublished);
+    localStorage.setItem(PUBLISHED_TESTS_KEY, JSON.stringify(newPublished));
   };
 
   const filteredStudents = students.filter(s => 
@@ -248,6 +268,9 @@ export default function CEOPanel() {
               </button>
               <button onClick={() => setActiveTab('movies')} className={`flex-1 py-4 text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'movies' ? 'bg-indigo-500/10 text-indigo-400 border-b-2 border-indigo-500' : 'text-tertiary hover:text-secondary'}`}>
                  English Movies
+              </button>
+              <button onClick={() => setActiveTab('mock-tests')} className={`flex-1 py-4 text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'mock-tests' ? 'bg-indigo-500/10 text-indigo-400 border-b-2 border-indigo-500' : 'text-tertiary hover:text-secondary'}`}>
+                 Mock Tests
               </button>
            </div>
 
@@ -354,7 +377,7 @@ export default function CEOPanel() {
                        </button>
                     </div>
                  </div>
-              ) : (
+              ) : activeTab === 'movies' ? (
                 <div className="space-y-6">
                    <div className="flex items-center justify-between">
                       <h3 className="text-xl font-black text-primary">English Movies Library</h3>
@@ -404,8 +427,44 @@ export default function CEOPanel() {
                       )}
                    </div>
                 </div>
+              ) : (
+                <div className="space-y-6">
+                   <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-black text-primary">Mock Test Management</h3>
+                      <p className="text-xs text-tertiary font-bold uppercase tracking-widest">Toggle visibility for students</p>
+                   </div>
+
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {mockTests.map(test => {
+                        const isPublished = publishedTests.includes(test.id);
+                        return (
+                          <div key={test.id} className="glass-card p-6 flex items-center justify-between gap-4">
+                             <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                                   {test.type === 'full' ? <Clock size={24} /> : <Headphones size={24} />}
+                                </div>
+                                <div>
+                                   <h4 className="font-bold text-primary">{test.title}</h4>
+                                   <p className="text-[10px] text-tertiary uppercase font-black tracking-widest">{test.type} Test</p>
+                                </div>
+                             </div>
+                             <button 
+                               onClick={() => toggleTestPublication(test.id)}
+                               className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border-2 
+                                 ${isPublished 
+                                   ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-500/20' 
+                                   : 'bg-transparent border-default text-tertiary hover:border-indigo-500/50 hover:text-indigo-400'}`}
+                             >
+                                {isPublished ? 'Published' : 'Draft / Hide'}
+                             </button>
+                          </div>
+                        );
+                      })}
+                   </div>
+                </div>
               )}
            </div>
+
         </div>
       </div>
 

@@ -22,8 +22,19 @@ const navLinks = [
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+
+  // Hide Navbar on test pages
+  const isTestPage = pathname.includes('/listening/') || 
+                     pathname.includes('/reading/') || 
+                     pathname.includes('/writing/') || 
+                     pathname.includes('/mock-tests/');
+  
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  if (isTestPage && pathname !== '/listening' && pathname !== '/reading' && pathname !== '/writing' && pathname !== '/mock-tests') {
+    return null;
+  }
   const [searchOpen, setSearchOpen] = useState(false);
   const [user, setUser] = useState<{name: string, email: string} | null>(null);
 

@@ -1425,9 +1425,14 @@ window.switchMode = function(m) {
   document.getElementById('writing-container').classList.toggle('active', isWriting);
 
   // Layout: reading has left+right split; listening is full-width (no left panel); writing is overlay
-  passagePanel.style.display  = (isWriting || isListening) ? 'none' : '';
-  resizer.style.display        = (isWriting || isListening) ? 'none' : '';
+  // Layout: reading has left+right split; listening is full-width (no left panel); writing is overlay
+  if (passagePanel) passagePanel.style.display  = (isWriting || isListening) ? 'none' : '';
+  if (resizer)      resizer.style.display        = (isWriting || isListening) ? 'none' : '';
   questionsPanel.style.display = isWriting ? 'none' : '';
+  
+  // Audio player visibility
+  const audioUI = document.getElementById('audio-player-ui');
+  if (audioUI) audioUI.style.display = isListening ? 'flex' : 'none';
 
   // Mode buttons
   document.getElementById('btn-listening').classList.toggle('active', isListening);
@@ -2030,75 +2035,103 @@ function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g
 // ════════════════════════════════════════════════════
 // START
 // ════════════════════════════════════════════════════
-// ════════════════════════════════════════════════════
-// AUDIO PLAYER LOGIC
-// ════════════════════════════════════════════════════
-const audioTracks = [
-  './full mock (1)/P1.mp3',
-  './full mock (1)/P2.mp3',
-  './full mock (1)/P3.mp3',
-  './full mock (1)/P4.mp3'
-];
-let currentTrackIndex = 0;
-const audioObj = new Audio(audioTracks[currentTrackIndex]);
-const playPauseBtn = document.getElementById('audio-play-pause');
-const playIcon = document.getElementById('play-icon');
-const pauseIcon = document.getElementById('pause-icon');
-const trackInfoDisplay = document.getElementById('audio-track-info');
-const audioProgress = document.getElementById('audio-progress');
-
-playPauseBtn.addEventListener('click', () => {
-  if (audioObj.paused) {
-    audioObj.play().catch(e => alert("Please interact with the page first to play audio."));
-  } else {
-    audioObj.pause();
-  }
-});
-
-audioObj.addEventListener('play', () => {
-  playIcon.style.display = 'none';
-  pauseIcon.style.display = 'block';
-});
-
-audioObj.addEventListener('pause', () => {
-  playIcon.style.display = 'block';
-  pauseIcon.style.display = 'none';
-});
-
-audioObj.addEventListener('timeupdate', () => {
-  const progress = (audioObj.currentTime / audioObj.duration) * 100;
-  audioProgress.value = progress || 0;
-});
-
-audioProgress.addEventListener('input', () => {
-  const time = (audioProgress.value / 100) * audioObj.duration;
-  audioObj.currentTime = time;
-});
-
-audioObj.addEventListener('ended', () => {
-  currentTrackIndex++;
-  if (currentTrackIndex < audioTracks.length) {
-    audioObj.src = audioTracks[currentTrackIndex];
-    trackInfoDisplay.textContent = `Part ${currentTrackIndex + 1}`;
-    audioObj.play();
-  } else {
-    currentTrackIndex = 0;
-    audioObj.src = audioTracks[0];
-    trackInfoDisplay.textContent = `Part 1`;
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-  }
-});
-
-// Attempt auto-play on first click anywhere if blocked
-document.addEventListener('click', () => {
-  if (audioObj.paused && currentTrackIndex === 0 && audioObj.currentTime === 0) {
-    audioObj.play().catch(e => {});
-  }
-}, { once: true });
-
 init();
 });
+</script>
+
+<script>
+// Separate Audio Player Logic
+(function() {
+  const audioTracks = [
+    './full mock (1)/P1.mp3',
+    './full mock (1)/P2.mp3',
+    './full mock (1)/P3.mp3',
+    './full mock (1)/P4.mp3'
+  ];
+  let currentTrackIndex = 0;
+  let audioObj = null;
+
+  function initAudio() {
+    const playPauseBtn = document.getElementById('audio-play-pause');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const trackInfoDisplay = document.getElementById('audio-track-info');
+    const audioProgress = document.getElementById('audio-progress');
+
+    if (!playPauseBtn || !audioProgress) return;
+
+    audioObj = new Audio(audioTracks[currentTrackIndex]);
+
+    playPauseBtn.addEventListener('click', () => {
+      if (!audioObj) return;
+      if (audioObj.paused) {
+        audioObj.play().catch(e => {
+          console.warn("Playback blocked", e);
+          alert("Please click anywhere on the page to enable audio playback.");
+        });
+      } else {
+        audioObj.pause();
+      }
+    });
+
+    audioObj.addEventListener('play', () => {
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
+    });
+
+    audioObj.addEventListener('pause', () => {
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+    });
+
+    audioObj.addEventListener('timeupdate', () => {
+      if (audioObj.duration) {
+        const progress = (audioObj.currentTime / audioObj.duration) * 100;
+        audioProgress.value = progress || 0;
+      }
+    });
+
+    audioProgress.addEventListener('input', () => {
+      if (audioObj.duration) {
+        const time = (audioProgress.value / 100) * audioObj.duration;
+        audioObj.currentTime = time;
+      }
+    });
+
+    audioObj.addEventListener('ended', () => {
+      currentTrackIndex++;
+      if (currentTrackIndex < audioTracks.length) {
+        audioObj.src = audioTracks[currentTrackIndex];
+        if (trackInfoDisplay) trackInfoDisplay.textContent = `Part ${currentTrackIndex + 1}`;
+        audioObj.play().catch(e => console.warn("Auto-advance blocked", e));
+      } else {
+        currentTrackIndex = 0;
+        audioObj.src = audioTracks[0];
+        if (trackInfoDisplay) trackInfoDisplay.textContent = `Part 1`;
+        if (playIcon) playIcon.style.display = 'block';
+        if (pauseIcon) pauseIcon.style.display = 'none';
+      }
+    });
+
+    // Handle initial interaction for autoplay
+    const handleFirstClick = () => {
+      if (audioObj && audioObj.paused && currentTrackIndex === 0 && audioObj.currentTime === 0) {
+        // Try to play silently to unlock audio
+        audioObj.play().then(() => {
+          audioObj.pause();
+        }).catch(e => {});
+      }
+      document.removeEventListener('click', handleFirstClick);
+    };
+    document.addEventListener('click', handleFirstClick);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAudio);
+  } else {
+    initAudio();
+  }
+})();
 </script>
 </body>
 </html>

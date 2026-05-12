@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Maximize, Minimize, Clock, ChevronRight, Play, Headphones, BookOpen, PenTool, CheckCircle } from 'lucide-react';
-import Link from 'next/navigation';
+import Link from 'next/link';
 import { useFullscreen } from '@/hooks/useFullscreen';
 import { formatTime } from '@/lib/utils';
 import { mockTests } from '@/data/mock-test-data';
@@ -161,25 +161,33 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
 
   // FULL MOCK TEST - ACTIVE SECTION VIEWER
   const currentSection = FULL_TEST_SECTIONS[currentSectionIndex];
+  
+  // Logic for single-file full mock tests (like Series 2)
+  const isSingleFileTest = test.id === 'mock-2' || test.htmlUrl.includes('/full mock/');
+  
   const filename = test.htmlUrl.split('/').pop() || '1.html';
-  const iframeUrl = `${currentSection.path}${filename}`;
-  const audioUrl = currentSection.id === 'listening' ? `${currentSection.path}${filename.replace('.html', '.mp3')}` : null;
+  const iframeUrl = encodeURI(isSingleFileTest ? test.htmlUrl : `${currentSection.path}${filename}`);
+  
+  // Hide React audio player for single-file tests as they have integrated players
+  const audioUrl = (!isSingleFileTest && currentSection.id === 'listening') 
+    ? `${currentSection.path}${filename.replace('.html', '.mp3')}` 
+    : null;
 
   return (
     <div className="h-screen flex flex-col bg-surface overflow-hidden">
       <header className="h-16 flex items-center justify-between px-6 border-b shrink-0 bg-surface z-50"
         style={{ borderColor: 'var(--border-default)' }}>
         
-        <div className="flex items-center gap-4">
-          <a href="/mock-tests" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
-            <ArrowLeft size={16} /> Exit
+        <div className="flex items-center gap-3">
+          <a href="/mock-tests" className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary border border-default text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary transition-all">
+            <ArrowLeft size={14} /> Exit
           </a>
-          <div className="w-px h-6 bg-default mx-1 hidden sm:block"></div>
+          <div className="w-px h-6 bg-default mx-1 hidden md:block"></div>
           <div className="flex items-center gap-2">
             <currentSection.icon size={18} className="text-indigo-400" />
-            <span className="font-bold text-primary uppercase tracking-widest text-sm">{currentSection.title}</span>
+            <span className="font-bold text-primary uppercase tracking-widest text-xs sm:text-sm">{currentSection.title}</span>
           </div>
-          <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-secondary text-tertiary hidden sm:inline">
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-indigo-500/10 text-indigo-500 hidden lg:inline">
             Part {currentSectionIndex + 1} of 3
           </span>
         </div>
@@ -190,22 +198,24 @@ export default function MockTestViewPage({ params }: { params: Promise<{ testId:
           </div>
         )}
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <div className="flex items-center gap-2 bg-secondary px-3 py-1.5 rounded-lg border border-default">
-            <Clock size={16} className={timer < 300 ? "text-red-500" : "text-indigo-400"} />
-            <span className={`font-mono font-bold ${timer < 300 ? "text-red-500 animate-pulse" : "text-primary"}`}>
+            <Clock size={14} className={timer < 300 ? "text-red-500" : "text-indigo-400"} />
+            <span className={`font-mono text-sm font-bold ${timer < 300 ? "text-red-500 animate-pulse" : "text-primary"}`}>
               {formatTime(timer)}
             </span>
           </div>
           
           <button onClick={handleNextSection}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-500 text-white text-xs font-bold hover:bg-indigo-600 transition-colors">
-            {currentSectionIndex < 2 ? 'Next Section' : 'Finish Test'} <ChevronRight size={14} />
+            className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-indigo-500 text-white text-[10px] sm:text-xs font-bold hover:bg-indigo-600 transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
+            <span className="hidden xs:inline">{currentSectionIndex < 2 ? 'Next Section' : 'Finish Test'}</span>
+            <span className="xs:hidden">{currentSectionIndex < 2 ? 'Next' : 'Finish'}</span>
+            <ChevronRight size={14} />
           </button>
           
           <button onClick={isFS ? exitFS : enterFS}
-            className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl border border-default text-xs font-bold text-secondary hover:text-primary transition-all">
-            {isFS ? <><Minimize size={14} /></> : <><Maximize size={14} /></>}
+            className="hidden sm:flex items-center justify-center w-9 h-9 rounded-xl border border-default text-secondary hover:text-primary transition-all">
+            {isFS ? <Minimize size={16} /> : <Maximize size={16} />}
           </button>
         </div>
       </header>
