@@ -29,9 +29,16 @@ export default function DashboardPage() {
       const userData = JSON.parse(stored);
       setUser(userData);
       
-      // Load messages
+      // Load personal messages
       const msgs = localStorage.getItem(`cdi-messages-${userData.email}`);
-      if (msgs) setMessages(JSON.parse(msgs));
+      const personalMsgs = msgs ? JSON.parse(msgs) : [];
+      
+      // Load global broadcasts
+      const globalMsgs = JSON.parse(localStorage.getItem('cdi-global-broadcasts') || '[]');
+      
+      // Combine and sort
+      const allMsgs = [...personalMsgs, ...globalMsgs].sort((a, b) => b.timestamp - a.timestamp);
+      setMessages(allMsgs);
     }
   }, []);
 
@@ -196,6 +203,70 @@ export default function DashboardPage() {
          </div>
          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Restricted area. Authorized personnel only.</p>
       </motion.div>
+      
+      {/* Messages Modal */}
+      <AnimatePresence>
+        {showMessages && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setShowMessages(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200]"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, x: 20 }} animate={{ opacity: 1, scale: 1, x: 0 }} exit={{ opacity: 0, scale: 0.9, x: 20 }}
+              className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l-4 border-black z-[201] shadow-2xl flex flex-col"
+            >
+              <div className="p-8 border-b-4 border-black flex items-center justify-between bg-indigo-500 text-white">
+                <div className="flex items-center gap-3">
+                  <Bell size={24} />
+                  <h3 className="text-2xl font-black uppercase tracking-tighter">Notifications</h3>
+                </div>
+                <button onClick={() => setShowMessages(false)} className="p-2 hover:bg-black/10 transition-colors">
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                {messages.length === 0 ? (
+                  <div className="text-center py-20">
+                    <Mail size={48} className="mx-auto text-gray-200 mb-4" />
+                    <p className="text-gray-400 font-bold uppercase">No messages yet</p>
+                  </div>
+                ) : (
+                  messages.map((msg) => (
+                    <div 
+                      key={msg.id} 
+                      className={`p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all ${msg.read ? 'bg-white' : 'bg-indigo-50 shadow-[6px_6px_0px_0px_rgba(99,102,241,1)]'}`}
+                      onClick={() => markAsRead(msg.id)}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 border-2 border-black ${msg.isGlobal ? 'bg-yellow-300 text-black' : 'bg-black text-white'}`}>
+                          {msg.isGlobal ? 'Global Update' : 'Direct Message'}
+                        </span>
+                        <span className="text-[10px] font-bold text-gray-400">
+                          {new Date(msg.timestamp).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <h4 className="font-black text-lg uppercase tracking-tighter mb-2">From: {msg.from}</h4>
+                      <p className="text-sm font-bold leading-tight text-gray-700 whitespace-pre-wrap">{msg.text}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+              
+              <div className="p-6 bg-gray-50 border-t-4 border-black">
+                <button 
+                  onClick={() => setShowMessages(false)}
+                  className="btn-neo w-full justify-center bg-black text-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                >
+                  Close Panel
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

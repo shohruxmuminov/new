@@ -46,6 +46,7 @@ export default function CEOPanel() {
   
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [messageText, setMessageText] = useState('');
+  const [broadcastText, setBroadcastText] = useState('');
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
@@ -121,6 +122,30 @@ export default function CEOPanel() {
       toast.success('Message sent to student dashboard');
       setMessageText('');
       setSelectedStudent(null);
+      setSending(false);
+    }, 800);
+  };
+  
+  const sendBroadcast = () => {
+    if (!broadcastText.trim()) return;
+    setSending(true);
+    
+    setTimeout(() => {
+      const globalKey = 'cdi-global-broadcasts';
+      const savedBroadcasts = JSON.parse(localStorage.getItem(globalKey) || '[]');
+      
+      const newBroadcast = {
+        id: `bc-${Date.now()}`,
+        from: 'CEO',
+        text: broadcastText,
+        timestamp: Date.now(),
+        isGlobal: true
+      };
+      
+      localStorage.setItem(globalKey, JSON.stringify([newBroadcast, ...savedBroadcasts]));
+      
+      toast.success('Broadcast sent to all students!');
+      setBroadcastText('');
       setSending(false);
     }, 800);
   };
@@ -369,11 +394,17 @@ export default function CEOPanel() {
                     <div className="max-w-xl mx-auto space-y-4">
                        <textarea 
                          placeholder="Type broadcast message here..." 
+                         value={broadcastText}
+                         onChange={e => setBroadcastText(e.target.value)}
                          className="w-full h-32 p-4 rounded-2xl bg-secondary border border-default outline-none text-sm resize-none focus:border-indigo-500/50"
                          style={{ color: 'var(--text-primary)' }}
                        />
-                       <button className="btn-primary w-full justify-center py-4 font-black uppercase tracking-widest">
-                          <Send size={18} /> Send to All Students
+                       <button 
+                         onClick={sendBroadcast}
+                         disabled={sending}
+                         className="btn-primary w-full justify-center py-4 font-black uppercase tracking-widest"
+                       >
+                          {sending ? 'Sending...' : <><Send size={18} /> Send to All Students</>}
                        </button>
                     </div>
                  </div>
