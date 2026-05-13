@@ -2,14 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Mic, MessageSquare, BookMarked, Award, Clock, ArrowRight, Play } from 'lucide-react';
-
-const sections = [
-  { icon: MessageSquare, title: 'Practice Questions', desc: 'Part 1 & Part 3 questions with sample answers', href: '/speaking/practice', color: '#f59e0b', count: '12 questions' },
-  { icon: Play, title: 'Mock Speaking Tests', desc: 'Full test simulations with all 3 parts', href: '/speaking/mock-test', color: '#10b981', count: '2 tests' },
-  { icon: BookMarked, title: 'Cue Cards (Part 2)', desc: 'Topic cards with preparation notes and sample answers', href: '/speaking/cue-cards', color: '#6366f1', count: '5 cards' },
-  { icon: Award, title: 'Band Descriptors', desc: 'Understand how IELTS speaking is scored (Band 5-9)', href: '/speaking/band-descriptors', color: '#ec4899', count: '5 bands' },
-];
+import { Mic, Clock, ArrowRight, Play } from 'lucide-react';
 
 export default function SpeakingPage() {
   return (
