@@ -8,7 +8,7 @@ import {
   LayoutDashboard, BookOpen, Headphones, PenTool, Mic,
   History, Bookmark, Settings, LogOut, Search,
   Bell, User, HelpCircle, Timer, BarChart2, Home,
-  ChevronRight, X, Play, Square, RotateCcw
+  ChevronRight, X, Play, Square, RotateCcw, Sparkles
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -41,6 +41,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { icon: Headphones, label: 'Listening', href: '/listening' },
     { icon: PenTool, label: 'Writing', href: '/writing' },
     { icon: Mic, label: 'Speaking', href: '/speaking' },
+    { icon: Sparkles, label: 'Chat AI', href: '/dashboard/chat' },
     { icon: BarChart2, label: 'Analytics', href: '/dashboard/history' },
     { icon: Bookmark, label: 'Bookmarks', href: '/dashboard/bookmarks' },
     { icon: Settings, label: 'Settings', href: '/dashboard/settings' },
