@@ -28,25 +28,41 @@ export default function SpeakingPage() {
           </div>
         </motion.div>
 
-        {/* Sections Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {sections.map((s, i) => (
-            <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-              <Link href={s.href} className="block glass-card p-6 group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110" style={{ background: `linear-gradient(135deg, ${s.color}20, ${s.color}08)`, color: s.color }}>
-                    <s.icon size={22} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{s.title}</h3>
-                    <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>{s.desc}</p>
-                    <span className="text-xs font-medium px-3 py-1 rounded-lg" style={{ background: 'var(--bg-secondary)', color: 'var(--text-tertiary)' }}>{s.count}</span>
-                  </div>
-                  <ArrowRight size={16} className="mt-1 transition-transform group-hover:translate-x-1" style={{ color: 'var(--text-tertiary)' }} />
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+        {/* Main Action */}
+        <div className="flex flex-col items-center justify-center py-12">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            className="glass-card p-10 text-center max-w-2xl w-full"
+          >
+            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.1))', color: '#10b981' }}>
+              <Play size={40} fill="currentColor" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Full Mock Test</h2>
+            <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
+              Practice the complete IELTS Speaking test experience.
+              Includes Part 1, 2, and 3 with realistic timers.
+            </p>
+            
+            <div className="grid grid-cols-3 gap-4 mb-10 text-sm">
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="font-bold text-emerald-500 mb-1">Part 1</div>
+                <div style={{ color: 'var(--text-tertiary)' }}>General<br/>Questions</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="font-bold text-emerald-500 mb-1">Part 2</div>
+                <div style={{ color: 'var(--text-tertiary)' }}>Cue Card<br/>(2 mins)</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="font-bold text-emerald-500 mb-1">Part 3</div>
+                <div style={{ color: 'var(--text-tertiary)' }}>Discussion<br/>(5 mins)</div>
+              </div>
+            </div>
+
+            <Link href="/speaking/mock-test" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105 active:scale-95" style={{ background: '#10b981', color: 'white' }}>
+              Start Mock Test <ArrowRight size={20} />
+            </Link>
+          </motion.div>
         </div>
 
         {/* Tips */}
