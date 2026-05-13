@@ -1,11 +1,18 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic, Timer, ArrowRight, Play, Pause, RotateCcw, CheckCircle2, ChevronRight, Info } from 'lucide-react';
+import { Mic, Timer, ArrowRight, Play, Pause, RotateCcw, CheckCircle2, ChevronRight, Info, Download, Volume2 } from 'lucide-react';
 import { speakingPart1, cueCards, CueCard, SpeakingTask } from '@/data/speaking-data';
 
 type Part = 1 | 2 | 3;
+
+interface Recording {
+  part: Part;
+  question: string;
+  url: string;
+  blob: Blob;
+}
 
 interface SimulatorState {
   part: Part;
@@ -31,17 +38,17 @@ export default function SpeakingSimulator() {
   });
 
   const [isActive, setIsActive] = useState(false);
+  const [recordings, setRecordings] = useState<Recording[]>([]);
+  
+  const mediaRecorder = useRef<MediaRecorder | null>(null);
+  const chunks = useRef<Blob[]>([]);
+  const streamRef = useRef<MediaStream | null>(null);
 
   // Initialize test data
   const initTest = useCallback(() => {
-    // Select 5 random questions from Part 1
     const shuffledP1 = [...speakingPart1].sort(() => 0.5 - Math.random());
     const selectedP1 = shuffledP1.slice(0, 5);
-
-    // Select 1 random cue card
     const randomCC = cueCards[Math.floor(Math.random() * cueCards.length)];
-
-    // Part 3 questions from that cue card
     const p3 = randomCC.followUpQuestions.slice(0, 6);
 
     setState({
@@ -54,27 +61,83 @@ export default function SpeakingSimulator() {
       selectedCueCard: randomCC,
       part3Questions: p3,
     });
+    setRecordings([]);
     setIsActive(true);
   }, []);
 
+  const startRecording = async () => {
+    try {
+      if (!streamRef.current) {
+        streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
+      
+      mediaRecorder.current = new MediaRecorder(streamRef.current);
+      chunks.current = [];
+      
+      mediaRecorder.current.ondataavailable = (e) => {
+        if (e.data.size > 0) chunks.current.push(e.data);
+      };
+      
+      mediaRecorder.current.onstop = () => {
+        const blob = new Blob(chunks.current, { type: 'audio/webm' });
+        const url = URL.createObjectURL(blob);
+        
+        let questionText = "";
+        if (state.part === 1) questionText = state.part1Questions[state.questionIndex]?.question;
+        else if (state.part === 2) questionText = state.selectedCueCard?.topic || "Cue Card";
+        else questionText = state.part3Questions[state.questionIndex];
+
+        setRecordings(prev => [...prev, {
+          part: state.part,
+          question: questionText,
+          url,
+          blob
+        }]);
+      };
+
+      mediaRecorder.current.start();
+    } catch (err) {
+      console.error("Microphone access denied:", err);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+      mediaRecorder.current.stop();
+    }
+  };
+
   useEffect(() => {
     initTest();
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
   }, [initTest]);
 
+  // Handle auto-recording when question changes
+  useEffect(() => {
+    if (isActive && !state.isFinished && !state.isThinkTime) {
+      startRecording();
+    }
+    return () => stopRecording();
+  }, [state.part, state.questionIndex, state.isThinkTime, state.isFinished, isActive]);
+
   const handleNext = useCallback(() => {
+    stopRecording();
+    
     setState(prev => {
       if (prev.part === 1) {
         if (prev.questionIndex < prev.part1Questions.length - 1) {
           return { ...prev, questionIndex: prev.questionIndex + 1, timeLeft: 30 };
         } else {
-          // Move to Part 2 think time
           return { ...prev, part: 2, isThinkTime: true, timeLeft: 60 };
         }
       } else if (prev.part === 2) {
         if (prev.isThinkTime) {
           return { ...prev, isThinkTime: false, timeLeft: 120 };
         } else {
-          // Move to Part 3
           return { ...prev, part: 3, questionIndex: 0, timeLeft: 45 };
         }
       } else if (prev.part === 3) {
@@ -86,7 +149,7 @@ export default function SpeakingSimulator() {
       }
       return prev;
     });
-  }, []);
+  }, [state.part, state.questionIndex, state.isThinkTime, state.part1Questions, state.part3Questions]);
 
   useEffect(() => {
     let interval: any = null;
@@ -111,18 +174,58 @@ export default function SpeakingSimulator() {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
+  const downloadAll = () => {
+    recordings.forEach((rec, i) => {
+      const a = document.createElement('a');
+      a.href = rec.url;
+      a.download = `Part${rec.part}_Q${i+1}.webm`;
+      a.click();
+    });
+  };
+
   if (state.isFinished) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-card p-10 max-w-lg w-full">
+      <div className="flex flex-col items-center justify-center py-8">
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="glass-card p-10 max-w-2xl w-full">
           <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 size={40} className="text-emerald-500" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">Test Completed!</h2>
-          <p className="text-gray-400 mb-8">You have successfully completed the IELTS Speaking Mock Test.</p>
-          <button onClick={() => initTest()} className="w-full py-4 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2">
-            <RotateCcw size={20} /> Restart Test
-          </button>
+          <h2 className="text-3xl font-bold mb-2 text-center">Test Completed!</h2>
+          <p className="text-gray-400 mb-8 text-center">Review and download your recorded answers below.</p>
+          
+          <div className="space-y-4 mb-10 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+            {recordings.map((rec, i) => (
+              <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between group hover:bg-white/10 transition-colors">
+                <div className="flex-1 min-w-0 mr-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-500">Part {rec.part}</span>
+                  </div>
+                  <p className="text-sm font-medium truncate text-gray-300">{rec.question}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <audio src={rec.url} id={`audio-${i}`} hidden />
+                  <button 
+                    onClick={() => (document.getElementById(`audio-${i}`) as HTMLAudioElement).play()}
+                    className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all"
+                  >
+                    <Volume2 size={18} />
+                  </button>
+                  <a href={rec.url} download={`Part${rec.part}_Q${i+1}.webm`} className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all">
+                    <Download size={18} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <button onClick={downloadAll} className="py-4 rounded-xl font-bold bg-white text-black hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
+              <Download size={20} /> Download All
+            </button>
+            <button onClick={() => initTest()} className="py-4 rounded-xl font-bold border border-white/10 bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+              <RotateCcw size={20} /> Restart Test
+            </button>
+          </div>
         </motion.div>
       </div>
     );
